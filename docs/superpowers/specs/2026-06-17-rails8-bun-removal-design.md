@@ -79,6 +79,10 @@ Add what `rails new` ships in Rails 8 and the skill expects:
   in this app). The `gh signoff` step is included but only takes effect once
   `gh signoff` is installed for the repo.
 
+`solid_queue`/`solid_cache`/`solid_cable` are **not** adopted — this is a tiny site
+that already uses Redis for Action Cable; keeping Redis avoids extra databases and
+migrations. (YAGNI.)
+
 ## Files removed
 
 - `bun.config.js`, `bun.lockb`, `package.json`
@@ -176,5 +180,6 @@ Add what `rails new` ships in Rails 8 and the skill expects:
 ## Out of scope
 
 - Fixing the pre-existing `DateParserTest` DST failure (noted, not addressed).
+- Migrating Action Cable from Redis to `solid_cable`.
 - Switching SQLite to Postgres.
 - Any UI/content/feature changes.
