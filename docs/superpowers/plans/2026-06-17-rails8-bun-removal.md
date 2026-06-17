@@ -784,6 +784,65 @@ git add -A
 git commit -m "Add omakase tooling: Brakeman, RuboCop omakase, bin/ci"
 ```
 
+### Task E3b: Freshen all gems (`bundle update`) to resolve CVEs and reach latest
+
+**Why:** `bundler-audit` (added in E3) flagged pre-existing CVEs in transitive deps —
+`rack` (~24 CVEs, fixed in 3.2.6+), `rexml`, `webrick`, `rack-session`, `addressable`,
+`thor`. Also `turbo-rails` (2.0.5) and `stimulus-rails` (1.3.3) are well behind latest.
+A full within-constraints `bundle update` fulfills the "update all packages" goal and
+clears the audit.
+
+**Files:**
+- Modify: `Gemfile.lock` (via bundler); possibly `config/importmap.rb`.
+
+- [ ] **Step 1: Full bundle update (respects Gemfile constraints)**
+
+```bash
+bundle update
+```
+Expected: "Bundle complete!". This bumps rack→3.2.x, rexml, webrick, rack-session,
+addressable, thor, turbo-rails, stimulus-rails, nokogiri, etc. to latest compatible.
+
+- [ ] **Step 2: Reconcile importmap pins if turbo/stimulus auto-pin now**
+
+Newer turbo-rails/stimulus-rails engines auto-append importmap pins. Check for
+DUPLICATES against the hand-pins in `config/importmap.rb`:
+```bash
+bin/importmap json
+```
+If `@hotwired/turbo-rails`, `@hotwired/stimulus`, or `@hotwired/stimulus-loading` now
+appear from the engine AND are also hand-pinned (causing duplicate/conflicting entries
+or an importmap error), remove the now-redundant hand-pins from `config/importmap.rb`,
+keeping only `pin "application"` and `pin_all_from "app/javascript/controllers", under: "controllers"`. If there are no duplicates/errors, leave `config/importmap.rb` as-is.
+Re-run `bin/importmap json` and confirm exactly one pin each for application, turbo,
+stimulus, stimulus-loading, and the controllers.
+
+- [ ] **Step 3: Re-run the security audit**
+
+```bash
+bin/bundle exec bundler-audit check --update 2>&1 | tail -20
+```
+Expected: substantially fewer/zero CVEs. Report any that remain (some may be
+unfixable-within-constraints — note them).
+
+- [ ] **Step 4: Verify boot, tests, assets**
+
+```bash
+bin/rails runner "puts 'boot ok ' + Rails.version"   # boot ok 8.1.x
+bin/rails test                                        # 14 runs, 1 failures, 0 errors, 0 skips
+bin/rails tailwindcss:build                           # CSS still builds
+```
+Then boot the server and confirm HTTP 200 + importmap tags + stylesheet served (as in
+prior tasks). If anything regresses, investigate; if a specific gem bump breaks the app,
+report which one.
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add Gemfile.lock config/importmap.rb
+git commit -m "Freshen gems via bundle update; resolve bundler-audit CVEs"
+```
+
 ### Task E4: Write the Hatchbox deployment doc and link the house rules
 
 **Files:**
