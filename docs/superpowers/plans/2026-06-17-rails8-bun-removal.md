@@ -92,6 +92,47 @@ git add Gemfile Gemfile.lock
 git commit -m "Bump to Rails 8.1, propshaft, sqlite3 2, rqrcode 3, puma 8"
 ```
 
+### Task A2b: Bump Ruby 3.3.0 → 3.4.8
+
+**Why:** Rails 8.1's `actionview` uses Ruby 3.4-only syntax (anonymous rest parameter
+within a block); it does not parse on Ruby 3.3 despite the gemspec claiming `>= 3.2.0`.
+Ruby 3.4.8 is already installed locally via asdf.
+
+**Files:**
+- Modify: `.ruby-version`
+- Modify: `Gemfile:3`
+- Modify: `Gemfile.lock` (via bundler)
+
+- [ ] **Step 1: Update `.ruby-version`**
+
+Replace its contents with:
+```
+ruby-3.4.8
+```
+
+- [ ] **Step 2: Update the `ruby` pin in `Gemfile`**
+
+Change line 3 from `ruby "3.3.0"` to:
+```ruby
+ruby "3.4.8"
+```
+
+- [ ] **Step 3: Re-resolve under Ruby 3.4.8**
+
+```bash
+ruby -v                # confirm asdf now selects 3.4.8 (from .ruby-version)
+bundle install
+```
+Expected: Ruby 3.4.8 active; "Bundle complete!". (The Dockerfile `RUBY_VERSION` ARG is
+updated later in Task E2.)
+
+- [ ] **Step 4: Commit**
+
+```bash
+git add .ruby-version Gemfile Gemfile.lock
+git commit -m "Bump Ruby to 3.4.8 (required by Rails 8.1)"
+```
+
 ### Task A3: Reconcile framework config for Rails 8 + Propshaft
 
 **Files:**
@@ -561,6 +602,14 @@ git commit -m "Remove bun/Node files and references"
 - Modify: `Dockerfile`
 - Modify: `.dockerignore`
 
+- [ ] **Step 0: Bump the Ruby version ARG**
+
+In `Dockerfile`, change `ARG RUBY_VERSION=3.3.0` to:
+```dockerfile
+ARG RUBY_VERSION=3.4.8
+```
+(Matches `.ruby-version` / the `Gemfile` pin set in Task A2b.)
+
 - [ ] **Step 1: Remove the bun install stage from `Dockerfile`**
 
 Delete these blocks from the `build` stage:
@@ -728,6 +777,12 @@ This app deploys to Hatchbox (Capistrano-style releases) with a SQLite database.
 No Node/bun is required — JS is served via importmap and CSS is compiled by
 `tailwindcss-rails` during `assets:precompile`.
 
+## Ruby version
+
+This app requires **Ruby 3.4.8** (Rails 8.1 does not parse on Ruby 3.3). Set the Ruby
+version for the app in Hatchbox to **3.4.8** before deploying the upgrade — it must match
+`.ruby-version`.
+
 ## Assets
 
 Hatchbox's standard deploy (`bundle install` + `bin/rails assets:precompile`) is
@@ -872,6 +927,7 @@ Expected: clean tree; the commit series from Tasks A2 → E4 present.
 These are NOT code steps — they are the human deploy actions, captured so they are not
 forgotten:
 
+- [ ] In Hatchbox: set the app's **Ruby version to 3.4.8** (matches `.ruby-version`).
 - [ ] On the server: `mkdir -p /home/deploy/profile-site/shared` (if not already present).
 - [ ] **Remove the `DATABASE_URL` env var** from the Hatchbox app environment.
 - [ ] Deploy the branch; confirm `bin/rails db:prepare` creates the four `shared/` DBs.

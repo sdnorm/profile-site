@@ -46,7 +46,11 @@ Hatchbox (no Kamal).
 | Hotwire | turbo-rails 2, stimulus-rails 1.3 | latest |
 | Misc | jbuilder, bcrypt, bootsnap, jbuilder, debug, web-console, capybara, selenium-webdriver | latest compatible |
 
-Ruby stays **3.3.0** (Rails 8.1 requires ≥ 3.2).
+**Ruby bumps 3.3.0 → 3.4.8.** Rails 8.1's `actionview` uses Ruby 3.4-only syntax
+(anonymous rest parameter within a block), so although the gemspec claims `>= 3.2.0`, it
+does not actually parse on Ruby 3.3. Update `.ruby-version`, the `ruby` pin in `Gemfile`,
+and the Dockerfile `RUBY_VERSION` ARG. **Hatchbox action:** set the app's Ruby version to
+3.4.8.
 
 ### Solid stack (replaces Redis)
 
