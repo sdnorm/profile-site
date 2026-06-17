@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
-  get 'general/index'
-  get 'date_parser/index'
-  post 'date_parse' => 'date_parser#parse', as: :date_parse
+  get "general/index"
+  get "date_parser/index"
+  post "date_parse" => "date_parser#parse", as: :date_parse
 
   resource :registration
   resource :session
   resource :qr_session
-  get 'qr_sessions', to: 'qr_sessions#qr_sign_in', as: :qr_sign_in
+  get "qr_sessions", to: "qr_sessions#qr_sign_in", as: :qr_sign_in
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -2,9 +2,9 @@ class QrSessionsController < ApplicationController
   before_action :authenticate_user!, only: :new
   before_action :authenticate_user_by_qr_code!, only: :qr_sign_in
 
-  # qr_sign_in 
+  # qr_sign_in
   def new
-    token = current_user.generate_token_for(:qr_sign_in)  
+    token = current_user.generate_token_for(:qr_sign_in)
     qr_code = RQRCode::QRCode.new("https://104jq.hatchboxapp.com/qr_sessions?token=#{token}")
     @svg = qr_code.as_svg(
       color: "000",
@@ -30,4 +30,3 @@ class QrSessionsController < ApplicationController
     sign_in @user
   end
 end
-
