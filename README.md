@@ -22,3 +22,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+## Deployment
+
+Deployed to Hatchbox with SQLite. See [docs/deployment-hatchbox.md](docs/deployment-hatchbox.md).
