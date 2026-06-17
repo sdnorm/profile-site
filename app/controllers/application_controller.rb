@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-
   private
 
   def authenticate_user!

@@ -1,3 +1,9 @@
-// Entry point for the build script in your package.json
+// Entry point for the importmap-managed JavaScript
 import "@hotwired/turbo-rails"
-import "./controllers"
+import "controllers"
+
+document.addEventListener("turbo:submit-end", (event) => {
+  if (event.target.id === "date-parse-form") {
+    event.target.reset()
+  }
+})
