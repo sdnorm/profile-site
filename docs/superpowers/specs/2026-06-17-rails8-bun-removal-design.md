@@ -67,6 +67,21 @@ Install brings schema files `db/cache_schema.rb`, `db/queue_schema.rb`,
 `db/cable_schema.rb` and their `db/*_migrate/` paths. The `redis` gem is removed
 from the Gemfile.
 
+### Solid stack (replaces Redis)
+
+The Rails 8 default `solid_*` trio is adopted, backed by SQLite — Redis was never
+actually provisioned for this site, so this removes a phantom dependency:
+
+- **solid_cache** — `config.cache_store = :solid_cache_store` (production).
+- **solid_queue** — `config.active_job.queue_adapter = :solid_queue`; run **inside
+  Puma** via the `solid_queue` plugin (`SOLID_QUEUE_IN_PUMA`) so no separate worker
+  process is needed on the single Hatchbox server.
+- **solid_cable** — `config/cable.yml` production adapter → `solid_cable`.
+
+Install brings schema files `db/cache_schema.rb`, `db/queue_schema.rb`,
+`db/cable_schema.rb` and their `db/*_migrate/` paths. The `redis` gem is removed
+from the Gemfile.
+
 ### Omakase tooling (per the `rails` house-rules skill)
 
 Add what `rails new` ships in Rails 8 and the skill expects:
@@ -78,10 +93,6 @@ Add what `rails new` ships in Rails 8 and the skill expects:
   Brakeman. The skill's `bin/rails test:system` step is **omitted** (no `test/system/`
   in this app). The `gh signoff` step is included but only takes effect once
   `gh signoff` is installed for the repo.
-
-`solid_queue`/`solid_cache`/`solid_cable` are **not** adopted — this is a tiny site
-that already uses Redis for Action Cable; keeping Redis avoids extra databases and
-migrations. (YAGNI.)
 
 ## Files removed
 
@@ -180,6 +191,5 @@ migrations. (YAGNI.)
 ## Out of scope
 
 - Fixing the pre-existing `DateParserTest` DST failure (noted, not addressed).
-- Migrating Action Cable from Redis to `solid_cable`.
 - Switching SQLite to Postgres.
 - Any UI/content/feature changes.
