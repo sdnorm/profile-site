@@ -601,6 +601,28 @@ git commit -m "Remove bun/Node files and references"
 **Files:**
 - Modify: `Dockerfile`
 - Modify: `.dockerignore`
+- Modify: `bin/setup`
+
+- [ ] **Step A: Remove the `bun install` step from `bin/setup` and honor `--skip-server`**
+
+In `bin/setup`, delete the JS-dependency lines:
+```ruby
+  # Install JavaScript dependencies
+  system!("bun install")
+```
+And gate the final server restart so `bin/setup --skip-server` (used by `bin/ci` in
+Task E3) does not restart the app. Change:
+```ruby
+  puts "\n== Restarting application server =="
+  system! "bin/rails restart"
+```
+to:
+```ruby
+  unless ARGV.include?("--skip-server")
+    puts "\n== Restarting application server =="
+    system! "bin/rails restart"
+  end
+```
 
 - [ ] **Step 0: Bump the Ruby version ARG**
 
