@@ -1,0 +1,104 @@
+/* ==========================================================================
+   Typography — Spencer Norman Design System
+   All-sans, tightly set. Bricolage Grotesque for display, Hanken Grotesk for
+   body/UI, Spline Sans Mono for labels, code, and metadata.
+   ========================================================================== */
+
+:root {
+  /* ---- Families ---- */
+  --font-display: "Bricolage Grotesque", "Hanken Grotesk", sans-serif;
+  --font-sans:    "Hanken Grotesk", system-ui, -apple-system, sans-serif;
+  --font-mono:    "Spline Sans Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  /* ---- Weights ---- */
+  --fw-regular:   400; /* @kind font */
+  --fw-medium:    500; /* @kind font */
+  --fw-semibold:  600; /* @kind font */
+  --fw-bold:      700; /* @kind font */
+  --fw-extrabold: 800; /* @kind font */
+
+  /* ---- Size scale (px, tight modern) ---- */
+  --fs-2xs:  11px;
+  --fs-xs:   12px;
+  --fs-sm:   13px;
+  --fs-base: 15px;
+  --fs-md:   17px;
+  --fs-lg:   20px;
+  --fs-xl:   24px;
+  --fs-2xl:  30px;
+  --fs-3xl:  38px;
+  --fs-4xl:  48px;
+  --fs-5xl:  64px;
+  --fs-6xl:  82px;
+
+  /* ---- Line heights ---- */
+  --lh-none:    1;      /* @kind font */
+  --lh-tight:   1.04;   /* @kind font */
+  --lh-snug:    1.18;   /* @kind font */
+  --lh-normal:  1.5;    /* @kind font */
+  --lh-relaxed: 1.62;   /* @kind font */
+
+  /* ---- Letter spacing ---- */
+  --track-tightest: -0.035em;  /* @kind font */
+  --track-tight:    -0.02em;   /* @kind font */
+  --track-snug:     -0.01em;   /* @kind font */
+  --track-normal:   0;         /* @kind font */
+  --track-wide:     0.04em;    /* @kind font */
+  --track-label:    0.14em;    /* @kind font */
+
+  /* ===================== SEMANTIC TYPE ROLES ===================== */
+  /* Each role = family / size / weight / line-height / tracking.
+     Apply with the four matching vars; see typography card for usage. */
+
+  /* Display (Bricolage) */
+  --type-display-family: var(--font-display);
+  --type-display-weight: var(--fw-extrabold);
+  --type-display-track:  var(--track-tightest);
+  --type-display-lh:     var(--lh-tight);
+
+  /* Headings (Bricolage) */
+  --type-heading-family: var(--font-display);
+  --type-heading-weight: var(--fw-bold);
+  --type-heading-track:  var(--track-tight);
+  --type-heading-lh:     var(--lh-snug);
+
+  /* Body / UI (Hanken) */
+  --type-body-family:    var(--font-sans);
+  --type-body-weight:    var(--fw-regular);
+  --type-body-track:     var(--track-normal);
+  --type-body-lh:        var(--lh-normal);
+
+  /* Eyebrow / label (Mono, uppercase) */
+  --type-label-family:   var(--font-mono);
+  --type-label-weight:   var(--fw-medium);
+  --type-label-track:    var(--track-label);
+  --type-label-size:     var(--fs-xs);
+}
+
+/* Optional convenience classes (semantic roles). Components may use vars
+   directly instead — these are for cards, docs, and quick markup. */
+.t-display {
+  font-family: var(--type-display-family);
+  font-weight: var(--type-display-weight);
+  letter-spacing: var(--type-display-track);
+  line-height: var(--type-display-lh);
+}
+.t-heading {
+  font-family: var(--type-heading-family);
+  font-weight: var(--type-heading-weight);
+  letter-spacing: var(--type-heading-track);
+  line-height: var(--type-heading-lh);
+}
+.t-body {
+  font-family: var(--type-body-family);
+  font-weight: var(--type-body-weight);
+  letter-spacing: var(--type-body-track);
+  line-height: var(--type-body-lh);
+}
+.t-label {
+  font-family: var(--type-label-family);
+  font-weight: var(--type-label-weight);
+  letter-spacing: var(--type-label-track);
+  font-size: var(--type-label-size);
+  text-transform: uppercase;
+}
