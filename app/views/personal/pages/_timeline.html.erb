@@ -1,0 +1,61 @@
+<%# Work — vertical experience timeline with expandable entries (accordion) %>
+<%
+  entries = [
+    { year: "2024 — Now", company: "Ledgerline", role: "Founding Engineer",
+      summary: "Owned the billing & metering platform from scratch for a usage-based fintech.",
+      detail: "Designed the event pipeline that meters 2B+ API calls/month, built the pricing engine, and set up the data model finance trusts at close. Hired and led a team of four.",
+      stack: ["TypeScript", "Stripe", "Postgres", "Kafka"], metric: "$0 → $9M ARR" },
+    { year: "2021 — 2024", company: "Northwind Commerce", role: "Staff Engineer → Eng Lead",
+      summary: "Led the checkout & subscriptions group; cut payment failures and grew LTV.",
+      detail: "Rebuilt the checkout funnel and dunning system, ran the pricing experiments, and partnered with finance on retention. Owned a roadmap tied directly to net revenue retention.",
+      stack: ["React", "Node", "Stripe", "Snowflake"], metric: "+22% NRR" },
+    { year: "2018 — 2021", company: "Cabana (acquired)", role: "Engineer #2",
+      summary: "Early engineer on a PLG analytics product; shipped the self-serve motion.",
+      detail: "Built onboarding, billing, and the admin console. Helped take the company through a Series A and an acquisition by a public analytics company.",
+      stack: ["Ruby", "React", "Postgres"], metric: "Acquired" },
+    { year: "2016 — 2018", company: "Freelance", role: "Full-stack Developer",
+      summary: "Shipped MVPs and revenue features for early-stage founders.",
+      detail: "Twelve client products across fintech, marketplaces, and SaaS — most still running. This is where the business instinct got wired in.",
+      stack: ["Rails", "Vue", "MySQL"], metric: "12 products" },
+  ]
+%>
+<section id="work" style="background: var(--surface-page); border-top: 1px solid var(--border-subtle);">
+  <div style="max-width: var(--container); margin: 0 auto; padding: 80px 32px;">
+    <span class="sn-eyebrow"><span class="sn-eyebrow__rule"></span>Selected work</span>
+    <h2 style="font-family: var(--font-display); font-weight: 800; font-size: clamp(30px,4vw,44px); letter-spacing: -0.03em; color: var(--text-strong); margin: 16px 0 8px;">
+      Sixteen years, shipped.
+    </h2>
+    <p style="font-size: 16.5px; color: var(--text-muted); max-width: 52ch; margin: 0 0 44px;">
+      A through-line of products that made money — not just demos. Tap any role to expand.
+    </p>
+    <div data-controller="timeline">
+      <% entries.each_with_index do |e, i| %>
+        <div class="sn-tl-entry<%= " is-open" if i.zero? %>" data-timeline-target="entry">
+          <div class="sn-tl-year"><%= e[:year] %></div>
+          <div class="sn-tl-rail">
+            <div class="sn-tl-dot"></div>
+            <% unless i == entries.length - 1 %><div class="sn-tl-line"></div><% end %>
+          </div>
+          <button type="button" class="sn-tl-panel" data-action="timeline#toggle">
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px;">
+              <div>
+                <span style="font-family: var(--font-display); font-weight: 700; font-size: 20px; letter-spacing: -0.02em; color: var(--text-strong);"><%= e[:company] %></span>
+                <span style="font-size: 15px; color: var(--text-muted); margin-left: 10px;"><%= e[:role] %></span>
+              </div>
+              <span class="sn-badge sn-badge--brand"><%= e[:metric] %></span>
+            </div>
+            <p style="font-size: 15px; line-height: 1.55; color: var(--text-body); margin: 10px 0 0;"><%= e[:summary] %></p>
+            <div class="sn-tl-detail">
+              <div>
+                <p style="font-size: 15px; line-height: 1.6; color: var(--text-muted); margin: 14px 0 0;"><%= e[:detail] %></p>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px;">
+                  <% e[:stack].each do |s| %><span class="sn-tag"><%= s %></span><% end %>
+                </div>
+              </div>
+            </div>
+          </button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
