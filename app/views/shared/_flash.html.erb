@@ -1,0 +1,16 @@
+<% if notice.present? %>
+  <div class="notice gap-x-6 bg-indigo-600 px-6 py-2.5 sm:px-3.5 sm:before:flex-1" data-notification-target="notice">
+    <button data-action="notification#close" class="text-white float-right text-2xl cursor-pointer -mt-1">&times;</button>
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="text-sm leading-6 text-white"><%= notice %></p>
+    </div>
+  </div>
+<% end %>
+<% if alert.present? %>
+  <div class="alert gap-x-6 bg-red-600 px-6 py-2.5 sm:px-3.5 sm:before:flex-1 items-center" data-notification-target="alert">
+    <button data-action="notification#close" class="text-white float-right items-center text-2xl cursor-pointer -mt-1">&times;</button>
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="text-sm leading-6 text-white"><%= alert %></p>
+    </div>
+  </div>
+<% end %>
