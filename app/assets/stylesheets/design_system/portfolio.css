@@ -41,6 +41,7 @@ html { scroll-behavior: smooth; }
 .sn-tl-detail > div { overflow: hidden; }
 
 /* ---- Contact form: submit -> success ---- */
+.sn-contact-form { display: flex; flex-direction: column; gap: 16px; }
 .sn-contact-card .sn-contact-success { display: none; }
 .sn-contact-card.is-sent .sn-contact-form { display: none; }
 .sn-contact-card.is-sent .sn-contact-success { display: flex; }

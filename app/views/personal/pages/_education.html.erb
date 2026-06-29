@@ -1,0 +1,21 @@
+<%# Education & certifications — compact two-up %>
+<%
+  items = [
+    { title: "B.B.A., Economics", org: "Southeastern Louisiana University", kind: "Education" },
+    { title: "Ruby on Rails Engineering Bootcamp", org: "The Iron Yard · Mar 2015", kind: "Certification" },
+  ]
+%>
+<section id="education" style="background: var(--surface-sunken); border-top: 1px solid var(--border-subtle);">
+  <div style="max-width: var(--container); margin: 0 auto; padding: 72px 32px;">
+    <span class="sn-eyebrow"><span class="sn-eyebrow__rule"></span>Education &amp; certifications</span>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-top: 28px;">
+      <% items.each do |it| %>
+        <div class="sn-card sn-card--pad">
+          <div class="t-label" style="color: var(--text-muted); margin-bottom: 10px;"><%= it[:kind] %></div>
+          <div style="font-family: var(--font-display); font-weight: 700; font-size: 19px; letter-spacing: -0.02em; color: var(--text-strong);"><%= it[:title] %></div>
+          <div style="font-size: 15px; color: var(--text-muted); margin-top: 4px;"><%= it[:org] %></div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

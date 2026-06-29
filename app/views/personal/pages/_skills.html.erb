@@ -1,0 +1,33 @@
+<%# Skills — grouped core skills, resume-style %>
+<%
+  groups = [
+    { label: "Languages", items: ["Ruby", "JavaScript", "TypeScript", "Python", "HTML", "CSS"] },
+    { label: "Rails & Backend", items: ["Ruby on Rails (11+ yrs)", "Hotwire — Turbo & Stimulus", "Server-rendered views", "REST & API-only services", "Third-party API integration", "Data pipelines", "Document parsing & extraction"] },
+    { label: "Frontend & UX", items: ["React", "TypeScript", "React Native", "Responsive UI", "PWAs", "Interaction design"] },
+    { label: "Data", items: ["PostgreSQL", "MySQL", "Large-scale / data-intensive systems", "Query optimization", "Data integrity"] },
+    { label: "AI-Augmented Dev", items: ["Claude Code", "Agentic workflows", "LLM integration", "AI document parsing", "Local models (Ollama)"] },
+    { label: "Leadership & Practice", items: ["Technical leadership & architecture", "Mentoring", "Code review", "TDD — RSpec, Minitest", "CI/CD", "Agile"] },
+    { label: "Cloud & Ops", items: ["AWS", "DigitalOcean", "Hatchbox", "Heroku", "Jenkins", "Git", "New Relic", "Splunk"] },
+  ]
+%>
+<section id="skills" style="background: var(--surface-sunken); border-top: 1px solid var(--border-subtle);">
+  <div style="max-width: var(--container); margin: 0 auto; padding: 80px 32px;">
+    <span class="sn-eyebrow"><span class="sn-eyebrow__rule"></span>Core skills</span>
+    <h2 style="font-family: var(--font-display); font-weight: 800; font-size: clamp(30px,4vw,44px); letter-spacing: -0.03em; color: var(--text-strong); margin: 16px 0 8px;">
+      The toolkit.
+    </h2>
+    <p style="font-size: 16.5px; color: var(--text-muted); max-width: 52ch; margin: 0 0 44px;">
+      Deep on Rails, full-stack when it's warranted, and early to AI-augmented development.
+    </p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+      <% groups.each do |g| %>
+        <div class="sn-card sn-card--pad">
+          <div class="t-label" style="color: var(--text-accent); margin-bottom: 14px;"><%= g[:label] %></div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <% g[:items].each do |item| %><span class="sn-tag sn-tag--filled"><%= item %></span><% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

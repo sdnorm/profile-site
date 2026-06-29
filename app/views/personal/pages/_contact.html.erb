@@ -2,12 +2,12 @@
 <section id="contact" style="background: var(--surface-inverse); color: var(--text-on-inverse);">
   <div class="sn-contact-grid" style="max-width: var(--container); margin: 0 auto; padding: 84px 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">
     <div>
-      <span style="display: inline-block; margin-bottom: 18px;" class="sn-pill"><span class="sn-pill__dot"></span>Available for work</span>
+      <span style="display: inline-block; margin-bottom: 18px;" class="sn-pill"><span class="sn-pill__dot"></span>Open to opportunities</span>
       <h2 style="font-family: var(--font-display); font-weight: 800; font-size: clamp(34px,4.4vw,52px); letter-spacing: -0.035em; line-height: 1.02; color: var(--paper-50); margin: 0;">
-        Let's build something<br>that pays for itself.
+        Let's build something<br>that lasts.
       </h2>
       <p style="font-size: 17px; line-height: 1.6; color: var(--ink-300); max-width: 42ch; margin: 22px 0 30px;">
-        Fractional, contract, or full-time. If you've got a revenue problem hiding inside a product problem, I want to hear about it.
+        Open to staff and senior Rails roles, plus select consulting through Norman Simplified. If you've got a complex, high-stakes workflow that needs simplifying, I'd love to hear about it.
       </p>
       <div style="display: flex; gap: 10px;">
         <a href="mailto:spencernorman@hey.com" style="display: inline-flex; align-items: center; gap: 9px; font-family: var(--font-mono); font-size: 14px; color: var(--honey-300); text-decoration: none;">
@@ -18,7 +18,7 @@
     </div>
 
     <div class="sn-contact-card" data-controller="contact" style="background: var(--paper-50); border-radius: var(--radius-2xl); padding: 28px; box-shadow: var(--shadow-lg);">
-      <form class="sn-contact-form" data-action="submit->contact#submit" style="display: flex; flex-direction: column; gap: 16px;">
+      <form class="sn-contact-form" data-action="submit->contact#submit">
         <div class="sn-field">
           <label class="sn-field__label" for="contact-name">Name</label>
           <input id="contact-name" class="sn-input" type="text" name="name" placeholder="Jane Doe">

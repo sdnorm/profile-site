@@ -36,3 +36,7 @@
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
+
+# Local verification artifacts (Playwright screenshots)
+/.playwright-mcp/
+/*.png

@@ -1,0 +1,49 @@
+<%# Selected projects — cards, one linking out to flexfit.ai %>
+<%
+  projects = [
+    { name: "Flexfit", tagline: "Adaptive AI Workout App",
+      href: "https://flexfit.ai", link_label: "flexfit.ai",
+      body: "An adaptive workout app that generates and adjusts workouts on the fly — adapting in real time when you're traveling or missing your usual equipment. Built as a cohesive Rails 8 + Hotwire monolith shipping as a PWA. Users converse with an AI assistant to set parameters instead of tedious manual entry — and AI drives the workout generation.",
+      stack: ["Rails 8", "Hotwire", "PWA", "AI / LLM"], badge: "Independent product" },
+    { name: "Agent Eva", tagline: "AI Document Extraction",
+      href: nil, link_label: nil,
+      body: "An AI-powered application that reads and parses documents, structuring the results into a database to streamline prescription-approval workflows for providers and manufacturers. Delivered through Norman Simplified alongside document-processing pipelines and LLM-integration work.",
+      stack: ["Ruby on Rails", "LLMs", "Document parsing", "PostgreSQL"], badge: "Norman Simplified" },
+  ]
+%>
+<section id="projects" style="background: var(--surface-page); border-top: 1px solid var(--border-subtle);">
+  <div style="max-width: var(--container); margin: 0 auto; padding: 80px 32px;">
+    <span class="sn-eyebrow"><span class="sn-eyebrow__rule"></span>Selected projects</span>
+    <h2 style="font-family: var(--font-display); font-weight: 800; font-size: clamp(30px,4vw,44px); letter-spacing: -0.03em; color: var(--text-strong); margin: 16px 0 8px;">
+      Things I've built.
+    </h2>
+    <p style="font-size: 16.5px; color: var(--text-muted); max-width: 52ch; margin: 0 0 44px;">
+      Products where AI does real work inside a clean, server-rendered Rails app.
+    </p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+      <% projects.each do |p| %>
+        <div class="sn-card sn-card--pad" style="display: flex; flex-direction: column;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px;">
+            <div>
+              <span style="font-family: var(--font-display); font-weight: 700; font-size: 22px; letter-spacing: -0.02em; color: var(--text-strong);"><%= p[:name] %></span>
+              <span style="font-size: 15px; color: var(--text-muted); margin-left: 8px;"><%= p[:tagline] %></span>
+            </div>
+            <span class="sn-badge sn-badge--neutral"><%= p[:badge] %></span>
+          </div>
+          <p style="font-size: 15px; line-height: 1.6; color: var(--text-body); margin: 14px 0 0;"><%= p[:body] %></p>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px;">
+            <% p[:stack].each do |s| %><span class="sn-tag"><%= s %></span><% end %>
+          </div>
+          <% if p[:href] %>
+            <div style="margin-top: 22px;">
+              <a href="<%= p[:href] %>" target="_blank" rel="noopener" class="sn-btn sn-btn--secondary sn-btn--md">
+                <span>Visit <%= p[:link_label] %></span>
+                <span class="sn-btn__i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+              </a>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
