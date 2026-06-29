@@ -1,8 +1,15 @@
 # Contact Form: Turnstile + Mailgun + Turbo Design
 
 **Date:** 2026-06-29
-**Status:** Approved
+**Status:** Approved (revised 2026-06-29 to follow `sdnorm/development-skills` house rules)
 **Scope:** Personal site (spencernorman.io) contact form only.
+
+**House-rules revision:** Per the `sdnorm/development-skills` `rails` skill — **no service
+objects** (business logic in concerns or tableless models), **Minitest with fixtures, no
+factories, no mocking libraries** (test via real objects + plain dependency injection),
+Hotwire/Turbo + Stimulus. Turnstile verification therefore lives in a tableless model
+`Turnstile::Verification` (not `app/services/`), and tests use DI instead of `.stub`
+(also necessary because Minitest 6 removed `minitest/mock`).
 
 ## Goal
 
@@ -43,29 +50,38 @@ Browser (Turbo form POST /contact, body includes cf-turnstile-response token)
 ## Components (each small, single-purpose, testable)
 
 ### `app/models/contact_message.rb`
-Plain `ActiveModel::Model` (not persisted). Attributes: `name`, `email`,
-`message`. Validations: `email` and `message` presence; `email` format; `name`
-optional. Gives the controller a thin, validatable object and supports
-`form_with model:` plus error re-rendering.
+Tableless model: `ActiveModel::Model` + `ActiveModel::Attributes` (house style).
+Attributes: `name`, `email`, `message` (all `:string`). Validations: `email` and
+`message` presence; `email` format; `name` optional. Gives the controller a thin,
+validatable object and supports `form_with model:` plus error re-rendering.
 
-### `app/services/turnstile_verifier.rb`
-`TurnstileVerifier.call(token, remote_ip: nil) => Boolean`. POSTs
-`secret` (`Rails.application.credentials.dig(:turnstile, :secret_key)`),
-`response` (token), and optional `remoteip` to
-`https://challenges.cloudflare.com/turnstile/v0/siteverify` using `Net::HTTP`.
-Parses JSON, returns the `success` boolean. Returns `false` on a blank token or
-any network/parse error (fail closed). No new gem.
+### `app/models/turnstile/verification.rb` (tableless model — NOT a service object)
+Tableless model: `ActiveModel::Model` + `ActiveModel::Attributes`. Attributes:
+`token`, `remote_ip`, and `secret` (defaults to
+`Rails.application.credentials.dig(:turnstile, :secret_key)`). Exposes `#verified?
+=> Boolean`: POSTs `secret`, `response` (token), and optional `remoteip` to
+`https://challenges.cloudflare.com/turnstile/v0/siteverify` and returns the
+`success` boolean. Returns `false` on a blank token or any network/parse error
+(fail closed). No new gem (`Net::HTTP`).
 
-**Dev/test bypass:** when the `turnstile.secret_key` credential is blank, log a
-warning and return `true`, so the form is usable before real keys exist. Tests
-stub `TurnstileVerifier.call` directly to assert both branches.
+**Dev/test bypass:** when `secret` is blank, return `true`, so the form is usable
+before real keys exist.
+
+**Testability without mocks (house rule):** the HTTP boundary is injected via a
+`http` writer that defaults to the real Cloudflare call. Tests set
+`verification.http = ->(**) { { "success" => true } }` (plain DI — no mocking
+library), and exercise the bypass / blank-token branches by passing `secret`
+explicitly. No `.stub`, no credential mocking.
 
 ### `app/controllers/personal/contacts_controller.rb`
 `Personal::ContactsController < Personal::BaseController`, `create` only. Reads
 `params[:contact_message]` and `params["cf-turnstile-response"]`. Order: validate
-the model → verify Turnstile → deliver. Each failure renders the appropriate
-`turbo_stream`. `respond_to` renders `turbo_stream`; a plain `html` fallback
-redirects to the home anchor with a flash (covers JS-disabled clients).
+the model → if valid, verify Turnstile via
+`Turnstile::Verification.new(token:, remote_ip:).verified?` → if verified, deliver.
+On a Turnstile failure it adds an error to `@contact_message` (`errors.add(:base,
+…)`) so the single re-render path shows it. `respond_to` renders `turbo_stream`
+(status `:unprocessable_entity` on failure); a plain `html` fallback redirects to
+the home anchor (covers JS-disabled clients).
 
 ### `app/mailers/contact_mailer.rb`
 `ContactMailer < ApplicationMailer`. `new_message(contact_message)`:
@@ -174,18 +190,20 @@ end
   again in a moment."; logged.
 - Every re-render includes a freshly rendered Turnstile widget (single-use token).
 
-## Testing (Minitest, TDD)
+## Testing (Minitest + fixtures, no mocking libraries — house rule)
 
-1. `ContactMessage`: valid with required fields; invalid without email/message;
-   invalid email format.
-2. `TurnstileVerifier`: returns `false` for blank token; parses `success: true`
-   / `success: false` (stub `Net::HTTP`); fail-closed on error; bypass returns
-   `true` when secret blank.
-3. `Personal::ContactsController` integration (`host! "spencernorman.io"`,
-   `TurnstileVerifier` stubbed):
-   - missing fields → turbo_stream re-render with errors, `deliveries` unchanged.
-   - turnstile false → re-render with verification error, `deliveries` unchanged.
-   - success → `deliveries` size +1, turbo_stream success panel.
+1. `ContactMessage` (instantiate directly; tableless, no fixture): valid with
+   required fields; invalid without email/message; invalid email format.
+2. `Turnstile::Verification` (plain DI, no mocks): bypass returns `true` when
+   `secret` blank; `false` for blank token when `secret` present; with `http`
+   injected, `true`/`false` per Cloudflare `success`; fail-closed when injected
+   `http` raises.
+3. `Personal::ContactsController` integration (`host! "spencernorman.io"`; the
+   blank Turnstile secret means verification bypasses — no mocking needed):
+   - missing fields → turbo_stream re-render (422), `deliveries` unchanged.
+   - valid params → `deliveries` size +1, turbo_stream success panel.
+   (The Turnstile-rejection branch is covered by the `Turnstile::Verification`
+   unit tests; the controller wiring is a simple `unless verified?` guard.)
 4. `ContactMailer#new_message`: correct `to`, `reply_to`, `subject`, body
    contains the message.
 

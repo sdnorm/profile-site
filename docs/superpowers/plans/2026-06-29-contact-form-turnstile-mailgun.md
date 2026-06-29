@@ -12,6 +12,20 @@
 
 ---
 
+## REVISION (2026-06-29) — `sdnorm/development-skills` house rules
+
+After Tasks 1–2 landed, the build was redirected to follow the team's `rails` skill. Changes to the tasks below:
+
+- **No service objects.** Task 3's `app/services/turnstile_verifier.rb` is replaced by a **tableless model** `app/models/turnstile/verification.rb` (`Turnstile::Verification`, `ActiveModel::Model` + `ActiveModel::Attributes`, instance method `#verified?`). No `app/services/`.
+- **`ContactMessage`** uses `ActiveModel::Attributes` (`attribute :x, :string`) rather than `attr_accessor` (small refactor of Task 2's output).
+- **No mocking libraries** (also Minitest 6 removed `minitest/mock`). Tests use fixtures + plain dependency injection: `Turnstile::Verification` exposes an injectable `http` writer; controller integration tests rely on the blank-secret **bypass** for the happy path. No `.stub`.
+- **Controller** (Task 6) orchestrates: `@contact_message.valid?` then `Turnstile::Verification.new(...).verified?`; Turnstile/delivery failures are added to `@contact_message.errors[:base]`; one re-render path; failure responds `:unprocessable_entity`.
+- Form partial (Tasks 6/7) renders `contact_message.errors` (base + per-field) instead of `verification_error`/`delivery_error` locals.
+
+The authoritative corrected code for Tasks 3/6/7 is carried in the implementer dispatch prompts. Everything else (Mailgun, Turbo flow, credentials) is unchanged.
+
+---
+
 ### Task 1: Add Mailgun gem and regenerate credentials
 
 **Files:**
