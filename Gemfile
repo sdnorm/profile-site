@@ -29,6 +29,9 @@ gem "tailwindcss-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+# Send transactional email via Mailgun
+gem "mailgun-ruby", "~> 1.3"
+
 # SQLite-backed cache, jobs, and Action Cable [https://github.com/rails/solid_cache]
 gem "solid_cache"
 gem "solid_queue"
