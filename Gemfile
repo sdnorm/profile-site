@@ -84,3 +84,5 @@ group :test do
 end
 
 gem "rqrcode", "~> 3.0"
+
+gem "honeybadger", "~> 6.9"
