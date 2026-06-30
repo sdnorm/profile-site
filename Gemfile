@@ -85,4 +85,4 @@ end
 
 gem "rqrcode", "~> 3.0"
 
-gem "honeybadger", "~> 6.9"
+gem "honeybadger", "~> 6.9", group: :production
