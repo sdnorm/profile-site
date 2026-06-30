@@ -1,0 +1,15 @@
+<%# locals: contact_message %>
+<%= form_with model: contact_message, url: personal_contact_path, class: "sn-contact-form" do |f| %>
+  <% if contact_message.errors[:base].any? %>
+    <div class="sn-form-alert" role="alert"><%= contact_message.errors[:base].to_sentence %></div>
+  <% end %>
+  <div class="sn-field">
+    <%= f.label :email, "Email", class: "sn-field__label" %>
+    <%= f.email_field :email, class: "sn-input" %>
+  </div>
+  <div class="sn-field">
+    <%= f.label :message, "Message", class: "sn-field__label" %>
+    <%= f.text_area :message, class: "sn-textarea" %>
+  </div>
+  <button type="submit" class="sn-btn sn-btn--primary sn-btn--lg sn-btn--block"><span>Send message</span></button>
+<% end %>

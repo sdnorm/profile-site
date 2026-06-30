@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   constraints(host: personal_host) do
     scope module: :personal, as: :personal do
       root "pages#home"
+      post "contact", to: "contacts#create", as: :contact
     end
   end
 
