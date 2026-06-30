@@ -19,7 +19,7 @@
 
   <div class="sn-field">
     <%= f.label :message, class: "sn-field__label" do %>What are you building?<span class="sn-field__req"> *</span><% end %>
-    <%= f.text_area :message, class: "sn-textarea", placeholder: "A few sentences on the problem…" %>
+    <%= f.text_area :message, class: "sn-textarea", placeholder: "A few sentences on the opportunity…" %>
     <% if contact_message.errors[:message].any? %>
       <span class="sn-field__hint">Message <%= contact_message.errors[:message].first %></span>
     <% end %>
