@@ -1,0 +1,9 @@
+<% if @sent %>
+  <%= turbo_stream.update "contact_panel" do %>
+    <%= render "personal/pages/contact_success" %>
+  <% end %>
+<% else %>
+  <%= turbo_stream.update "contact_panel" do %>
+    <%= render "personal/pages/contact_form", contact_message: @contact_message %>
+  <% end %>
+<% end %>

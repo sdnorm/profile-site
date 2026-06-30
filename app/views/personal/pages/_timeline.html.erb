@@ -1,0 +1,61 @@
+<%# Experience — vertical timeline with expandable entries (accordion) %>
+<%
+  entries = [
+    { year: "2025 — Now", company: "Nava PBC", role: "Software Engineer",
+      summary: "Building features end-to-end on the HealthCare.gov Insurance Marketplace — a high-traffic Rails platform serving millions.",
+      detail: "Work across the Rails backend and two React apps (one powered by a Rails API), handling complex eligibility and enrollment workflows and large datasets. Proactively identify and resolve production issues to safeguard reliability and data integrity, shipping through a Jenkins CI/CD pipeline on AWS with observability via Splunk and New Relic.",
+      stack: ["Ruby on Rails", "React", "TypeScript", "AWS"], metric: "Millions of users" },
+    { year: "2016 — 2025", company: "United Networks of America", role: "Lead Software Developer",
+      summary: "Technical lead and architect for core healthcare Rails applications, guiding a remote team.",
+      detail: "Architected and deployed an API-only Rails application accessed by 9,800+ pharmacy locations, optimizing PostgreSQL for large-scale data. Built and maintained a secure, multi-tenant medication-pricing platform across 50+ domains, integrated Pharmacy Benefit Manager (PBM) APIs, and set the quality bar through code review, CI, and mentorship.",
+      stack: ["Ruby on Rails", "PostgreSQL", "PBM APIs", "Hotwire"], metric: "Engineering · Leadership" },
+    { year: "2015 — Now", company: "Norman Simplified, LLC", role: "Founder & Software Engineer",
+      summary: "Independent Rails consultancy delivering bespoke apps and data/document pipelines for healthcare, finance, and AI clients.",
+      detail: "Built Agent Eva — an AI-powered app that reads and parses documents and structures the results into a database to streamline prescription-approval workflows. Delivered document-processing pipelines (PDF generation, CSV processing) and dynamic form / workflow tools, with significant LLM integration.",
+      stack: ["Ruby on Rails", "LLMs", "Document parsing", "PostgreSQL"], metric: "Engineering · AI · Consulting" },
+    { year: "2015 — 2016", company: "United Networks of America", role: "Software Developer",
+      summary: "Shipped a Rails pharmacy-locator using geocoding and revamped a mobile application.",
+      detail: "Built a Rails pharmacy-locator application using geocoding to help users quickly find nearby pharmacies, and revamped a mobile application with dynamic image / text-overlay features.",
+      stack: ["Ruby on Rails", "Geocoding"], metric: "First Rails role" },
+  ]
+%>
+<section id="work" style="background: var(--surface-page); border-top: 1px solid var(--border-subtle);">
+  <div style="max-width: var(--container); margin: 0 auto; padding: 80px 32px;">
+    <span class="sn-eyebrow"><span class="sn-eyebrow__rule"></span>Experience</span>
+    <h2 style="font-family: var(--font-display); font-weight: 800; font-size: clamp(30px,4vw,44px); letter-spacing: -0.03em; color: var(--text-strong); margin: 16px 0 8px;">
+      Eleven years, shipped.
+    </h2>
+    <p style="font-size: 16.5px; color: var(--text-muted); max-width: 52ch; margin: 0 0 44px;">
+      A through-line of Rails applications across healthcare, fintech, e-commerce, and AI, built at real scale. Tap any role to expand.
+    </p>
+    <div data-controller="timeline">
+      <% entries.each_with_index do |e, i| %>
+        <div class="sn-tl-entry<%= " is-open" if i.zero? %>" data-timeline-target="entry">
+          <div class="sn-tl-year"><%= e[:year] %></div>
+          <div class="sn-tl-rail">
+            <div class="sn-tl-dot"></div>
+            <% unless i == entries.length - 1 %><div class="sn-tl-line"></div><% end %>
+          </div>
+          <button type="button" class="sn-tl-panel" data-action="timeline#toggle">
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px;">
+              <div>
+                <span style="font-family: var(--font-display); font-weight: 700; font-size: 20px; letter-spacing: -0.02em; color: var(--text-strong);"><%= e[:company] %></span>
+                <span style="font-size: 15px; color: var(--text-muted); margin-left: 10px;"><%= e[:role] %></span>
+              </div>
+              <span class="sn-badge sn-badge--brand"><%= e[:metric] %></span>
+            </div>
+            <p style="font-size: 15px; line-height: 1.55; color: var(--text-body); margin: 10px 0 0;"><%= e[:summary] %></p>
+            <div class="sn-tl-detail">
+              <div>
+                <p style="font-size: 15px; line-height: 1.6; color: var(--text-muted); margin: 14px 0 0;"><%= e[:detail] %></p>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px;">
+                  <% e[:stack].each do |s| %><span class="sn-tag"><%= s %></span><% end %>
+                </div>
+              </div>
+            </div>
+          </button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

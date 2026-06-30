@@ -1,0 +1,34 @@
+<%# locals: contact_message %>
+<%= form_with model: contact_message, url: personal_contact_path, class: "sn-contact-form" do |f| %>
+  <% if contact_message.errors[:base].any? %>
+    <div class="sn-form-alert" role="alert"><%= contact_message.errors[:base].to_sentence %></div>
+  <% end %>
+
+  <div class="sn-field">
+    <%= f.label :name, "Name", class: "sn-field__label" %>
+    <%= f.text_field :name, class: "sn-input", placeholder: "Jane Doe" %>
+  </div>
+
+  <div class="sn-field">
+    <%= f.label :email, class: "sn-field__label" do %>Email<span class="sn-field__req"> *</span><% end %>
+    <%= f.email_field :email, class: "sn-input", placeholder: "you@company.com" %>
+    <% if contact_message.errors[:email].any? %>
+      <span class="sn-field__hint">Email <%= contact_message.errors[:email].first %></span>
+    <% end %>
+  </div>
+
+  <div class="sn-field">
+    <%= f.label :message, class: "sn-field__label" do %>What are you building?<span class="sn-field__req"> *</span><% end %>
+    <%= f.text_area :message, class: "sn-textarea", placeholder: "A few sentences on the opportunity…" %>
+    <% if contact_message.errors[:message].any? %>
+      <span class="sn-field__hint">Message <%= contact_message.errors[:message].first %></span>
+    <% end %>
+  </div>
+
+  <% sitekey = Rails.application.credentials.dig(:turnstile, :site_key) %>
+  <% if sitekey.present? %>
+    <div data-controller="turnstile" data-turnstile-sitekey-value="<%= sitekey %>" style="margin-top: 2px;"></div>
+  <% end %>
+
+  <button type="submit" class="sn-btn sn-btn--primary sn-btn--lg sn-btn--block"><span>Send message</span></button>
+<% end %>

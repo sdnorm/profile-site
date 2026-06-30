@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+/* Honey Bold design-system tokens (source: claude.ai/design 4b468235…) */
+@import "../stylesheets/design_system/colors.css";
+@import "../stylesheets/design_system/typography.css";
+@import "../stylesheets/design_system/spacing.css";
+@import "../stylesheets/design_system/base.css";
+@import "../stylesheets/design_system/components.css";
+@import "../stylesheets/design_system/portfolio.css";

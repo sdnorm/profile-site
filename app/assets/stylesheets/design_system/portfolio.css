@@ -1,0 +1,59 @@
+/* ==========================================================================
+   Portfolio page — section layout + interactive state for the personal site.
+   Translated from ui_kits/portfolio (claude.ai/design 4b468235…). Drives the
+   Hero/Timeline/Contact partials; JS state via Stimulus toggles `is-open`/`is-sent`.
+   ========================================================================== */
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* ---- Timeline accordion ---- */
+.sn-tl-entry { display: grid; grid-template-columns: 120px 28px 1fr; column-gap: 0; }
+.sn-tl-year { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); padding-top: 24px; letter-spacing: 0.02em; }
+.sn-tl-rail { display: flex; flex-direction: column; align-items: center; }
+.sn-tl-dot {
+  width: 13px; height: 13px; border-radius: 50%;
+  background: var(--paper-0); border: 2px solid var(--ink-300);
+  margin-top: 26px; flex: none;
+  transition: all var(--dur-base) var(--ease-out);
+}
+.sn-tl-line { width: 2px; flex: 1; background: var(--border-default); margin-top: 4px; }
+.sn-tl-entry.is-open .sn-tl-dot { background: var(--brand); border-color: var(--brand); }
+.sn-tl-panel {
+  all: unset; cursor: pointer; display: block; text-align: left;
+  padding: 18px 20px; margin-bottom: 14px; border-radius: var(--radius-lg);
+  border: 1px solid transparent; background: transparent;
+  transition: all var(--dur-base) var(--ease-out);
+}
+.sn-tl-panel:hover { background: var(--paper-100); }
+.sn-tl-entry.is-open .sn-tl-panel {
+  border-color: var(--border-default); background: var(--surface-card);
+  box-shadow: var(--shadow-sm);
+}
+.sn-tl-entry.is-open .sn-tl-panel:hover { background: var(--surface-card); }
+.sn-tl-detail {
+  display: grid; grid-template-rows: 0fr;
+  transition: grid-template-rows var(--dur-slow) var(--ease-out);
+}
+.sn-tl-entry.is-open .sn-tl-detail { grid-template-rows: 1fr; }
+.sn-tl-detail > div { overflow: hidden; }
+
+/* ---- Contact form ---- */
+.sn-contact-form { display: flex; flex-direction: column; gap: 16px; }
+.sn-form-alert {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--danger);
+  background: var(--danger-tint);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+}
+
+/* ---- Responsive collapse (matches the design kit @880px) ---- */
+@media (max-width: 880px) {
+  .sn-hero-grid, .sn-contact-grid { grid-template-columns: 1fr !important; }
+  .sn-navlinks { display: none !important; }
+  .sn-navpill { display: none !important; }
+}

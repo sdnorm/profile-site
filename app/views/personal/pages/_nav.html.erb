@@ -1,0 +1,21 @@
+<%# Nav — sticky top bar: mark + wordmark, links, availability, CTA %>
+<header style="position: sticky; top: 0; z-index: 100;
+               background: color-mix(in srgb, var(--surface-page) 82%, transparent);
+               backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+               border-bottom: 1px solid var(--border-subtle);">
+  <div style="max-width: var(--container); margin: 0 auto; padding: 14px 32px;
+              display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+    <a href="#top" style="display: flex; align-items: center; gap: 11px; text-decoration: none;">
+      <%= image_tag "mark.svg", width: 32, height: 32, alt: "", style: "display: block;" %>
+      <span style="font-family: var(--font-display); font-weight: 800; font-size: 17px; letter-spacing: -0.025em; color: var(--text-strong);">Spencer Norman</span>
+    </a>
+    <nav class="sn-navlinks" style="display: flex; align-items: center; gap: 26px;">
+      <a href="#work" style="font-family: var(--font-sans); font-size: var(--fs-sm); font-weight: 500; color: var(--text-body); text-decoration: none; padding: 6px 2px;">Experience</a>
+      <a href="#skills" style="font-family: var(--font-sans); font-size: var(--fs-sm); font-weight: 500; color: var(--text-body); text-decoration: none; padding: 6px 2px;">Skills</a>
+      <a href="#projects" style="font-family: var(--font-sans); font-size: var(--fs-sm); font-weight: 500; color: var(--text-body); text-decoration: none; padding: 6px 2px;">Projects</a>
+    </nav>
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="#contact" class="sn-btn sn-btn--inverse sn-btn--sm"><span>Get in touch</span></a>
+    </div>
+  </div>
+</header>

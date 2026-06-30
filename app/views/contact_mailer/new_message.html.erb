@@ -1,0 +1,5 @@
+<h2>New portfolio inquiry</h2>
+<p><strong>Name:</strong> <%= @contact_message.name.presence || "(not provided)" %></p>
+<p><strong>Email:</strong> <%= @contact_message.email %></p>
+<p><strong>Message:</strong></p>
+<p><%= simple_format(@contact_message.message) %></p>
