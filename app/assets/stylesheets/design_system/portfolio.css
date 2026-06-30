@@ -40,11 +40,16 @@ html { scroll-behavior: smooth; }
 .sn-tl-entry.is-open .sn-tl-detail { grid-template-rows: 1fr; }
 .sn-tl-detail > div { overflow: hidden; }
 
-/* ---- Contact form: submit -> success ---- */
+/* ---- Contact form ---- */
 .sn-contact-form { display: flex; flex-direction: column; gap: 16px; }
-.sn-contact-card .sn-contact-success { display: none; }
-.sn-contact-card.is-sent .sn-contact-form { display: none; }
-.sn-contact-card.is-sent .sn-contact-success { display: flex; }
+.sn-form-alert {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--danger);
+  background: var(--danger-tint);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+}
 
 /* ---- Responsive collapse (matches the design kit @880px) ---- */
 @media (max-width: 880px) {

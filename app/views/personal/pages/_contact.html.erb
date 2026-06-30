@@ -1,4 +1,4 @@
-<%# Contact — inverse CTA section with a contact form (client-side success state) %>
+<%# Contact — inverse CTA with a working, bot-protected form (Turnstile + Mailgun) %>
 <section id="contact" style="background: var(--surface-inverse); color: var(--text-on-inverse);">
   <div class="sn-contact-grid" style="max-width: var(--container); margin: 0 auto; padding: 84px 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">
     <div>
@@ -10,31 +10,8 @@
       </p>
     </div>
 
-    <div class="sn-contact-card" data-controller="contact" style="background: var(--paper-50); border-radius: var(--radius-2xl); padding: 28px; box-shadow: var(--shadow-lg);">
-      <form class="sn-contact-form" data-action="submit->contact#submit">
-        <div class="sn-field">
-          <label class="sn-field__label" for="contact-name">Name</label>
-          <input id="contact-name" class="sn-input" type="text" name="name" placeholder="Jane Doe">
-        </div>
-        <div class="sn-field">
-          <label class="sn-field__label" for="contact-email">Email<span class="sn-field__req"> *</span></label>
-          <input id="contact-email" class="sn-input" type="email" name="email" required placeholder="you@company.com">
-        </div>
-        <div class="sn-field">
-          <label class="sn-field__label" for="contact-message">What are you building?<span class="sn-field__req"> *</span></label>
-          <textarea id="contact-message" class="sn-textarea" name="message" required placeholder="A few sentences on the problem…"></textarea>
-        </div>
-        <button type="submit" class="sn-btn sn-btn--primary sn-btn--lg sn-btn--block"><span>Send message</span></button>
-      </form>
-
-      <div class="sn-contact-success" style="flex-direction: column; align-items: center; justify-content: center; text-align: center; min-height: 268px; gap: 14px;">
-        <div style="width: 52px; height: 52px; border-radius: 50%; background: var(--success-tint); color: var(--success); display: flex; align-items: center; justify-content: center;">
-          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-        </div>
-        <h3 style="font-family: var(--font-display); font-weight: 700; font-size: 22px; letter-spacing: -0.02em; color: var(--text-strong); margin: 0;">Message sent</h3>
-        <p style="font-size: 15px; color: var(--text-muted); margin: 0; max-width: 30ch;">Thanks — I'll get back to you within a day.</p>
-        <button type="button" class="sn-btn sn-btn--ghost sn-btn--md" data-action="contact#reset"><span>Send another</span></button>
-      </div>
+    <div id="contact_panel" class="sn-contact-card" style="background: var(--paper-50); border-radius: var(--radius-2xl); padding: 28px; box-shadow: var(--shadow-lg);">
+      <%= render "personal/pages/contact_form", contact_message: ContactMessage.new %>
     </div>
   </div>
 </section>
