@@ -41,6 +41,17 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  # Use Mailgun in development only when configured; otherwise leave the default
+  # so the form works locally without keys (delivery silently no-ops).
+  if Rails.application.credentials.dig(:mailgun, :api_key).present?
+    config.action_mailer.delivery_method = :mailgun
+    config.action_mailer.mailgun_settings = {
+      api_key: Rails.application.credentials.dig(:mailgun, :api_key),
+      domain:  Rails.application.credentials.dig(:mailgun, :domain)
+    }
+  end
+  config.action_mailer.default_url_options = { host: "spencernorman.localhost", port: 3000 }
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
