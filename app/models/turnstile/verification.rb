@@ -4,8 +4,8 @@ require "json"
 module Turnstile
   # Verifies a Cloudflare Turnstile token server-side (no Cloudflare Worker).
   # Tableless model. Fails closed (false) on a blank token or any error; bypasses
-  # (true) when no secret is configured, so the form works in dev/test before real
-  # keys exist. The HTTP boundary is injectable (plain DI) for tests — no mocks.
+  # (true) when no secret is configured (or config.x.turnstile.bypass is set, as in test),
+  # so the form works before real keys exist. The HTTP boundary is injectable (plain DI) for tests — no mocks.
   class Verification
     include ActiveModel::Model
     include ActiveModel::Attributes
@@ -14,7 +14,9 @@ module Turnstile
 
     attribute :token, :string
     attribute :remote_ip, :string
-    attribute :secret, :string, default: -> { Rails.application.credentials.dig(:turnstile, :secret_key) }
+    attribute :secret, :string, default: -> {
+      Rails.application.credentials.dig(:turnstile, :secret_key) unless Rails.configuration.x.turnstile.bypass
+    }
 
     attr_writer :http
     def http = @http ||= method(:cloudflare_siteverify)
