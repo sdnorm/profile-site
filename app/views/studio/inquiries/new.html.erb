@@ -1,0 +1,11 @@
+<% content_for :title, "Request a call · Norman Simplified" %>
+<main class="mx-auto max-w-2xl px-6 py-20">
+  <h1 class="t-display">Request a call</h1>
+  <div id="inquiry_panel">
+    <% if @sent %>
+      <%= render "studio/inquiries/success" %>
+    <% else %>
+      <%= render "studio/inquiries/form", inquiry: @inquiry %>
+    <% end %>
+  </div>
+</main>

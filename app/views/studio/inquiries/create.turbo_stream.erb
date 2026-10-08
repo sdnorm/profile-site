@@ -1,0 +1,7 @@
+<%= turbo_stream.update "inquiry_panel" do %>
+  <% if @sent %>
+    <%= render "studio/inquiries/success" %>
+  <% else %>
+    <%= render "studio/inquiries/form", inquiry: @inquiry %>
+  <% end %>
+<% end %>
