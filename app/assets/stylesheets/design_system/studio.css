@@ -1,0 +1,100 @@
+/* Clear Workshop — semantic overrides for the studio; shared layout stays intact. */
+body[data-site="studio"] {
+  /* Cool surfaces */
+  --surface-page: #f5f7fa;
+  --surface-raised: #f0f4f9;
+  --surface-sunken: #eaf0f6;
+  --surface-card: #ffffff;
+  --surface-inverse: #17212b;
+  --surface-accent: #eaf0fc;
+  --surface-hover: #f0f4f9;
+  --surface-hover-strong: #eaf0f6;
+  --surface-inverse-hover: #354457;
+
+  /* Graphite text and white on filled accents */
+  --text-strong: #17212b;
+  --text-body: #354457;
+  --text-muted: #536277;
+  --text-subtle: #5d6c80;
+  --text-on-accent: #ffffff;
+  --text-on-accent-hover: #ffffff;
+  --text-on-inverse: #ffffff;
+  --text-accent: #2456c7;
+  --text-link: #1d46a3;
+
+  /* Decorative rules stay light; control borders remain distinct. */
+  --border-subtle: #d8e0eb;
+  --border-default: #8190a5;
+  --border-strong: #8190a5;
+  --border-inverse: rgba(255, 255, 255, 0.18);
+  --border-hover: #536277;
+
+  /* Cobalt brand */
+  --brand: #2456c7;
+  --brand-hover: #1d46a3;
+  --brand-active: #183b88;
+  --brand-tint: #eaf0fc;
+  --brand-soft: #f0f4fc;
+  --brand-soft-border: #c5d6f3;
+  --brand-soft-text: #1d46a3;
+  --brand-dot: #2456c7;
+  --brand-dot-glow: rgba(36, 86, 199, 0.18);
+  --icon-muted: #5d6c80;
+
+  /* Status pairs */
+  --success: #1d7044;
+  --success-tint: #e5f3eb;
+  --danger: #ad342b;
+  --danger-tint: #fcebe8;
+  --info: #1d46a3;
+  --info-tint: #eaf0fc;
+  --warning: #805307;
+  --warning-tint: #fff3d6;
+  --ring: #2456c7;
+
+  /* Rebind every type role here: inherited aliases resolve at their source. */
+  --font-display: "Hanken Grotesk", system-ui, -apple-system, sans-serif;
+  --fs-base: 17px;
+  --type-display-family: var(--font-display);
+  --type-display-weight: var(--fw-bold);
+  --type-display-track: -0.02em;
+  --type-display-lh: var(--lh-tight);
+  --type-heading-family: var(--font-display);
+  --type-heading-weight: var(--fw-semibold);
+  --type-heading-track: -0.01em;
+  --type-heading-lh: var(--lh-snug);
+  --type-body-family: var(--font-sans);
+  --type-body-weight: var(--fw-regular);
+  --type-body-track: var(--track-normal);
+  --type-body-lh: var(--lh-normal);
+  --type-label-family: var(--font-mono);
+  --type-label-weight: var(--fw-medium);
+  --type-label-track: var(--track-label);
+  --type-label-size: var(--fs-xs);
+
+  /* Small corners and restrained cool shadows; semantic pills stay round. */
+  --radius-xs: 8px;
+  --radius-sm: 8px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+  --radius-2xl: 12px;
+  --shadow-xs: 0 1px 2px rgba(23, 33, 43, 0.04);
+  --shadow-sm: 0 1px 2px rgba(23, 33, 43, 0.04), 0 3px 8px -3px rgba(23, 33, 43, 0.08);
+  --shadow-md: 0 2px 4px rgba(23, 33, 43, 0.04), 0 10px 24px -12px rgba(23, 33, 43, 0.12);
+  --shadow-lg: 0 4px 8px rgba(23, 33, 43, 0.04), 0 18px 36px -16px rgba(23, 33, 43, 0.16);
+  --shadow-inset: inset 0 1px 2px rgba(23, 33, 43, 0.04);
+  --shadow-focus: 0 0 0 2px var(--surface-card), 0 0 0 4px var(--ring);
+}
+
+/* Reserve mono for .t-label process labels; interface labels use Hanken. */
+body[data-site="studio"] .sn-eyebrow,
+body[data-site="studio"] .sn-tag,
+body[data-site="studio"] .sn-field__label,
+body[data-site="studio"] .sn-tl-year {
+  font-family: var(--font-sans);
+}
+
+body[data-site="studio"] .sn-btn--primary:active {
+  --_bg: var(--brand-active);
+}
