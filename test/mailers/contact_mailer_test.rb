@@ -5,8 +5,8 @@ class ContactMailerTest < ActionMailer::TestCase
     cm = ContactMessage.new(name: "Jane Doe", email: "jane@acme.com", message: "We have a billing problem.")
     mail = ContactMailer.new_message(cm)
 
-    assert_equal ["spencernorman@hey.com"], mail.to
-    assert_equal ["jane@acme.com"], mail.reply_to
+    assert_equal [ "spencernorman@hey.com" ], mail.to
+    assert_equal [ "jane@acme.com" ], mail.reply_to
     assert_match "Jane Doe", mail.subject
     assert_match "We have a billing problem.", mail.body.encoded
   end
