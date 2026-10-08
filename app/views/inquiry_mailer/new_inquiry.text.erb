@@ -1,0 +1,9 @@
+New Norman Simplified inquiry
+
+Interest: <%= @inquiry.interest_label %>
+Name:     <%= @inquiry.name.presence || "(not provided)" %>
+Company:  <%= @inquiry.company.presence || "(not provided)" %>
+Email:    <%= @inquiry.email %>
+
+Message:
+<%= @inquiry.message %>
