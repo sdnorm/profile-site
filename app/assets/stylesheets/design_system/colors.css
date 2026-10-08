@@ -52,6 +52,9 @@
   --surface-card:     var(--paper-0);
   --surface-inverse:  var(--ink-900);
   --surface-accent:   var(--honey-100);
+  --surface-hover:    var(--paper-100);
+  --surface-hover-strong: var(--paper-200);
+  --surface-inverse-hover: var(--ink-700);
 
   /* Text */
   --text-strong:      var(--ink-900);
@@ -59,6 +62,7 @@
   --text-muted:       var(--ink-500);
   --text-subtle:      var(--ink-400);
   --text-on-accent:   var(--ink-900);     /* dark ink reads best on honey */
+  --text-on-accent-hover: var(--paper-0);
   --text-on-inverse:  var(--paper-50);
   --text-accent:      var(--honey-600);
   --text-link:        var(--honey-700);
@@ -68,12 +72,21 @@
   --border-default:   #e2d8c5;
   --border-strong:    var(--ink-200);
   --border-inverse:   rgba(255,255,255,0.14);
+  --border-hover:     var(--ink-300);
 
   /* Accent / brand */
   --brand:            var(--honey-500);
   --brand-hover:      var(--honey-600);
   --brand-active:     var(--honey-700);
   --brand-tint:       var(--honey-100);
+  --brand-soft:       var(--honey-50);
+  --brand-soft-border: var(--honey-200);
+  --brand-soft-text:  var(--honey-700);
+  --brand-dot:        var(--honey-500);
+  --brand-dot-glow:   rgba(224,153,43,0.22);
+
+  /* Icons */
+  --icon-muted:       var(--ink-400);
 
   /* Status */
   --success:          var(--green-600);

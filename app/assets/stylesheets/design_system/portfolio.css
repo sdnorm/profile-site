@@ -15,7 +15,7 @@ html { scroll-behavior: smooth; }
 .sn-tl-rail { display: flex; flex-direction: column; align-items: center; }
 .sn-tl-dot {
   width: 13px; height: 13px; border-radius: 50%;
-  background: var(--paper-0); border: 2px solid var(--ink-300);
+  background: var(--surface-card); border: 2px solid var(--border-hover);
   margin-top: 26px; flex: none;
   transition: all var(--dur-base) var(--ease-out);
 }
@@ -27,7 +27,7 @@ html { scroll-behavior: smooth; }
   border: 1px solid transparent; background: transparent;
   transition: all var(--dur-base) var(--ease-out);
 }
-.sn-tl-panel:hover { background: var(--paper-100); }
+.sn-tl-panel:hover { background: var(--surface-hover); }
 .sn-tl-entry.is-open .sn-tl-panel {
   border-color: var(--border-default); background: var(--surface-card);
   box-shadow: var(--shadow-sm);
