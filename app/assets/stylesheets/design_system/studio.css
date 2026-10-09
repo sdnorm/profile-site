@@ -1293,14 +1293,29 @@ body[data-site="studio"] .ns-ai__explanation .ns-prose li + li {
 }
 
 body[data-site="studio"] .ns-catalog__group {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-  gap: 64px;
   padding-block: 40px;
   border-top: 1px solid var(--border-subtle);
 }
 
-body[data-site="studio"] .ns-catalog__intro h3,
+body[data-site="studio"] .ns-catalog__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: 64px;
+  margin-top: 24px;
+}
+
+body[data-site="studio"] .ns-catalog__summary {
+  cursor: pointer;
+  color: var(--text-accent);
+}
+
+body[data-site="studio"] .ns-catalog__summary:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 8px;
+  border-radius: var(--radius-sm);
+}
+
+body[data-site="studio"] .ns-catalog__summary h3,
 body[data-site="studio"] .ns-explorer__step h3 {
   margin: 0 0 16px;
   color: var(--text-strong);
@@ -1309,7 +1324,12 @@ body[data-site="studio"] .ns-explorer__step h3 {
   letter-spacing: -0.01em;
 }
 
-body[data-site="studio"] .ns-catalog__intro p {
+body[data-site="studio"] .ns-catalog__summary h3 {
+  display: inline;
+  margin: 0;
+}
+
+body[data-site="studio"] .ns-catalog__intro {
   margin: 0;
   color: var(--text-muted);
 }
@@ -1458,9 +1478,12 @@ body[data-site="studio"] .ns-explorer__close {
 
 @media (max-width: 47.999rem) {
   body[data-site="studio"] .ns-catalog__group {
+    padding-block: 24px;
+  }
+
+  body[data-site="studio"] .ns-catalog__body {
     grid-template-columns: minmax(0, 1fr);
     gap: 28px;
-    padding-block: 32px;
   }
 
   body[data-site="studio"] .ns-explorer__step {
@@ -1578,6 +1601,17 @@ body[data-site="studio"] .ns-contact__alert p {
 
 body[data-site="studio"] .ns-contact__alert p + p {
   margin-top: 12px;
+}
+
+body[data-site="studio"] .ns-contact__alert ul {
+  margin: 0;
+  padding-left: 20px;
+  list-style: disc;
+}
+
+body[data-site="studio"] .ns-contact__alert p + ul,
+body[data-site="studio"] .ns-contact__alert li + li {
+  margin-top: 8px;
 }
 
 body[data-site="studio"] .ns-contact__submit {

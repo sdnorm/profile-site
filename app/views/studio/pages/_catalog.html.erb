@@ -128,34 +128,36 @@
     }
   ]
 %>
-<section class="ns-section ns-catalog" aria-labelledby="catalog-title">
+<section class="ns-section ns-catalog" aria-labelledby="catalog-title" data-controller="catalog">
   <div class="ns-container">
     <header class="ns-section-heading">
       <p class="sn-eyebrow">Twelve builds</p>
       <h2 class="t-heading" id="catalog-title">Pick the job, not the model</h2>
     </header>
     <% groups.each_with_index do |group, index| %>
-      <section class="ns-catalog__group" aria-labelledby="catalog-group-<%= index %>">
-        <header class="ns-catalog__intro">
+      <details class="ns-catalog__group" data-catalog-target="groups" open>
+        <summary class="ns-catalog__summary">
           <h3 class="t-heading" id="catalog-group-<%= index %>"><%= group[:name] %></h3>
-          <p><%= group[:intro] %></p>
-        </header>
-        <div>
-          <% group[:items].each do |item| %>
-            <article class="ns-catalog__item" data-catalog-item>
-              <header class="ns-catalog__item-heading">
-                <h4 class="t-heading"><%= item[:name] %></h4>
-                <p>starts at <strong><%= item[:price] %></strong> · <%= item[:timeline] %></p>
-              </header>
-              <dl class="ns-catalog__details">
-                <div><dt>Who</dt><dd><%= item[:who] %></dd></div>
-                <div><dt>What</dt><dd><%= item[:what] %></dd></div>
-                <div><dt>Moves</dt><dd><%= item[:outcome] %></dd></div>
-              </dl>
-            </article>
-          <% end %>
+        </summary>
+        <div class="ns-catalog__body">
+          <p class="ns-catalog__intro"><%= group[:intro] %></p>
+          <div>
+            <% group[:items].each do |item| %>
+              <article class="ns-catalog__item" data-catalog-item>
+                <header class="ns-catalog__item-heading">
+                  <h4 class="t-heading"><%= item[:name] %></h4>
+                  <p>starts at <strong><%= item[:price] %></strong> · <%= item[:timeline] %></p>
+                </header>
+                <dl class="ns-catalog__details">
+                  <div><dt>Who</dt><dd><%= item[:who] %></dd></div>
+                  <div><dt>What</dt><dd><%= item[:what] %></dd></div>
+                  <div><dt>Moves</dt><dd><%= item[:outcome] %></dd></div>
+                </dl>
+              </article>
+            <% end %>
+          </div>
         </div>
-      </section>
+      </details>
     <% end %>
   </div>
 </section>

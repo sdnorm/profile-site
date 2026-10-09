@@ -2,9 +2,9 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["steps", "buttons", "status"]
+  static values = { index: { type: Number, default: 0 } }
 
   connect() {
-    this.index = 0
     this.buttonsTarget.hidden = false
     this.render()
   }
@@ -15,21 +15,30 @@ export default class extends Controller {
   }
 
   previous() {
-    this.index = Math.max(0, this.index - 1)
+    this.indexValue = Math.max(0, this.indexValue - 1)
     this.render()
+    this.announce()
   }
 
   next() {
-    this.index = Math.min(this.stepsTargets.length - 1, this.index + 1)
+    this.indexValue = Math.min(this.stepsTargets.length - 1, this.indexValue + 1)
     this.render()
+    this.announce()
   }
 
   render() {
-    this.stepsTargets.forEach((step, index) => { step.hidden = index !== this.index })
-    const buttons = this.buttonsTarget.querySelectorAll("button")
-    buttons[0].disabled = this.index === 0
-    buttons[1].disabled = this.index === this.stepsTargets.length - 1
-    const title = this.stepsTargets[this.index].dataset.stepTitle
-    this.statusTarget.textContent = `Step ${this.index + 1} of ${this.stepsTargets.length} — ${title}`
+    this.stepsTargets.forEach((step, index) => { step.hidden = index !== this.indexValue })
+    const [previous, next] = this.buttonsTarget.querySelectorAll("button")
+    const firstStep = this.indexValue === 0
+    const lastStep = this.indexValue === this.stepsTargets.length - 1
+    if (firstStep && document.activeElement === previous) next.focus()
+    if (lastStep && document.activeElement === next) previous.focus()
+    previous.disabled = firstStep
+    next.disabled = lastStep
+  }
+
+  announce() {
+    const title = this.stepsTargets[this.indexValue].dataset.stepTitle
+    this.statusTarget.textContent = `Step ${this.indexValue + 1} of ${this.stepsTargets.length} — ${title}`
   }
 }

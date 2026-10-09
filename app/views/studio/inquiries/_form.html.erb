@@ -1,20 +1,24 @@
 <%# locals: inquiry %>
 <% missing_copy = "Add this so I know where to reply and what the work is." %>
+<% name_error = inquiry.errors[:name].first %>
+<% company_error = inquiry.errors[:company].first %>
 <% email_error = if inquiry.errors[:email].any?
   if inquiry.errors.of_kind?(:email, :blank)
     missing_copy
   elsif inquiry.errors.of_kind?(:email, :invalid)
     "That email address does not look usable."
   else
-    inquiry.errors.full_messages_for(:email).first
+    inquiry.errors[:email].first
   end
 end %>
 <% interest_error = if inquiry.errors[:interest].any?
-  inquiry.interest.blank? ? missing_copy : inquiry.errors.full_messages_for(:interest).first
+  inquiry.interest.blank? ? missing_copy : inquiry.errors[:interest].first
 end %>
 <% message_error = if inquiry.errors[:message].any?
-  inquiry.errors.of_kind?(:message, :blank) ? missing_copy : inquiry.errors.full_messages_for(:message).first
+  inquiry.errors.of_kind?(:message, :blank) ? missing_copy : inquiry.errors[:message].first
 end %>
+<% field_errors = { name: name_error, email: email_error, company: company_error, interest: interest_error, message: message_error }.compact %>
+<% first_invalid_field = [ :email, :message, :name, :company, :interest ].find { |field| field_errors.key?(field) } %>
 <% interest_options = [
   [ "Adopt — tools and training", "adopt" ],
   [ "Automate — one workflow", "automate" ],
@@ -24,35 +28,48 @@ end %>
 ] %>
 <h2 class="t-heading ns-contact__form-heading">The workflow</h2>
 <%= form_with model: inquiry, scope: :studio_inquiry, url: studio_contact_path, class: "sn-contact-form ns-contact__form" do |f| %>
-  <% if inquiry.errors[:base].any? %>
+  <% if inquiry.errors.any? %>
     <div class="sn-form-alert ns-contact__alert" role="alert">
       <% inquiry.errors[:base].each do |error| %>
-        <p><%= error == "Couldn't send right now. Please try again in a moment." ? "It did not send. Try again in a moment. If it fails twice, use the form on spencernorman.io and mention Norman Simplified." : error %></p>
+        <p><%= error %></p>
+      <% end %>
+      <% if field_errors.any? %>
+        <ul>
+          <% field_errors.each do |field, error| %>
+            <li><%= link_to "#{field.to_s.humanize}: #{error}", "#studio_inquiry_#{field}", class: "ns-inline-link" %></li>
+          <% end %>
+        </ul>
       <% end %>
     </div>
   <% end %>
 
-  <div class="sn-field">
+  <div class="sn-field <%= "sn-field--error" if name_error %>">
     <%= f.label :name, "Name (optional)", class: "sn-field__label" %>
-    <%= f.text_field :name, class: "sn-input", autocomplete: "name" %>
+    <%= f.text_field :name, class: "sn-input", autocomplete: "name", maxlength: 120, autofocus: first_invalid_field == :name, aria: { invalid: name_error.present?, describedby: ("studio_inquiry_name_error" if name_error) } %>
+    <% if name_error %>
+      <span id="studio_inquiry_name_error" class="sn-field__hint"><%= name_error %></span>
+    <% end %>
   </div>
 
   <div class="sn-field <%= "sn-field--error" if email_error %>">
     <%= f.label :email, class: "sn-field__label" do %>Email<span class="sn-field__req" aria-hidden="true"> *</span><% end %>
-    <%= f.email_field :email, class: "sn-input", autocomplete: "email", required: true, aria: { invalid: email_error.present?, describedby: ("studio_inquiry_email_error" if email_error) } %>
+    <%= f.email_field :email, class: "sn-input", autocomplete: "email", required: true, autofocus: first_invalid_field == :email, aria: { invalid: email_error.present?, describedby: ("studio_inquiry_email_error" if email_error) } %>
     <% if email_error %>
       <span id="studio_inquiry_email_error" class="sn-field__hint"><%= email_error %></span>
     <% end %>
   </div>
 
-  <div class="sn-field">
+  <div class="sn-field <%= "sn-field--error" if company_error %>">
     <%= f.label :company, "Company (optional)", class: "sn-field__label" %>
-    <%= f.text_field :company, class: "sn-input", autocomplete: "organization" %>
+    <%= f.text_field :company, class: "sn-input", autocomplete: "organization", maxlength: 120, autofocus: first_invalid_field == :company, aria: { invalid: company_error.present?, describedby: ("studio_inquiry_company_error" if company_error) } %>
+    <% if company_error %>
+      <span id="studio_inquiry_company_error" class="sn-field__hint"><%= company_error %></span>
+    <% end %>
   </div>
 
   <div class="sn-field <%= "sn-field--error" if interest_error %>">
     <%= f.label :interest, class: "sn-field__label" do %>What should this cover?<span class="sn-field__req" aria-hidden="true"> *</span><% end %>
-    <%= f.select :interest, interest_options, {}, class: "sn-input", required: true, aria: { invalid: interest_error.present?, describedby: ("studio_inquiry_interest_error" if interest_error) } %>
+    <%= f.select :interest, interest_options, {}, class: "sn-input", required: true, autofocus: first_invalid_field == :interest, aria: { invalid: interest_error.present?, describedby: ("studio_inquiry_interest_error" if interest_error) } %>
     <% if interest_error %>
       <span id="studio_inquiry_interest_error" class="sn-field__hint"><%= interest_error %></span>
     <% end %>
@@ -60,8 +77,8 @@ end %>
 
   <div class="sn-field <%= "sn-field--error" if message_error %>">
     <%= f.label :message, class: "sn-field__label" do %>What is taking the time?<span class="sn-field__req" aria-hidden="true"> *</span><% end %>
-    <%= f.text_area :message, class: "sn-textarea", rows: 6, required: true, placeholder: "The documents, the spreadsheet, or the tool. What happens today, and who does it?", aria: { invalid: message_error.present?, describedby: [ "studio_inquiry_message_hint", ("studio_inquiry_message_error" if message_error) ].compact.join(" ") } %>
-    <span id="studio_inquiry_message_hint" class="sn-field__hint ns-contact__helper">Leave out passwords, customer secrets, and patient information. If the work involves patient data, say so in general terms only.</span>
+    <%= f.text_area :message, class: "sn-textarea", rows: 6, required: true, maxlength: 5000, autofocus: first_invalid_field == :message, placeholder: "The documents, the spreadsheet, or the tool. What happens today, and who does it?", aria: { invalid: message_error.present?, describedby: [ "studio_inquiry_message_hint", ("studio_inquiry_message_error" if message_error) ].compact.join(" ") } %>
+    <span id="studio_inquiry_message_hint" class="sn-field__hint ns-contact__helper">Leave out passwords, customer secrets, and patient information. I don't take work involving protected health information.</span>
     <% if message_error %>
       <span id="studio_inquiry_message_error" class="sn-field__hint"><%= message_error %></span>
     <% end %>
