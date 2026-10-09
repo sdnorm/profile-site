@@ -98,3 +98,250 @@ body[data-site="studio"] .sn-tl-year {
 body[data-site="studio"] .sn-btn--primary:active {
   --_bg: var(--brand-active);
 }
+
+/* Studio shell */
+body[data-site="studio"] {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+body[data-site="studio"] .ns-container {
+  width: min(var(--container), calc(100% - 48px));
+  margin-inline: auto;
+}
+
+body[data-site="studio"] .ns-content {
+  flex: 1;
+  min-width: 0;
+}
+
+body[data-site="studio"] .ns-content:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+body[data-site="studio"] .ns-skip-link {
+  position: absolute;
+  top: 12px;
+  left: 24px;
+  z-index: var(--z-overlay);
+  padding: 12px 18px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-inverse);
+  color: var(--text-on-inverse);
+  transform: translateY(calc(-100% - 16px));
+}
+
+body[data-site="studio"] .ns-skip-link:focus {
+  transform: translateY(0);
+}
+
+body[data-site="studio"] .ns-header {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+body[data-site="studio"] .ns-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  min-height: 96px;
+  padding-block: 20px;
+}
+
+body[data-site="studio"] .ns-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  color: var(--text-strong);
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--track-tight);
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+/* Three aligned rules: a simple studio mark, separate from the personal monogram. */
+body[data-site="studio"] .ns-mark {
+  display: block;
+  width: 24px;
+  height: 24px;
+  flex: none;
+  border-top: 3px solid var(--brand);
+  border-bottom: 3px solid var(--brand);
+  position: relative;
+}
+
+body[data-site="studio"] .ns-mark::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 3px;
+  background: var(--brand);
+  transform: translateY(-50%);
+}
+
+body[data-site="studio"] .ns-nav__links,
+body[data-site="studio"] .ns-footer__links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body[data-site="studio"] .ns-nav__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--text-body);
+  font-size: 15px;
+  font-weight: var(--fw-medium);
+  white-space: nowrap;
+  text-underline-offset: 6px;
+}
+
+body[data-site="studio"] .ns-nav__link:hover,
+body[data-site="studio"] .ns-nav__link[aria-current="page"] {
+  color: var(--text-link);
+  text-decoration: underline;
+}
+
+body[data-site="studio"] .ns-nav__cta {
+  min-height: 44px;
+  font-size: 15px;
+}
+
+body[data-site="studio"] .ns-nav__toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  background: var(--surface-card);
+  color: var(--text-strong);
+  font: inherit;
+  font-size: 15px;
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+}
+
+body[data-site="studio"] .ns-nav__toggle:hover {
+  background: var(--surface-hover);
+}
+
+body[data-site="studio"] .ns-nav__toggle-icon {
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+}
+
+body[data-site="studio"] .ns-nav__toggle[aria-expanded="true"] .ns-nav__toggle-icon {
+  transform: translateY(2px) rotate(225deg);
+}
+
+body[data-site="studio"] .ns-footer {
+  margin-top: 48px;
+  padding-block: 40px 24px;
+  border-top: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+body[data-site="studio"] .ns-footer__top,
+body[data-site="studio"] .ns-footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  justify-content: space-between;
+  gap: 24px 40px;
+}
+
+body[data-site="studio"] .ns-footer__name {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-semibold);
+}
+
+body[data-site="studio"] .ns-footer__tagline {
+  margin: 4px 0 0;
+}
+
+body[data-site="studio"] .ns-footer__links {
+  flex-wrap: wrap;
+  gap: 4px 24px;
+}
+
+body[data-site="studio"] .ns-footer a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--text-body);
+  text-underline-offset: 4px;
+}
+
+body[data-site="studio"] .ns-footer__bottom {
+  align-items: center;
+  gap: 8px 32px;
+  margin-top: 28px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+body[data-site="studio"] .ns-footer__bottom p {
+  margin: 0;
+}
+
+@media (max-width: 63.999rem) {
+  body[data-site="studio"] .ns-nav {
+    flex-wrap: wrap;
+    gap: 12px;
+    min-height: 84px;
+  }
+
+  body[data-site="studio"] .ns-wordmark {
+    gap: 10px;
+    font-size: 18px;
+  }
+
+  body[data-site="studio"] .ns-nav__links {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    width: 100%;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  body[data-site="studio"] .ns-nav__link {
+    display: flex;
+    padding-inline: 4px;
+    font-size: var(--fs-base);
+  }
+
+  body[data-site="studio"] .ns-nav__cta {
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  /* Without Stimulus all links remain visible and the inactive toggle stays hidden. */
+  body[data-site="studio"] .ns-nav[data-nav-ready="true"] .ns-nav__toggle {
+    display: inline-flex;
+  }
+
+  body[data-site="studio"] .ns-nav[data-nav-ready="true"] .ns-nav__toggle[aria-expanded="false"] + .ns-nav__links {
+    display: none;
+  }
+}
