@@ -1,0 +1,7 @@
+<h2>New Norman Simplified inquiry</h2>
+<p><strong>Interest:</strong> <%= @inquiry.interest_label %></p>
+<p><strong>Name:</strong> <%= @inquiry.name.presence || "(not provided)" %></p>
+<p><strong>Company:</strong> <%= @inquiry.company.presence || "(not provided)" %></p>
+<p><strong>Email:</strong> <%= @inquiry.email %></p>
+<p><strong>Message:</strong></p>
+<%= simple_format(@inquiry.message) %>

@@ -1,0 +1,78 @@
+<% content_for :title, "AI integration | Norman Simplified" %>
+<% content_for :description, "Document intake, answers from your own files, and workflow automation inside the systems you already use. Human review, a measured sample, and a plain account of running cost." %>
+
+<main class="ns-ai">
+  <section class="ns-hero ns-section" aria-labelledby="ai-title">
+    <div class="ns-container ns-ai__hero">
+      <p class="sn-eyebrow">Build</p>
+      <h1 id="ai-title" class="t-display ns-hero__title">AI inside the software you already run</h1>
+      <p class="ns-lead">I extract fields from documents, draft answers from your files, and connect the result to the system your team already opens. A person still decides the exceptions. A pilot starts at $18,000.</p>
+      <div class="ns-actions">
+        <%= link_to "Request a call", studio_contact_path(interest: "build"), class: "sn-btn sn-btn--primary sn-btn--lg" %>
+        <%= link_to "Start with a Signal Audit — $4,500", studio_contact_path(interest: "audit"), class: "ns-text-link" %>
+      </div>
+    </div>
+  </section>
+  <section class="ns-section ns-ai__explanation" aria-labelledby="build-shape">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading"><h2 class="t-heading" id="build-shape">One workflow, one system of record</h2></header>
+      <div class="ns-prose">
+        <p>A pilot is three to four weeks and starts at $18,000. A fuller integration starts at $36,000 and usually takes six to eight weeks. You and I name the number this work should move before kickoff. Prices below are starting points for a single workflow with access in the first week. A second workflow is a second scope.</p>
+        <p>If you cannot name the workflow yet, the Signal Audit is $4,500 and takes two weeks.</p>
+      </div>
+    </div>
+  </section>
+  <%= render "studio/pages/catalog" %>
+  <section class="ns-section ns-ai__explanation" aria-labelledby="human-review">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading"><h2 class="t-heading" id="human-review">A person sees the exceptions</h2></header>
+      <div class="ns-prose">
+        <p>The model proposes. It does not get the last word on a low-confidence field or on an action you mark as sensitive: sending a message, moving money, changing a customer record.</p>
+        <ul>
+          <li>You and I set the confidence line and the sensitive actions before launch</li>
+          <li>Items under the line go to a named role on your team</li>
+          <li>The reviewer sees the source document next to the field</li>
+          <li>Nothing reaches the system of record until the rule for that field says it can</li>
+          <li>Overrides are stored, so the next review is not from memory</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="ns-section ns-ai__explanation" aria-labelledby="evals">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading"><h2 class="t-heading" id="evals">Accuracy is measured on your documents</h2></header>
+      <div class="ns-prose">
+        <p>I don't publish a universal accuracy number. Before go-live I label a sample from your files and score the workflow against it. You see the misses, not a vendor benchmark.</p>
+        <ul>
+          <li>The sample is documents you recognize</li>
+          <li>The score is per field, not one flattering average</li>
+          <li>That set stays as a regression check when a prompt or model changes</li>
+          <li>If the sample is too small or too clean to trust, I say so before you rely on it</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="ns-section ns-ai__explanation" aria-labelledby="running-costs">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading"><h2 class="t-heading" id="running-costs">The model bill is a line item, not a surprise</h2></header>
+      <div class="ns-prose">
+        <p>Inference cost depends on document length, how many fields you extract, and monthly volume. I estimate it from your real volume before build, set a monthly ceiling, and alert when spend approaches it. There is no honest dollar figure for that bill until those inputs exist.</p>
+        <ul>
+          <li>You pay the model provider, or I pass the cost through with the ceiling written down</li>
+          <li>Retries and long documents are part of the estimate</li>
+          <li>After launch, Managed AI Ops starts at $6,500 a month: monitoring, eval updates, the cost cap, and a one-page note on what changed</li>
+          <li>You can run it yourself with the handoff notes if you prefer</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="ns-section ns-ai__explanation" aria-labelledby="agent-eva">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading"><h2 class="t-heading" id="agent-eva">The same pattern, already built once</h2></header>
+      <div class="ns-prose">
+        <p>Agent Eva is a Norman Simplified project. It read prescription-approval packets, wrote structured records, and held back fields that were not confident enough to store. I am not naming the client, and I am not offering this as healthcare work. The pattern — document, fields, review, your database — is the one in the catalog under Packet Intake.</p>
+      </div>
+    </div>
+  </section>
+  <%= render "studio/pages/explorer" %>
+</main>

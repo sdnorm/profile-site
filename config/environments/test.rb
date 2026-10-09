@@ -31,6 +31,9 @@ Rails.application.configure do
   # Render exception templates for rescuable exceptions and raise for other exceptions.
   config.action_dispatch.show_exceptions = :rescuable
 
+  # Never call Cloudflare from tests, even when credentials carry a real Turnstile secret.
+  config.x.turnstile.bypass = true
+
   # Disable request forgery protection in test environment.
   config.action_controller.allow_forgery_protection = false
 

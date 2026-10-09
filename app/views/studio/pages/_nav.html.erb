@@ -1,0 +1,18 @@
+<header class="ns-header">
+  <nav class="ns-container ns-nav" aria-label="Primary" data-controller="nav" data-action="keydown.esc->nav#escape">
+    <%= link_to studio_root_path, class: "ns-wordmark", aria: { label: "Norman Simplified home" } do %>
+      <span class="ns-mark" aria-hidden="true"></span>
+      <span>Norman Simplified</span>
+    <% end %>
+    <button class="ns-nav__toggle" type="button" aria-expanded="false" aria-controls="studio-navigation" data-nav-target="toggle" data-action="nav#toggle">
+      Menu
+      <span class="ns-nav__toggle-icon" aria-hidden="true"></span>
+    </button>
+    <ul id="studio-navigation" class="ns-nav__links" data-nav-target="menu" data-action="click->nav#followLink">
+      <li><%= link_to "Services", studio_root_path(anchor: "services"), class: "ns-nav__link" %></li>
+      <li><%= link_to "AI integration", studio_ai_integration_path, class: "ns-nav__link", aria: { current: ("page" if current_page?(studio_ai_integration_path)) } %></li>
+      <li><%= link_to "How we work", studio_how_we_work_path, class: "ns-nav__link", aria: { current: ("page" if current_page?(studio_how_we_work_path)) } %></li>
+      <li><%= link_to "Request a call", studio_contact_path, class: "sn-btn sn-btn--primary sn-btn--md ns-nav__cta", aria: { current: ("page" if current_page?(studio_contact_path)) } %></li>
+    </ul>
+  </nav>
+</header>

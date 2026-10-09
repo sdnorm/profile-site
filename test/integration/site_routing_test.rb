@@ -28,4 +28,12 @@ class SiteRoutingTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "body[data-site=studio]"
   end
+
+  test "studio-only pages are not reachable on the personal host" do
+    host! "spencernorman.io"
+    [ "/ai-integration", "/how-we-work", "/contact" ].each do |path|
+      get path
+      assert_response :not_found, "expected #{path} to 404 on the personal host"
+    end
+  end
 end

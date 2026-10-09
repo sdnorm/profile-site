@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title><%= content_for(:title) || "Norman Simplified" %></title>
+    <title><%= content_for(:title) || "Technology, simplified | Norman Simplified" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="<%= content_for(:description) || "AI tools, automations, and custom software for operators buried in documents, spreadsheets, and aging tools. You work directly with Spencer Norman." %>">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= render "shared/fonts" %>
+    <%= yield :head %>
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
   <body data-site="<%= current_site %>" data-controller="notification">
+    <a class="ns-skip-link" href="#main-content">Skip to content</a>
+    <%= render "studio/pages/nav" %>
     <%= render "shared/flash" %>
-    <%= yield %>
+    <div id="main-content" class="ns-content" tabindex="-1">
+      <%= yield %>
+    </div>
+    <%= render "studio/pages/footer" %>
   </body>
 </html>

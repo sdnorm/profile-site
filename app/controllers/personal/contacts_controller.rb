@@ -1,32 +1,26 @@
 module Personal
   class ContactsController < BaseController
+    include TurnstileVerifiable
+
     def create
       @contact_message = ContactMessage.new(contact_params)
-
-      if @contact_message.valid? && turnstile_verified?
-        ContactMailer.new_message(@contact_message).deliver_now
-        @sent = true
-      end
-
-      render_panel
-    rescue => e
-      Rails.logger.error("Contact delivery failed: #{e.class}: #{e.message}")
-      @contact_message.errors.add(:base, "Couldn't send right now — please try again in a moment.")
+      @sent = @contact_message.valid? && turnstile_verified_for?(@contact_message) && deliver_message
       render_panel
     end
 
     private
 
     def contact_params
-      params.require(:contact_message).permit(:name, :email, :message)
+      params.fetch(:contact_message, {}).permit(:name, :email, :message)
     end
 
-    def turnstile_verified?
-      verified = Turnstile::Verification.new(
-        token: params["cf-turnstile-response"], remote_ip: request.remote_ip
-      ).verified?
-      @contact_message.errors.add(:base, "Please complete the verification and try again.") unless verified
-      verified
+    def deliver_message
+      ContactMailer.new_message(@contact_message).deliver_now
+      true
+    rescue => e
+      Rails.logger.error("Contact delivery failed: #{e.class}: #{e.message}")
+      @contact_message.errors.add(:base, "Couldn't send right now — please try again in a moment.")
+      false
     end
 
     def render_panel

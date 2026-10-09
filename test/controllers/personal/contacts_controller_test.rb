@@ -23,4 +23,21 @@ class Personal::ContactsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_match "Message sent", @response.body
   end
+
+  test "a post without contact params re-renders the form instead of erroring" do
+    post personal_contact_path, as: :turbo_stream
+    assert_response :unprocessable_entity
+    assert_match "contact_panel", @response.body
+  end
+
+  test "a delivery failure re-renders the form with an error" do
+    ActionMailer::Base.register_interceptor(FailingDelivery)
+    post personal_contact_path,
+      params: { contact_message: { name: "Jane", email: "jane@acme.com", message: "hello there" } },
+      as: :turbo_stream
+    assert_response :unprocessable_entity
+    assert_match "send right now", @response.body
+  ensure
+    ActionMailer::Base.unregister_interceptor(FailingDelivery)
+  end
 end

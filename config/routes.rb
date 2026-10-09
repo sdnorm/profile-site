@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   constraints(host: studio_host) do
     scope module: :studio, as: :studio do
       root "pages#home"
+      get  "ai-integration", to: "pages#ai_integration", as: :ai_integration
+      get  "how-we-work",    to: "pages#how_we_work",    as: :how_we_work
+      get  "contact",        to: "inquiries#new",        as: :contact
+      post "contact",        to: "inquiries#create"
     end
   end
 
