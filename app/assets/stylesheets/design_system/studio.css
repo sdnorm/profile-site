@@ -1165,6 +1165,105 @@ body[data-site="studio"] .ns-cta__panel > .sn-btn {
   }
 }
 
+/* Engagement detail: three lanes, then the scope and continuation of each offer. */
+body[data-site="studio"] .ns-how__title {
+  max-width: 16ch;
+  margin: 0;
+  color: var(--text-strong);
+  font-size: clamp(44px, 6vw, 72px);
+  line-height: 1.06;
+  text-wrap: balance;
+}
+
+body[data-site="studio"] .ns-how__hero .sn-eyebrow {
+  margin: 0 0 24px;
+}
+
+body[data-site="studio"] .ns-how__hero .ns-lead {
+  max-width: 760px;
+  margin: 28px 0 0;
+}
+
+body[data-site="studio"] .ns-how__overview {
+  border-block: 1px solid var(--border-subtle);
+  background: var(--surface-raised);
+}
+
+body[data-site="studio"] .ns-how__lanes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+  margin: 0;
+}
+
+body[data-site="studio"] .ns-how__lanes dt {
+  margin-bottom: 12px;
+  font-size: 24px;
+}
+
+body[data-site="studio"] .ns-how__lanes dd {
+  margin: 0;
+}
+
+body[data-site="studio"] .ns-how__lane {
+  border-top: 1px solid var(--border-subtle);
+}
+
+body[data-site="studio"] .ns-how__offer {
+  padding-block: 32px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+body[data-site="studio"] .ns-how__offer:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+body[data-site="studio"] .ns-how__offer:last-child {
+  padding-bottom: 0;
+}
+
+body[data-site="studio"] .ns-how__offer h3 {
+  margin: 0 0 12px;
+  color: var(--text-strong);
+  font-size: 27px;
+}
+
+body[data-site="studio"] .ns-how__offer .ns-how__price {
+  margin-bottom: 24px;
+  color: var(--text-accent);
+  font-weight: var(--fw-semibold);
+}
+
+body[data-site="studio"] .ns-how__audit {
+  margin: 0 0 32px;
+  color: var(--text-muted);
+}
+
+body[data-site="studio"] .ns-how__audit strong,
+body[data-site="studio"] .ns-how__lanes strong,
+body[data-site="studio"] .ns-how__offer strong {
+  color: var(--text-strong);
+  font-weight: var(--fw-semibold);
+}
+
+body[data-site="studio"] .ns-how__list {
+  margin: 0;
+  padding-left: 24px;
+  list-style: disc;
+}
+
+body[data-site="studio"] .ns-how__list li + li {
+  margin-top: 16px;
+}
+
+@media (max-width: 47.999rem) {
+  body[data-site="studio"] .ns-how__lanes {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+}
+
 /* Build catalog: grouped editorial rows with a visible price and scope. */
 body[data-site="studio"] .ns-ai__hero {
   max-width: 920px;

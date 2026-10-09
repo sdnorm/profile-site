@@ -36,6 +36,13 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
     assert_select "details", minimum: 6
   end
 
+  test "how we work shows exact Adopt prices and the Signal Audit" do
+    get "/how-we-work"
+    [ "$3,500", "$8,500", "$4,500" ].each { |price| assert_match price, @response.body }
+    assert_select "a[href='/contact?interest=audit']"
+    assert_no_match(/per hour|\/hr/i, @response.body)
+  end
+
   test "AI integration groups twelve builds and labels its recorded explorer" do
     get "/ai-integration"
 

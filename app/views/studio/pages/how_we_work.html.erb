@@ -1,4 +1,167 @@
 <% content_for :title, "How we work | Norman Simplified" %>
 <% content_for :description, "Fixed prices for Pick ($3,500) and Rollout ($8,500). Automate from $7,500. Build from $18,000. A Signal Audit is $4,500 if the workflow is still unclear." %>
 
-<main class="mx-auto max-w-3xl px-6 py-20"><h1 class="t-display">How we work</h1></main>
+<main class="ns-how">
+  <section class="ns-section ns-how__hero" aria-labelledby="how-title">
+    <div class="ns-container">
+      <p class="sn-eyebrow">Scope before work</p>
+      <h1 id="how-title" class="t-display ns-how__title">How an engagement runs</h1>
+      <p class="ns-lead">You buy a defined piece of work. At the end you decide whether anything continues. I take a small number of these at once, and I will say so if the start date does not fit.</p>
+      <div class="ns-actions">
+        <%= link_to "Request a call", studio_contact_path, class: "sn-btn sn-btn--primary sn-btn--lg" %>
+      </div>
+    </div>
+  </section>
+
+  <section class="ns-section ns-how__overview" aria-labelledby="three-lanes">
+    <div class="ns-container">
+      <header class="ns-section-heading">
+        <h2 id="three-lanes" class="t-heading">Three lanes</h2>
+        <p class="ns-lead">The site sells these three. Everything else is a line inside one of them.</p>
+      </header>
+      <dl class="ns-how__lanes">
+        <div>
+          <dt><a class="ns-text-link" href="#adopt">Adopt</a></dt>
+          <dd><strong>Starts at $3,500.</strong> The right AI tools in people's hands, with a policy and a way to practice.</dd>
+        </div>
+        <div>
+          <dt><a class="ns-text-link" href="#automate">Automate</a></dt>
+          <dd><strong>Starts at $7,500.</strong> One recurring workflow, running, without a new app.</dd>
+        </div>
+        <div>
+          <dt><a class="ns-text-link" href="#build">Build</a></dt>
+          <dd><strong>Starts at $18,000.</strong> Software and production AI when the spreadsheet or the old app is the constraint. If you cannot name the workflow yet, a Signal Audit is $4,500.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section id="adopt" class="ns-section ns-how__lane" aria-labelledby="adopt-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading">
+        <h2 id="adopt-title" class="t-heading">Adopt</h2>
+        <p class="ns-lead">For a company that needs a decision and a shared practice, not a new application.</p>
+        <div class="ns-actions"><%= link_to "Request a call", studio_contact_path(interest: "adopt"), class: "sn-btn sn-btn--primary sn-btn--md" %></div>
+      </header>
+      <div class="ns-how__offers">
+        <article class="ns-how__offer ns-prose">
+          <h3 class="t-heading">Pick</h3>
+          <p class="ns-how__price">$3,500 · 10 days</p>
+          <p><strong>What you get:</strong> A memo that names which of ChatGPT, Claude, Copilot, or Gemini to buy, who gets a seat, what is off limits, and the order of the next 90 days. Plus a 45-minute readout.</p>
+          <p><strong>Credit:</strong> $1,500 applies to a Rollout or a Wire that starts within 60 days.</p>
+          <p><strong>What it is not:</strong> A license reseller agreement. You buy the tools from the vendor.</p>
+        </article>
+        <article class="ns-how__offer ns-prose">
+          <h3 class="t-heading">Rollout</h3>
+          <p class="ns-how__price">$8,500 · 3 weeks · up to 30 people</p>
+          <p><strong>What you get:</strong> A one-page use policy, two live sessions split by role, a prompt pack for three jobs your staff already do, and ten business days of follow-up questions.</p>
+          <p><strong>Over 30 people:</strong> Quoted separately. I don't stretch this price to cover a second department.</p>
+          <p><strong>What usually comes next:</strong> Desk Hours, or a Wire if the same request shows up twice.</p>
+        </article>
+        <article class="ns-how__offer ns-prose">
+          <h3 class="t-heading">Desk Hours</h3>
+          <p class="ns-how__price">$2,500 a month</p>
+          <p>Two live hours, plus a look at what staff actually tried between sessions.</p>
+          <p>Month to month. Cancel before the next month.</p>
+          <p>I cap how many of these I hold. Ask, and I will tell you if a seat is open.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="automate" class="ns-section ns-how__lane" aria-labelledby="automate-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading">
+        <h2 id="automate-title" class="t-heading">Automate</h2>
+        <p class="ns-lead">For a workflow you can already describe step by step.</p>
+        <div class="ns-actions"><%= link_to "Request a call", studio_contact_path(interest: "automate"), class: "sn-btn sn-btn--primary sn-btn--md" %></div>
+      </header>
+      <div class="ns-how__offers">
+        <article class="ns-how__offer ns-prose">
+          <h3 class="t-heading">Wire</h3>
+          <p class="ns-how__price">Starts at $7,500 · about 3 weeks</p>
+          <p><strong>What you get:</strong> One Zapier, Make, or n8n workflow in production, a named owner on your team, and a one-page runbook.</p>
+          <p>I pick the tool based on volume and who has to maintain it after I leave.</p>
+          <p><strong>What it is not:</strong> A database, a login system, or a place to hide failed runs. Those belong in Build.</p>
+        </article>
+        <article class="ns-how__offer ns-prose">
+          <h3 class="t-heading">Flow Care</h3>
+          <p class="ns-how__price">$1,500 a month</p>
+          <p>The workflow keeps running. Small edits. About two hours.</p>
+          <p>If it starts to need a real data model or error handling, I will stop adding steps and recommend a Pilot instead.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="build" class="ns-section ns-how__lane" aria-labelledby="build-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading">
+        <h2 id="build-title" class="t-heading">Build</h2>
+        <p class="ns-lead">For work that has to live in software. The catalog on the <%= link_to "AI integration page", studio_ai_integration_path, class: "ns-inline-link" %> is the menu of shapes. A pilot is the usual first build.</p>
+        <div class="ns-actions"><%= link_to "Request a call", studio_contact_path(interest: "build"), class: "sn-btn sn-btn--primary sn-btn--md" %></div>
+      </header>
+      <div class="ns-how__offers">
+        <p class="ns-how__audit"><strong>Signal Audit — $4,500 · two weeks.</strong> One line, on purpose. Four conversations, three workflows scored, constraints written down, a recommendation, a 45-minute readout. $2,000 credited if a build starts within 60 days. The memo is yours if you stop. <%= link_to "Request a call", studio_contact_path(interest: "audit"), class: "ns-text-link" %></p>
+        <article class="ns-how__offer ns-prose">
+          <h3 class="t-heading">Pilot</h3>
+          <p class="ns-how__price">Starts at $18,000 · 3–4 weeks</p>
+          <p>One workflow, one system of record, in production. The metric is written before kickoff.</p>
+        </article>
+        <article class="ns-how__offer ns-prose">
+          <h3 class="t-heading">Integration</h3>
+          <p class="ns-how__price">Starts at $36,000 · 6–8 weeks</p>
+          <p>A catalog item, wired in, with the labeled sample from the <%= link_to "AI integration page", studio_ai_integration_path, class: "ns-inline-link" %>.</p>
+        </article>
+        <article class="ns-how__offer ns-prose">
+          <h3 class="t-heading">Rescue of an old app</h3>
+          <p>Quoted after a look at the codebase. See <%= link_to "Legacy Rescue on the AI integration page", studio_ai_integration_path, class: "ns-inline-link" %>. I don't put a single headline price on it here because the range is wide.</p>
+        </article>
+        <article class="ns-how__offer ns-prose">
+          <h3 class="t-heading">After it is live</h3>
+          <p>Managed AI Ops starts at $6,500 a month. Some clients later want a weekly working session (Fractional AI Lead, starts at $10,000 a month). I keep very few of those. It is a conversation after a build, not a package on the homepage.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="ns-section ns-process" aria-labelledby="weeks-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading"><h2 id="weeks-title" class="t-heading">What the weeks look like</h2></header>
+      <ol class="ns-process__steps" role="list">
+        <li><span class="t-label ns-process__number" aria-hidden="true">01</span><p>You send the workflow through the form. I reply by email within two business days.</p></li>
+        <li><span class="t-label ns-process__number" aria-hidden="true">02</span><p>A call. If I am the wrong person, or I cannot start, I say that.</p></li>
+        <li><span class="t-label ns-process__number" aria-hidden="true">03</span><p>A written scope: price, duration, what is included, what is not, and the metric.</p></li>
+        <li><span class="t-label ns-process__number" aria-hidden="true">04</span><p>Half to start. Work begins when access is actually available.</p></li>
+        <li><span class="t-label ns-process__number" aria-hidden="true">05</span><p>Readout. You decide whether to stop, take a monthly plan, or scope the next piece.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="ns-section" aria-labelledby="terms-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading"><h2 id="terms-title" class="t-heading">Money and access</h2></header>
+      <ul class="ns-how__list">
+        <li>Projects: half to start, half when the agreed scope ships</li>
+        <li>Monthly plans: paid at the start of the month</li>
+        <li>A late system login moves the calendar. It does not add silent hours</li>
+        <li>I would rather decline a poor fit than discount a fuzzy one</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="ns-section ns-how__lane" aria-labelledby="not-fit-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading"><h2 id="not-fit-title" class="t-heading">What I don't take</h2></header>
+      <div>
+        <ul class="ns-how__list">
+          <li>Protected health information, or any project that needs a BAA</li>
+          <li>A chatbot with no system of record behind it</li>
+          <li>Open-ended "AI strategy" with no artifact</li>
+          <li>Train-the-trainer programs and unlimited office hours</li>
+        </ul>
+        <div class="ns-actions"><%= link_to "Request a call", studio_contact_path, class: "sn-btn sn-btn--primary sn-btn--lg" %></div>
+      </div>
+    </div>
+  </section>
+</main>
