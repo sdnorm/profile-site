@@ -1,0 +1,57 @@
+<section class="ns-hero ns-section" aria-labelledby="home-title">
+  <div class="ns-container ns-hero__grid">
+    <div class="ns-hero__copy">
+      <p class="sn-eyebrow"><span class="sn-eyebrow__rule" aria-hidden="true"></span>For operators</p>
+      <h1 id="home-title" class="t-display ns-hero__title">Technology, simplified.</h1>
+      <p class="ns-lead">AI tools, automations, and custom software for operators buried in documents, spreadsheets, and aging tools.</p>
+      <p class="ns-hero__body">You work with me, Spencer Norman. I help you choose the tools, take one recurring workflow off a person's plate, or build software when the spreadsheet or the old app is the constraint.</p>
+      <div class="ns-actions">
+        <%= link_to "Request a call", studio_contact_path, class: "sn-btn sn-btn--primary sn-btn--lg" %>
+        <%= link_to studio_ai_integration_path, class: "ns-text-link" do %>
+          See AI integration <span aria-hidden="true">↗</span>
+        <% end %>
+      </div>
+    </div>
+
+    <figure class="ns-workflow" aria-labelledby="workflow-label" aria-describedby="workflow-caption">
+      <div class="ns-workflow__board">
+        <div class="ns-workflow__heading">
+          <p id="workflow-label" class="t-label">Illustrative workflow</p>
+          <span class="ns-workflow__key" aria-hidden="true"><i></i><i></i><i></i></span>
+        </div>
+        <ol class="ns-flow">
+          <li class="ns-flow__step">
+            <span class="ns-flow__number t-label" aria-hidden="true">01</span>
+            <div class="ns-flow__node">
+              <span class="ns-flow__document" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="ns-flow__label">Document</span>
+            </div>
+          </li>
+          <li class="ns-flow__step">
+            <span class="ns-flow__number t-label" aria-hidden="true">02</span>
+            <div class="ns-flow__node">
+              <span class="ns-flow__fields" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="ns-flow__label">Extracted fields</span>
+            </div>
+          </li>
+          <li class="ns-flow__step ns-flow__step--review">
+            <span class="ns-flow__number t-label" aria-hidden="true">03</span>
+            <div class="ns-flow__node">
+              <span class="ns-flow__review" aria-hidden="true">✓</span>
+              <span class="ns-flow__label">Human review</span>
+              <span class="ns-flow__annotation" aria-hidden="true">A person decides</span>
+            </div>
+          </li>
+          <li class="ns-flow__step ns-flow__step--destination">
+            <span class="ns-flow__number t-label" aria-hidden="true">04</span>
+            <div class="ns-flow__node">
+              <span class="ns-flow__system" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="ns-flow__label">The system you already use</span>
+            </div>
+          </li>
+        </ol>
+      </div>
+      <figcaption id="workflow-caption">An example, not a live model. The recorded walkthrough is on the <%= link_to "AI integration page", studio_ai_integration_path %>.</figcaption>
+    </figure>
+  </div>
+</section>

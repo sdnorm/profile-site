@@ -26,4 +26,13 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
     assert_select "nav a[href='/how-we-work']"
     assert_select "nav a[href^='/contact']", text: /Request a call/
   end
+
+  test "home shows the brand line, three lanes with starting prices, and lane CTAs" do
+    get "/"
+    assert_select "h1", /Technology, simplified/
+    assert_select "#services [data-lane]", 3
+    [ "$3,500", "$7,500", "$18,000" ].each { |price| assert_match price, @response.body }
+    %w[adopt automate build].each { |lane| assert_select "a[href='/contact?interest=#{lane}']" }
+    assert_select "details", minimum: 6
+  end
 end

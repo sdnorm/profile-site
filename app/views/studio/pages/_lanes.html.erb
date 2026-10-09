@@ -1,0 +1,62 @@
+<section id="services" class="ns-section ns-services" aria-labelledby="services-title">
+  <div class="ns-container">
+    <header class="ns-section-heading">
+      <p class="sn-eyebrow"><span class="sn-eyebrow__rule" aria-hidden="true"></span>Three ways in</p>
+      <h2 id="services-title" class="t-heading">Start with the smallest piece of work that removes the bottleneck</h2>
+      <p class="ns-lead">Each lane has a fixed starting price. A later phase is a separate decision.</p>
+    </header>
+
+    <div class="ns-lanes">
+      <article class="sn-card ns-lane" data-lane="adopt" aria-labelledby="adopt-title">
+        <div class="ns-lane__heading">
+          <span class="ns-lane__number t-label" aria-hidden="true">01</span>
+          <h3 id="adopt-title" class="t-heading">Adopt</h3>
+        </div>
+        <p class="ns-lane__price">Starts at <strong>$3,500</strong></p>
+        <p class="ns-lane__problem">People are already pasting work into chat tools, with no shared rules.</p>
+        <p class="ns-lane__deliverable">A written tool decision, or a staff rollout with a one-page policy, two working sessions, and a prompt pack for the jobs you already do.</p>
+        <div class="ns-lane__actions">
+          <%= link_to "Request a call", studio_contact_path(interest: "adopt"), class: "sn-btn sn-btn--secondary sn-btn--md", aria: { label: "Request a call about Adopt" } %>
+          <%= link_to studio_how_we_work_path(anchor: "adopt"), class: "ns-text-link" do %>
+            See Pick and Rollout <span aria-hidden="true">→</span>
+          <% end %>
+        </div>
+      </article>
+
+      <article class="sn-card ns-lane" data-lane="automate" aria-labelledby="automate-title">
+        <div class="ns-lane__heading">
+          <span class="ns-lane__number t-label" aria-hidden="true">02</span>
+          <h3 id="automate-title" class="t-heading">Automate</h3>
+        </div>
+        <p class="ns-lane__price">Starts at <strong>$7,500</strong></p>
+        <p class="ns-lane__problem">The same steps happen every day across an inbox, a spreadsheet, and one or two other apps.</p>
+        <p class="ns-lane__deliverable">One Zapier, Make, or n8n workflow running in production, with a named owner and a one-page runbook.</p>
+        <div class="ns-lane__actions">
+          <%= link_to "Request a call", studio_contact_path(interest: "automate"), class: "sn-btn sn-btn--secondary sn-btn--md", aria: { label: "Request a call about Automate" } %>
+          <%= link_to studio_how_we_work_path(anchor: "automate"), class: "ns-text-link" do %>
+            See Wire <span aria-hidden="true">→</span>
+          <% end %>
+        </div>
+      </article>
+
+      <div class="ns-lane-with-note">
+        <article class="sn-card ns-lane ns-lane--build" data-lane="build" aria-labelledby="build-title">
+          <div class="ns-lane__heading">
+            <span class="ns-lane__number t-label" aria-hidden="true">03</span>
+            <h3 id="build-title" class="t-heading">Build</h3>
+          </div>
+          <p class="ns-lane__price">Starts at <strong>$18,000</strong></p>
+          <p class="ns-lane__problem">A document queue, a spreadsheet, or an aging app is how the work actually gets done.</p>
+          <p class="ns-lane__deliverable">A fixed-scope pilot or integration inside the system you already use, with a person on the exceptions.</p>
+          <div class="ns-lane__actions">
+            <%= link_to "Request a call", studio_contact_path(interest: "build"), class: "sn-btn sn-btn--primary sn-btn--md", aria: { label: "Request a call about Build" } %>
+            <%= link_to studio_ai_integration_path, class: "ns-text-link" do %>
+              See AI integration <span aria-hidden="true">→</span>
+            <% end %>
+          </div>
+        </article>
+        <p class="ns-lane__note">Not sure which workflow to change? <%= link_to "A Signal Audit is $4,500.", studio_contact_path(interest: "audit") %></p>
+      </div>
+    </div>
+  </div>
+</section>

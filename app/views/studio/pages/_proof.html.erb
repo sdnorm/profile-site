@@ -1,0 +1,80 @@
+<section class="ns-section ns-proof" aria-labelledby="proof-title">
+  <div class="ns-container">
+    <div class="ns-editorial-grid">
+      <header class="ns-section-heading">
+        <p class="sn-eyebrow"><span class="sn-eyebrow__rule" aria-hidden="true"></span>Proof</p>
+        <h2 id="proof-title" class="t-heading">Shipped work, labeled honestly</h2>
+        <p class="ns-lead">Three different kinds of work. None of them is a client logo wall.</p>
+      </header>
+      <div class="ns-proof__list">
+        <article class="ns-proof__item" data-proof-kind="consulting">
+          <p class="sn-eyebrow">Consulting</p>
+          <h3 class="t-heading">Agent Eva — Norman Simplified.</h3>
+          <p>I built an extraction workflow that turned prescription-approval packets into structured records. Fields the model was unsure about went to a person. Client unnamed.</p>
+        </article>
+        <article class="ns-proof__item" data-proof-kind="employment">
+          <p class="sn-eyebrow">Employment</p>
+          <h3 class="t-heading">United Networks of America — employment, 2016–2025.</h3>
+          <p>I was the lead developer. The pharmacy API I worked on there is used by <strong>9,800+ locations</strong>. That was a job, not a client of this practice.</p>
+        </article>
+        <article class="ns-proof__item" data-proof-kind="independent">
+          <p class="sn-eyebrow">Independent product</p>
+          <h3 class="t-heading">Flexfit — my product.</h3>
+          <p>An adaptive workout app at <%= link_to "flexfit.ai", "https://flexfit.ai", class: "ns-inline-link" %>. I designed and shipped it. It is not a client project.</p>
+        </article>
+      </div>
+    </div>
+
+    <section id="work" class="ns-selected-work" aria-labelledby="work-title">
+      <header class="ns-section-heading">
+        <p class="sn-eyebrow"><span class="sn-eyebrow__rule" aria-hidden="true"></span>Selected work</p>
+        <h2 id="work-title" class="t-heading">Two projects I can show</h2>
+        <p class="ns-lead">Qualitative on purpose. I don't publish metrics I can't stand behind.</p>
+      </header>
+      <div class="ns-work-grid">
+        <article class="ns-work" aria-labelledby="eva-title">
+          <div class="ns-work__heading">
+            <h3 id="eva-title" class="t-heading">Agent Eva</h3>
+            <span class="sn-tag sn-tag--accent">Consulting</span>
+          </div>
+          <p class="ns-work__label">Norman Simplified. Client unnamed.</p>
+          <dl class="ns-work__description">
+            <div>
+              <dt>Problem</dt>
+              <dd>Staff re-keyed prescription-approval packets by hand.</dd>
+            </div>
+            <div>
+              <dt>What I did</dt>
+              <dd>Documents became rows in a database. Low-confidence fields stopped for review instead of posting straight through.</dd>
+            </div>
+            <div>
+              <dt>Result</dt>
+              <dd>The queue worked from records, not from attachments someone had to read field by field.</dd>
+            </div>
+          </dl>
+        </article>
+        <article class="ns-work" aria-labelledby="flexfit-title">
+          <div class="ns-work__heading">
+            <h3 id="flexfit-title" class="t-heading">Flexfit</h3>
+            <span class="sn-tag sn-tag--filled">Independent product</span>
+          </div>
+          <p class="ns-work__label">Independent product, not a client engagement. <%= link_to "flexfit.ai", "https://flexfit.ai", class: "ns-inline-link" %></p>
+          <dl class="ns-work__description">
+            <div>
+              <dt>Problem</dt>
+              <dd>A training plan that stays the same when the person does not.</dd>
+            </div>
+            <div>
+              <dt>What I did</dt>
+              <dd>A Rails app that adjusts workouts from feedback.</dd>
+            </div>
+            <div>
+              <dt>Result</dt>
+              <dd>A product you can open. I built it to run, not as a demo.</dd>
+            </div>
+          </dl>
+        </article>
+      </div>
+    </section>
+  </div>
+</section>
