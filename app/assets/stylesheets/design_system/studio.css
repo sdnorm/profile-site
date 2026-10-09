@@ -1164,3 +1164,223 @@ body[data-site="studio"] .ns-cta__panel > .sn-btn {
     padding: 28px;
   }
 }
+
+/* Build catalog: grouped editorial rows with a visible price and scope. */
+body[data-site="studio"] .ns-ai__hero {
+  max-width: 920px;
+}
+
+body[data-site="studio"] .ns-ai__hero .ns-lead {
+  max-width: 780px;
+  margin-top: 28px;
+}
+
+body[data-site="studio"] .ns-ai__explanation {
+  border-top: 1px solid var(--border-subtle);
+}
+
+body[data-site="studio"] .ns-ai__explanation .ns-section-heading {
+  margin-bottom: 0;
+}
+
+body[data-site="studio"] .ns-ai__explanation .ns-prose ul {
+  margin: 24px 0 0;
+  padding-left: 24px;
+  list-style: disc;
+}
+
+body[data-site="studio"] .ns-ai__explanation .ns-prose li + li {
+  margin-top: 12px;
+}
+
+body[data-site="studio"] .ns-catalog__group {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: 64px;
+  padding-block: 40px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+body[data-site="studio"] .ns-catalog__intro h3,
+body[data-site="studio"] .ns-explorer__step h3 {
+  margin: 0 0 16px;
+  color: var(--text-strong);
+  font-size: 28px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.01em;
+}
+
+body[data-site="studio"] .ns-catalog__intro p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+body[data-site="studio"] .ns-catalog__item {
+  padding-block: 28px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+body[data-site="studio"] .ns-catalog__item:first-child {
+  padding-top: 0;
+}
+
+body[data-site="studio"] .ns-catalog__item:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+body[data-site="studio"] .ns-catalog__item-heading h4 {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: 22px;
+  font-weight: var(--fw-semibold);
+}
+
+body[data-site="studio"] .ns-catalog__item-heading p {
+  margin: 8px 0 20px;
+  color: var(--text-muted);
+}
+
+body[data-site="studio"] .ns-catalog__item-heading strong {
+  color: var(--text-accent);
+  font-weight: var(--fw-semibold);
+}
+
+body[data-site="studio"] .ns-catalog__details,
+body[data-site="studio"] .ns-explorer__fields {
+  margin: 0;
+}
+
+body[data-site="studio"] .ns-catalog__details > div {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 12px;
+  margin-top: 12px;
+}
+
+body[data-site="studio"] .ns-catalog__details dt,
+body[data-site="studio"] .ns-explorer__fields dt {
+  color: var(--text-muted);
+  font-size: 15px;
+  font-weight: var(--fw-semibold);
+}
+
+body[data-site="studio"] .ns-catalog__details dd,
+body[data-site="studio"] .ns-explorer__fields dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+/* The sample notice stays outside the four progressively enhanced steps. */
+body[data-site="studio"] .ns-explorer {
+  background: var(--surface-raised);
+  border-top: 1px solid var(--border-subtle);
+}
+
+body[data-site="studio"] .ns-explorer__banner {
+  padding: 16px 20px;
+  border-left: 3px solid var(--brand);
+  background: var(--surface-accent);
+  color: var(--text-strong);
+  font-weight: var(--fw-medium);
+}
+
+body[data-site="studio"] .ns-explorer__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-block: 28px;
+}
+
+body[data-site="studio"] .ns-explorer__controls p {
+  margin: 0;
+  text-align: center;
+}
+
+body[data-site="studio"] .ns-explorer__controls[hidden],
+body[data-site="studio"] .ns-explorer__step[hidden] {
+  display: none;
+}
+
+body[data-site="studio"] .ns-explorer__step {
+  padding: 32px;
+  margin-block: 24px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--surface-card);
+}
+
+body[data-site="studio"] .ns-explorer__step > .t-label {
+  margin: 0 0 16px;
+  color: var(--text-accent);
+}
+
+body[data-site="studio"] .ns-explorer__fields > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: 16px;
+  padding: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+body[data-site="studio"] .ns-explorer__fields dd span {
+  float: right;
+  margin-left: 12px;
+  color: var(--text-muted);
+}
+
+body[data-site="studio"] .ns-explorer__fields small {
+  display: block;
+  clear: both;
+  margin-top: 8px;
+  font-size: 15px;
+}
+
+body[data-site="studio"] .ns-explorer__fields .ns-explorer__flag {
+  background: var(--warning-tint);
+  color: var(--warning);
+}
+
+body[data-site="studio"] .ns-explorer__lines {
+  padding-left: 24px;
+  margin-block: 28px;
+}
+
+body[data-site="studio"] .ns-explorer__caption {
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+body[data-site="studio"] .ns-explorer__close {
+  max-width: 680px;
+  margin-block: 28px;
+}
+
+@media (max-width: 47.999rem) {
+  body[data-site="studio"] .ns-catalog__group {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    padding-block: 32px;
+  }
+
+  body[data-site="studio"] .ns-explorer__step {
+    padding: 20px;
+  }
+
+  body[data-site="studio"] .ns-explorer__fields > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+    padding-inline: 8px;
+  }
+
+  body[data-site="studio"] .ns-explorer__controls {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  body[data-site="studio"] .ns-explorer__controls p {
+    order: -1;
+    flex-basis: 100%;
+  }
+}

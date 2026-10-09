@@ -35,4 +35,16 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
     %w[adopt automate build].each { |lane| assert_select "a[href='/contact?interest=#{lane}']" }
     assert_select "details", minimum: 6
   end
+
+  test "AI integration groups twelve builds and labels its recorded explorer" do
+    get "/ai-integration"
+
+    %w[Documents Answers Workflows Numbers].each do |group|
+      assert_select "h2, h3", text: group
+    end
+    assert_select "[data-catalog-item]", count: 12
+    assert_select "[data-controller=explorer]" do |explorer|
+      assert_match(/sample|fictional/i, explorer.text)
+    end
+  end
 end

@@ -1,0 +1,161 @@
+<%
+  groups = [
+    {
+      name: "Documents",
+      intro: "Paper, PDFs, and inboxes becoming rows your system can store.",
+      items: [
+        {
+          name: "Packet Intake",
+          price: "$28,000",
+          timeline: "4–6 weeks",
+          who: "An ops lead whose team re-keys PDFs and email.",
+          what: "Fields land as rows in the database you already use. Anything under the confidence line waits for a person.",
+          outcome: "How long a packet waits, and field accuracy on a labeled sample of your own files."
+        },
+        {
+          name: "PDF & CSV Plant",
+          price: "$18,000",
+          timeline: "3–5 weeks",
+          who: "A back office that generates or ingests files.",
+          what: "Validation, alerts, and a path for the files that fail. Bad input does not wait until month-end to surface.",
+          outcome: "Time to notice a failed file, and how many bad files reach the system of record."
+        },
+        {
+          name: "Approval Agent",
+          price: "$36,000",
+          timeline: "5–7 weeks",
+          who: "The person who clears purchase orders, vendor packets, or applications.",
+          what: "Routine packets route forward. Exceptions go to a named person with the source document attached.",
+          outcome: "Time to clear a routine item, and how often something lands on the wrong desk."
+        }
+      ]
+    },
+    {
+      name: "Answers",
+      intro: "Questions answered from your material, with the source attached.",
+      items: [
+        {
+          name: "Company Brain",
+          price: "$24,000",
+          timeline: "4–6 weeks",
+          who: "A founder or COO at a company of roughly 30 to 150 people.",
+          what: "Staff ask questions against your docs, policies, and past tickets. Each answer shows where it came from. It stays inside the company.",
+          outcome: "Repeat internal questions, and whether people can check the source without asking someone else."
+        },
+        {
+          name: "Eval Tune-up",
+          price: "$12,000",
+          timeline: "2–3 weeks",
+          who: "A team that already shipped a model feature and is unhappy with the mistakes or the bill.",
+          what: "A regression set from your own examples, a cost cap, and changes aimed at cost per successful task. Ongoing watch is Managed AI Ops, which starts at $6,500 a month.",
+          outcome: "Cost per task that actually finished, and failures caught by the regression set before users see them."
+        }
+      ]
+    },
+    {
+      name: "Workflows",
+      intro: "A process that currently lives in a spreadsheet, an inbox, or an app nobody wants to touch.",
+      items: [
+        {
+          name: "Onboarding Concierge",
+          price: "$26,000",
+          timeline: "4–6 weeks",
+          who: "A services firm that chases paperwork from every new account.",
+          what: "A checklist, document requests, and a status page. The customer and your team see the same missing items.",
+          outcome: "Days from signed agreement to a live account, and \"where's my paperwork\" email."
+        },
+        {
+          name: "Spreadsheet Exit",
+          price: "$38,000",
+          timeline: "6–8 weeks",
+          who: "A team running one core workflow from Sheets.",
+          what: "That workflow becomes a small internal app with an audit trail. One workflow, not a rewrite of the company.",
+          outcome: "Conflicting copies of the sheet, and errors you can no longer trace to a person and a time."
+        },
+        {
+          name: "Legacy Rescue",
+          price: "$40,000",
+          timeline: "8–12 weeks",
+          who: "A company with a Rails app, or something like it, that people are afraid to deploy.",
+          what: "Upgrade, tests, and a deploy you can repeat. Then one agent from this catalog, usually intake, approvals, or plain-language numbers. The fee moves with the state of the codebase. This starting price is the floor.",
+          outcome: "Whether a deploy is routine, plus the metric on the one workflow the agent takes."
+        }
+      ]
+    },
+    {
+      name: "Numbers",
+      intro: "Answers from data you already collect, in a sentence a manager can use.",
+      items: [
+        {
+          name: "Plain-English Numbers",
+          price: "$30,000",
+          timeline: "4–6 weeks",
+          who: "A founder who waits on exports.",
+          what: "A question returns a chart and a short explanation from your warehouse or a curated extract. It does not invent figures that are not in the source.",
+          outcome: "How often someone asks for a pull that the Monday report could have answered."
+        },
+        {
+          name: "Location Desk",
+          price: "$42,000",
+          timeline: "6–8 weeks",
+          who: "Someone responsible for many sites who still waits on a central analyst.",
+          what: "Per-location status, plus plain-language questions over operational data you already store.",
+          outcome: "Time a regional manager waits for a routine number."
+        }
+      ]
+    },
+    {
+      name: "Sales and support",
+      intro: "Drafts and routing. A person still sends the message.",
+      items: [
+        {
+          name: "Support Triage",
+          price: "$22,000",
+          timeline: "3–5 weeks",
+          who: "A head of support.",
+          what: "Inbound is classified, a reply is drafted, and escalation follows rules you set. Someone on your team hits send.",
+          outcome: "Time to first response, and tickets that reach the wrong queue."
+        },
+        {
+          name: "Follow-up Desk",
+          price: "$18,000",
+          timeline: "3–5 weeks",
+          who: "A sales lead with a CRM people actually use.",
+          what: "Stalled deals get a drafted next step from CRM fields and call notes. The rep approves it before anything goes out.",
+          outcome: "Touches per rep on stalled deals, and how long deals sit in a stage."
+        }
+      ]
+    }
+  ]
+%>
+<section class="ns-section ns-catalog" aria-labelledby="catalog-title">
+  <div class="ns-container">
+    <header class="ns-section-heading">
+      <p class="sn-eyebrow">Twelve builds</p>
+      <h2 class="t-heading" id="catalog-title">Pick the job, not the model</h2>
+    </header>
+    <% groups.each_with_index do |group, index| %>
+      <section class="ns-catalog__group" aria-labelledby="catalog-group-<%= index %>">
+        <header class="ns-catalog__intro">
+          <h3 class="t-heading" id="catalog-group-<%= index %>"><%= group[:name] %></h3>
+          <p><%= group[:intro] %></p>
+        </header>
+        <div>
+          <% group[:items].each do |item| %>
+            <article class="ns-catalog__item" data-catalog-item>
+              <header class="ns-catalog__item-heading">
+                <h4 class="t-heading"><%= item[:name] %></h4>
+                <p>starts at <strong><%= item[:price] %></strong> · <%= item[:timeline] %></p>
+              </header>
+              <dl class="ns-catalog__details">
+                <div><dt>Who</dt><dd><%= item[:who] %></dd></div>
+                <div><dt>What</dt><dd><%= item[:what] %></dd></div>
+                <div><dt>Moves</dt><dd><%= item[:outcome] %></dd></div>
+              </dl>
+            </article>
+          <% end %>
+        </div>
+      </section>
+    <% end %>
+  </div>
+</section>

@@ -1,0 +1,73 @@
+<section class="ns-section ns-explorer" aria-labelledby="explorer-title" data-controller="explorer">
+  <div class="ns-container">
+    <header class="ns-section-heading">
+      <p class="sn-eyebrow">Sample only</p>
+      <h2 class="t-heading" id="explorer-title">A vendor invoice, walked through</h2>
+      <p class="ns-lead">This is the explorer for the page. Four steps. The numbers are part of the sample, not a promise about your documents.</p>
+    </header>
+    <p class="ns-explorer__banner">Fictional document. Recorded example. Not a live model. Not a client file. Do not upload real invoices here.</p>
+    <div class="ns-explorer__controls" data-explorer-target="buttons" hidden>
+      <button type="button" class="sn-btn sn-btn--secondary sn-btn--md" data-action="explorer#previous" disabled>Previous</button>
+      <p class="t-label" data-explorer-target="status" role="status" aria-live="polite" aria-atomic="true"></p>
+      <button type="button" class="sn-btn sn-btn--secondary sn-btn--md" data-action="explorer#next">Next</button>
+    </div>
+    <section class="ns-explorer__step" data-explorer-target="steps" data-step-title="Document" aria-labelledby="invoice-title">
+      <p class="t-label">Step 1 — Document</p>
+      <h3 class="t-heading" id="invoice-title">Invoice</h3>
+      <dl class="ns-explorer__fields">
+        <div><dt>From</dt><dd>Northline Supply Co. (fictional)</dd></div>
+        <div><dt>To</dt><dd>Example Operating Co.</dd></div>
+        <div><dt>Invoice number</dt><dd>INV-10482</dd></div>
+        <div><dt>Invoice date</dt><dd>March 12, 2026</dd></div>
+        <div><dt>Due date</dt><dd>April 11, 2026</dd></div>
+        <div><dt>PO</dt><dd>PO-7781</dd></div>
+      </dl>
+      <ul class="ns-explorer__lines">
+        <li>Packing tape, 12 cases × $18.40 = $220.80</li>
+        <li>Pallet wrap, 4 × $36.00 = $144.00</li>
+      </ul>
+      <dl class="ns-explorer__fields ns-explorer__amounts">
+        <div><dt>Subtotal</dt><dd>$364.80</dd></div>
+        <div><dt>Tax</dt><dd>$29.18</dd></div>
+        <div><dt>Total</dt><dd><strong>$393.98</strong></dd></div>
+      </dl>
+    </section>
+    <section class="ns-explorer__step" data-explorer-target="steps" data-step-title="Extracted fields" aria-labelledby="fields-title">
+      <p class="t-label">Step 2 — Extracted fields</p>
+      <h3 class="t-heading" id="fields-title">Extracted fields</h3>
+      <p class="ns-explorer__caption">Sample confidence values</p>
+      <dl class="ns-explorer__fields">
+        <div><dt>Vendor name</dt><dd>Northline Supply Co. <span>98%</span></dd></div>
+        <div><dt>Invoice number</dt><dd>INV-10482 <span>99%</span></dd></div>
+        <div><dt>Invoice date</dt><dd>2026-03-12 <span>96%</span></dd></div>
+        <div><dt>PO number</dt><dd>PO-7781 <span>91%</span></dd></div>
+        <div><dt>Subtotal</dt><dd>$364.80 <span>97%</span></dd></div>
+        <div class="ns-explorer__flag"><dt>Tax</dt><dd>$29.18 <span>62%</span><small>under the sample review line of 85%</small></dd></div>
+        <div class="ns-explorer__flag"><dt>Total</dt><dd>$393.98 <span>97%</span><small>held because tax is unconfirmed</small></dd></div>
+      </dl>
+      <p class="ns-explorer__caption">85% is the review line for this example. Your line is set from your documents, not copied from this page.</p>
+    </section>
+    <section class="ns-explorer__step" data-explorer-target="steps" data-step-title="Human review" aria-labelledby="review-title">
+      <p class="t-label">Step 3 — Human review</p>
+      <h3 class="t-heading" id="review-title">Human review</h3>
+      <dl class="ns-explorer__fields">
+        <div><dt>Queue</dt><dd>Accounts payable clerk</dd></div>
+        <div class="ns-explorer__flag"><dt>Task</dt><dd>Tax does not clear the line. Compare $29.18 to the PDF. Accept or correct.</dd></div>
+        <div><dt>Rule shown</dt><dd>Total stays out of "ready to pay" until tax is confirmed. Vendor name and invoice number are above the line, so they don't need a second look in this sample.</dd></div>
+      </dl>
+    </section>
+    <section class="ns-explorer__step" data-explorer-target="steps" data-step-title="Destination" aria-labelledby="destination-title">
+      <p class="t-label">Step 4 — Destination</p>
+      <h3 class="t-heading" id="destination-title">Destination</h3>
+      <dl class="ns-explorer__fields">
+        <div><dt>System</dt><dd>The accounting bill queue (example)</dd></div>
+        <div><dt>Status before review</dt><dd>Needs review</dd></div>
+        <div><dt>Status after the clerk confirms tax</dt><dd>Ready to pay</dd></div>
+        <div><dt>Attached</dt><dd>the source PDF</dd></div>
+        <div><dt>Written back</dt><dd>invoice number, dates, PO, amounts, reviewer, timestamp</dd></div>
+      </dl>
+    </section>
+    <p class="ns-explorer__close">Your build uses your document types and your system. This sample only shows the path.</p>
+    <%= link_to "Request a call", studio_contact_path(interest: "build"), class: "sn-btn sn-btn--primary sn-btn--lg" %>
+  </div>
+</section>
