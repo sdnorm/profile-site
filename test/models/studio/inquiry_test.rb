@@ -27,4 +27,11 @@ class Studio::InquiryTest < ActiveSupport::TestCase
     assert_equal "Signal Audit", build(interest: "audit").interest_label
     assert_equal "Not sure yet", build.interest_label
   end
+
+  test "caps field lengths so oversized submissions are rejected" do
+    assert_not build(name: "a" * 121).valid?
+    assert_not build(company: "a" * 121).valid?
+    assert_not build(message: "a" * 5001).valid?
+    assert build(name: "a" * 120, company: "a" * 120, message: "a" * 5000).valid?
+  end
 end

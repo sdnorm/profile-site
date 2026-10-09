@@ -47,4 +47,22 @@ class Studio::InquiriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
     assert_select "form[action='#{studio_contact_path}']"
   end
+
+  test "a post without inquiry params re-renders the form instead of erroring" do
+    assert_no_difference "ActionMailer::Base.deliveries.size" do
+      post studio_contact_path, as: :turbo_stream
+    end
+    assert_response :unprocessable_entity
+    assert_match "inquiry_panel", @response.body
+  end
+
+  test "a delivery failure shows the friendly error once and records no delivery" do
+    ActionMailer::Base.register_interceptor(FailingDelivery)
+    post studio_contact_path, params: valid_params, as: :turbo_stream
+    assert_response :unprocessable_entity
+    assert_match "It did not send", @response.body
+    assert_empty ActionMailer::Base.deliveries
+  ensure
+    ActionMailer::Base.unregister_interceptor(FailingDelivery)
+  end
 end

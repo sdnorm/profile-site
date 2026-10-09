@@ -20,7 +20,8 @@ module Studio
     attribute :message, :string
 
     validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-    validates :message, presence: true
+    validates :message, presence: true, length: { maximum: 5000 }
+    validates :name, :company, length: { maximum: 120 }
     validates :interest, inclusion: { in: INTERESTS }
 
     def interest_label = INTEREST_LABELS.fetch(interest, interest.to_s.humanize)

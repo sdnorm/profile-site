@@ -1,5 +1,7 @@
 module Studio
   class InquiriesController < BaseController
+    include TurnstileVerifiable
+
     def new
       @inquiry = Inquiry.new(interest: requested_interest)
       @sent = flash[:inquiry_sent].present?
@@ -7,35 +9,28 @@ module Studio
 
     def create
       @inquiry = Inquiry.new(inquiry_params)
-
-      if @inquiry.valid? && turnstile_verified?
-        InquiryMailer.new_inquiry(@inquiry).deliver_now
-        @sent = true
-      end
-
-      respond
-    rescue => e
-      Rails.logger.error("Inquiry delivery failed: #{e.class}: #{e.message}")
-      @inquiry.errors.add(:base, "Couldn't send right now. Please try again in a moment.")
+      @sent = @inquiry.valid? && turnstile_verified_for?(@inquiry) && deliver_inquiry
       respond
     end
 
     private
 
     def inquiry_params
-      params.require(:studio_inquiry).permit(:name, :email, :company, :interest, :message)
+      params.fetch(:studio_inquiry, {}).permit(:name, :email, :company, :interest, :message)
     end
 
     def requested_interest
       Inquiry::INTERESTS.include?(params[:interest]) ? params[:interest] : "not_sure"
     end
 
-    def turnstile_verified?
-      verified = Turnstile::Verification.new(
-        token: params["cf-turnstile-response"], remote_ip: request.remote_ip
-      ).verified?
-      @inquiry.errors.add(:base, "Please complete the verification and try again.") unless verified
-      verified
+    def deliver_inquiry
+      InquiryMailer.new_inquiry(@inquiry).deliver_now
+      true
+    rescue => e
+      Rails.logger.error("Inquiry delivery failed: #{e.class}: #{e.message}")
+      @inquiry.errors.add(:base, :delivery_failed,
+        message: "It did not send. Try again in a moment. If it fails twice, use the form on spencernorman.io and mention Norman Simplified.")
+      false
     end
 
     def respond
