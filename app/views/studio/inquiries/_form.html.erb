@@ -1,37 +1,69 @@
 <%# locals: inquiry %>
-<%= form_with model: inquiry, scope: :studio_inquiry, url: studio_contact_path, class: "sn-contact-form" do |f| %>
+<% missing_copy = "Add this so I know where to reply and what the work is." %>
+<% email_error = if inquiry.errors[:email].any?
+  if inquiry.errors.of_kind?(:email, :blank)
+    missing_copy
+  elsif inquiry.errors.of_kind?(:email, :invalid)
+    "That email address does not look usable."
+  else
+    inquiry.errors.full_messages_for(:email).first
+  end
+end %>
+<% interest_error = if inquiry.errors[:interest].any?
+  inquiry.interest.blank? ? missing_copy : inquiry.errors.full_messages_for(:interest).first
+end %>
+<% message_error = if inquiry.errors[:message].any?
+  inquiry.errors.of_kind?(:message, :blank) ? missing_copy : inquiry.errors.full_messages_for(:message).first
+end %>
+<% interest_options = [
+  [ "Adopt — tools and training", "adopt" ],
+  [ "Automate — one workflow", "automate" ],
+  [ "Build — software or AI integration", "build" ],
+  [ "Signal Audit — $4,500", "audit" ],
+  [ "Not sure yet", "not_sure" ]
+] %>
+<h2 class="t-heading ns-contact__form-heading">The workflow</h2>
+<%= form_with model: inquiry, scope: :studio_inquiry, url: studio_contact_path, class: "sn-contact-form ns-contact__form" do |f| %>
   <% if inquiry.errors[:base].any? %>
-    <div class="sn-form-alert" role="alert"><%= inquiry.errors[:base].to_sentence %></div>
+    <div class="sn-form-alert ns-contact__alert" role="alert">
+      <% inquiry.errors[:base].each do |error| %>
+        <p><%= error == "Couldn't send right now. Please try again in a moment." ? "It did not send. Try again in a moment. If it fails twice, use the form on spencernorman.io and mention Norman Simplified." : error %></p>
+      <% end %>
+    </div>
   <% end %>
 
   <div class="sn-field">
-    <%= f.label :name, "Name", class: "sn-field__label" %>
+    <%= f.label :name, "Name (optional)", class: "sn-field__label" %>
     <%= f.text_field :name, class: "sn-input", autocomplete: "name" %>
   </div>
 
-  <div class="sn-field">
-    <%= f.label :email, class: "sn-field__label" do %>Work email<span class="sn-field__req"> *</span><% end %>
-    <%= f.email_field :email, class: "sn-input", autocomplete: "email" %>
-    <% if inquiry.errors[:email].any? %>
-      <span class="sn-field__hint">Email <%= inquiry.errors[:email].first %></span>
+  <div class="sn-field <%= "sn-field--error" if email_error %>">
+    <%= f.label :email, class: "sn-field__label" do %>Email<span class="sn-field__req" aria-hidden="true"> *</span><% end %>
+    <%= f.email_field :email, class: "sn-input", autocomplete: "email", required: true, aria: { invalid: email_error.present?, describedby: ("studio_inquiry_email_error" if email_error) } %>
+    <% if email_error %>
+      <span id="studio_inquiry_email_error" class="sn-field__hint"><%= email_error %></span>
     <% end %>
   </div>
 
   <div class="sn-field">
-    <%= f.label :company, "Company", class: "sn-field__label" %>
+    <%= f.label :company, "Company (optional)", class: "sn-field__label" %>
     <%= f.text_field :company, class: "sn-input", autocomplete: "organization" %>
   </div>
 
-  <div class="sn-field">
-    <%= f.label :interest, "What are you interested in?", class: "sn-field__label" %>
-    <%= f.select :interest, Studio::Inquiry::INTEREST_LABELS.invert, {}, class: "sn-input" %>
+  <div class="sn-field <%= "sn-field--error" if interest_error %>">
+    <%= f.label :interest, class: "sn-field__label" do %>What should this cover?<span class="sn-field__req" aria-hidden="true"> *</span><% end %>
+    <%= f.select :interest, interest_options, {}, class: "sn-input", required: true, aria: { invalid: interest_error.present?, describedby: ("studio_inquiry_interest_error" if interest_error) } %>
+    <% if interest_error %>
+      <span id="studio_inquiry_interest_error" class="sn-field__hint"><%= interest_error %></span>
+    <% end %>
   </div>
 
-  <div class="sn-field">
-    <%= f.label :message, class: "sn-field__label" do %>What work keeps getting done by hand?<span class="sn-field__req"> *</span><% end %>
-    <%= f.text_area :message, class: "sn-textarea" %>
-    <% if inquiry.errors[:message].any? %>
-      <span class="sn-field__hint">Message <%= inquiry.errors[:message].first %></span>
+  <div class="sn-field <%= "sn-field--error" if message_error %>">
+    <%= f.label :message, class: "sn-field__label" do %>What is taking the time?<span class="sn-field__req" aria-hidden="true"> *</span><% end %>
+    <%= f.text_area :message, class: "sn-textarea", rows: 6, required: true, placeholder: "The documents, the spreadsheet, or the tool. What happens today, and who does it?", aria: { invalid: message_error.present?, describedby: [ "studio_inquiry_message_hint", ("studio_inquiry_message_error" if message_error) ].compact.join(" ") } %>
+    <span id="studio_inquiry_message_hint" class="sn-field__hint ns-contact__helper">Leave out passwords, customer secrets, and patient information. If the work involves patient data, say so in general terms only.</span>
+    <% if message_error %>
+      <span id="studio_inquiry_message_error" class="sn-field__hint"><%= message_error %></span>
     <% end %>
   </div>
 
@@ -40,5 +72,8 @@
     <div data-controller="turnstile" data-turnstile-sitekey-value="<%= sitekey %>"></div>
   <% end %>
 
-  <button type="submit" class="sn-btn sn-btn--primary sn-btn--lg sn-btn--block"><span>Request a call</span></button>
+  <div class="ns-actions ns-contact__submit">
+    <button type="submit" class="sn-btn sn-btn--primary sn-btn--lg sn-btn--block"><span>Request a call</span></button>
+  </div>
+  <p class="ns-contact__fine-print">I use this to reply to you. I don't add you to a mailing list.</p>
 <% end %>
