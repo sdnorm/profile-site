@@ -30,5 +30,5 @@
     <div data-controller="turnstile" data-turnstile-sitekey-value="<%= sitekey %>" style="margin-top: 2px;"></div>
   <% end %>
 
-  <button type="submit" class="sn-btn sn-btn--primary sn-btn--lg sn-btn--block"><span>Send message</span></button>
+  <button type="submit" class="sn-btn sn-btn--primary sn-btn--lg sn-btn--block" data-controller="analytics" data-action="click->analytics#track" data-analytics-event-param="cta_clicked" data-analytics-cta-param="send_message" data-analytics-location-param="form"><span>Send message</span></button>
 <% end %>

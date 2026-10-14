@@ -90,7 +90,7 @@ end %>
   <% end %>
 
   <div class="ns-actions ns-contact__submit">
-    <button type="submit" class="sn-btn sn-btn--primary sn-btn--lg sn-btn--block"><span>Request a call</span></button>
+    <button type="submit" class="sn-btn sn-btn--primary sn-btn--lg sn-btn--block" data-controller="analytics" data-action="click->analytics#track" data-analytics-event-param="cta_clicked" data-analytics-cta-param="request_a_call" data-analytics-location-param="form"><span>Request a call</span></button>
   </div>
   <p class="ns-contact__fine-print">I use this to reply to you. I don't add you to a mailing list.</p>
 <% end %>

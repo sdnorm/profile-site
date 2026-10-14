@@ -1,6 +1,6 @@
 <%= turbo_stream.update "inquiry_panel" do %>
   <% if @sent %>
-    <%= render "studio/inquiries/success" %>
+    <%= render "studio/inquiries/success", interest: @inquiry.interest %>
   <% else %>
     <%= render "studio/inquiries/form", inquiry: @inquiry %>
   <% end %>

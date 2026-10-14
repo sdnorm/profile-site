@@ -20,4 +20,10 @@ export default class extends Controller {
   disconnect() {
     this.narrowScreen.removeEventListener("change", this.updateLayout)
   }
+
+  trackOpen({ currentTarget, params }) {
+    if (!currentTarget.closest("details").open) {
+      window.posthog?.capture("catalog_group_opened", { group: params.group })
+    }
+  }
 }

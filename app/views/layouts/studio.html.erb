@@ -9,6 +9,7 @@
     <%= render "shared/fonts" %>
     <%= yield :head %>
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= render "shared/posthog", site: current_site %>
     <%= javascript_importmap_tags %>
   </head>
   <body data-site="<%= current_site %>" data-controller="notification">

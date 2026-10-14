@@ -8,7 +8,7 @@
       <h1 id="how-title" class="t-display ns-how__title">How an engagement runs</h1>
       <p class="ns-lead">You buy a defined piece of work. At the end you decide whether anything continues. I take a small number of these at once, and I will say so if the start date does not fit.</p>
       <div class="ns-actions">
-        <%= link_to "Request a call", studio_contact_path, class: "sn-btn sn-btn--primary sn-btn--lg" %>
+        <%= link_to "Request a call", studio_contact_path, data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "hero" }, class: "sn-btn sn-btn--primary sn-btn--lg" %>
       </div>
     </div>
   </section>
@@ -41,7 +41,7 @@
       <header class="ns-section-heading">
         <h2 id="adopt-title" class="t-heading">Adopt</h2>
         <p class="ns-lead">For a company that needs a decision and a shared practice, not a new application.</p>
-        <div class="ns-actions"><%= link_to "Request a call", studio_contact_path(interest: "adopt"), class: "sn-btn sn-btn--primary sn-btn--md" %></div>
+        <div class="ns-actions"><%= link_to "Request a call", studio_contact_path(interest: "adopt"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "lanes", analytics_interest_param: "adopt" }, class: "sn-btn sn-btn--primary sn-btn--md" %></div>
       </header>
       <div class="ns-how__offers">
         <article class="ns-how__offer ns-prose">
@@ -74,7 +74,7 @@
       <header class="ns-section-heading">
         <h2 id="automate-title" class="t-heading">Automate</h2>
         <p class="ns-lead">For a workflow you can already describe step by step.</p>
-        <div class="ns-actions"><%= link_to "Request a call", studio_contact_path(interest: "automate"), class: "sn-btn sn-btn--primary sn-btn--md" %></div>
+        <div class="ns-actions"><%= link_to "Request a call", studio_contact_path(interest: "automate"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "lanes", analytics_interest_param: "automate" }, class: "sn-btn sn-btn--primary sn-btn--md" %></div>
       </header>
       <div class="ns-how__offers">
         <article class="ns-how__offer ns-prose">
@@ -99,10 +99,10 @@
       <header class="ns-section-heading">
         <h2 id="build-title" class="t-heading">Build</h2>
         <p class="ns-lead">For work that has to live in software. The catalog on the <%= link_to "AI integration page", studio_ai_integration_path, class: "ns-inline-link" %> is the menu of shapes. A pilot is the usual first build.</p>
-        <div class="ns-actions"><%= link_to "Request a call", studio_contact_path(interest: "build"), class: "sn-btn sn-btn--primary sn-btn--md" %></div>
+        <div class="ns-actions"><%= link_to "Request a call", studio_contact_path(interest: "build"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "lanes", analytics_interest_param: "build" }, class: "sn-btn sn-btn--primary sn-btn--md" %></div>
       </header>
       <div class="ns-how__offers">
-        <p class="ns-how__audit"><strong>Signal Audit — $4,500 · two weeks.</strong> Four conversations, three workflows scored, constraints written down, a recommendation, a 45-minute readout. $2,000 credited if a build starts within 60 days. The memo is yours if you stop. <%= link_to "Request a call", studio_contact_path(interest: "audit"), class: "ns-text-link" %></p>
+        <p class="ns-how__audit"><strong>Signal Audit — $4,500 · two weeks.</strong> Four conversations, three workflows scored, constraints written down, a recommendation, a 45-minute readout. $2,000 credited if a build starts within 60 days. The memo is yours if you stop. <%= link_to "Request a call", studio_contact_path(interest: "audit"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "audit", analytics_interest_param: "audit" }, class: "ns-text-link" %></p>
         <article class="ns-how__offer ns-prose">
           <h3 class="t-heading">Pilot</h3>
           <p class="ns-how__price">Starts at $18,000 · 3–4 weeks</p>
@@ -160,7 +160,7 @@
           <li>Open-ended "AI strategy" with no artifact</li>
           <li>Train-the-trainer programs and unlimited office hours</li>
         </ul>
-        <div class="ns-actions"><%= link_to "Request a call", studio_contact_path, class: "sn-btn sn-btn--primary sn-btn--lg" %></div>
+        <div class="ns-actions"><%= link_to "Request a call", studio_contact_path, data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "cta" }, class: "sn-btn sn-btn--primary sn-btn--lg" %></div>
       </div>
     </div>
   </section>

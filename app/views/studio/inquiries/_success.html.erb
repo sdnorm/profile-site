@@ -1,4 +1,6 @@
-<div class="sn-contact-success ns-contact__success" role="status">
+<%# locals: (interest: "unknown") %>
+<% tracked_interest = Studio::Inquiry::INTERESTS.include?(interest) ? interest : "unknown" %>
+<div class="sn-contact-success ns-contact__success" role="status" data-controller="analytics" data-analytics-on-connect-value="inquiry_submitted" data-analytics-properties-value="<%= { interest: tracked_interest }.to_json %>">
   <h2 class="t-heading">Request received</h2>
   <p>I have your note. I will reply by email within two business days.</p>
   <div class="ns-actions">

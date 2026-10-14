@@ -136,7 +136,7 @@
     </header>
     <% groups.each_with_index do |group, index| %>
       <details class="ns-catalog__group" data-catalog-target="groups" open>
-        <summary class="ns-catalog__summary">
+        <summary class="ns-catalog__summary" data-action="click->catalog#trackOpen" data-catalog-group-param="<%= group[:name] %>">
           <h3 class="t-heading" id="catalog-group-<%= index %>"><%= group[:name] %></h3>
         </summary>
         <div class="ns-catalog__body">
