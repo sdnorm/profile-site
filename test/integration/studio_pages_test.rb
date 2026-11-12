@@ -1,7 +1,7 @@
 require "test_helper"
 
 class StudioPagesTest < ActionDispatch::IntegrationTest
-  setup { host! "normansimplified.com" }
+  setup { host! "www.normansimplified.com" }
 
   test "studio pages render in the studio layout" do
     [ "/", "/ai-integration", "/how-we-work" ].each do |path|

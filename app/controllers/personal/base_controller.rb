@@ -3,6 +3,7 @@ module Personal
     layout "personal"
 
     def current_site = :personal
-    helper_method :current_site
+    def canonical_host = "spencernorman.io"
+    helper_method :current_site, :canonical_host
   end
 end

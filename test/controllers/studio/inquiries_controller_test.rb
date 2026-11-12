@@ -1,7 +1,7 @@
 require "test_helper"
 
 class Studio::InquiriesControllerTest < ActionDispatch::IntegrationTest
-  setup { host! "normansimplified.com" }
+  setup { host! "www.normansimplified.com" }
 
   def valid_params = { studio_inquiry: { name: "Jane", email: "jane@acme.com", interest: "automate", message: "Invoices by hand." } }
 

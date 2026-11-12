@@ -4,6 +4,7 @@
     <title><%= content_for(:title) || "Spencer Norman — Rails Developer" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="description" content="<%= content_for(:description) || "Spencer Norman — seasoned Ruby on Rails developer. Scrappy, detail-oriented, ships code worth being proud of." %>">
+    <link rel="canonical" href="https://<%= canonical_host %><%= request.path %>">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
