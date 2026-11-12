@@ -12,7 +12,7 @@
       </p>
       <div style="display: flex; gap: 14px; align-items: center; margin-top: 34px; flex-wrap: wrap;">
         <a href="#work" class="sn-btn sn-btn--primary sn-btn--lg"><span>See my work</span></a>
-        <a href="#contact" class="sn-btn sn-btn--ghost sn-btn--lg">
+        <a href="#contact" data-controller="analytics" data-action="click->analytics#track" data-analytics-event-param="cta_clicked" data-analytics-cta-param="get_in_touch" data-analytics-location-param="hero" class="sn-btn sn-btn--ghost sn-btn--lg">
           <span>Get in touch</span>
           <span class="sn-btn__i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </a>

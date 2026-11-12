@@ -8,8 +8,8 @@
       <h1 id="ai-title" class="t-display ns-hero__title">AI inside the software you already run</h1>
       <p class="ns-lead">I extract fields from documents, draft answers from your files, and connect the result to the system your team already opens. A person still decides the exceptions. A pilot starts at $18,000.</p>
       <div class="ns-actions">
-        <%= link_to "Request a call", studio_contact_path(interest: "build"), class: "sn-btn sn-btn--primary sn-btn--lg" %>
-        <%= link_to "Start with a Signal Audit — $4,500", studio_contact_path(interest: "audit"), class: "ns-text-link" %>
+        <%= link_to "Request a call", studio_contact_path(interest: "build"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "hero", analytics_interest_param: "build" }, class: "sn-btn sn-btn--primary sn-btn--lg" %>
+        <%= link_to "Start with a Signal Audit — $4,500", studio_contact_path(interest: "audit"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "audit", analytics_interest_param: "audit" }, class: "ns-text-link" %>
       </div>
     </div>
   </section>

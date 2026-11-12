@@ -10,7 +10,7 @@
           <li><%= link_to "Services", studio_root_path(anchor: "services") %></li>
           <li><%= link_to "AI integration", studio_ai_integration_path %></li>
           <li><%= link_to "How we work", studio_how_we_work_path %></li>
-          <li><%= link_to "Request a call", studio_contact_path %></li>
+          <li><%= link_to "Request a call", studio_contact_path, data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "footer" } %></li>
         </ul>
       </nav>
     </div>

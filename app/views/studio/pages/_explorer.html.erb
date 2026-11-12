@@ -68,6 +68,6 @@
       </dl>
     </section>
     <p class="ns-explorer__close">Your build uses your document types and your system. This sample only shows the path.</p>
-    <%= link_to "Request a call", studio_contact_path(interest: "build"), class: "sn-btn sn-btn--primary sn-btn--lg" %>
+    <%= link_to "Request a call", studio_contact_path(interest: "build"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "explorer", analytics_interest_param: "build" }, class: "sn-btn sn-btn--primary sn-btn--lg" %>
   </div>
 </section>

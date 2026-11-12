@@ -40,5 +40,6 @@ export default class extends Controller {
   announce() {
     const title = this.stepsTargets[this.indexValue].dataset.stepTitle
     this.statusTarget.textContent = `Step ${this.indexValue + 1} of ${this.stepsTargets.length} — ${title}`
+    window.posthog?.capture("explorer_step_viewed", { step: this.indexValue + 1 })
   }
 }

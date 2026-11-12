@@ -6,7 +6,7 @@
       <p class="ns-lead">AI tools, automations, and custom software for operators buried in documents, spreadsheets, and aging tools.</p>
       <p class="ns-hero__body">You work with me, Spencer Norman. I help you choose the tools, take one recurring workflow off a person's plate, or build software when the spreadsheet or the old app is the constraint.</p>
       <div class="ns-actions">
-        <%= link_to "Request a call", studio_contact_path, class: "sn-btn sn-btn--primary sn-btn--lg" %>
+        <%= link_to "Request a call", studio_contact_path, data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "hero" }, class: "sn-btn sn-btn--primary sn-btn--lg" %>
         <%= link_to studio_ai_integration_path, class: "ns-text-link" do %>
           See AI integration <span aria-hidden="true">→</span>
         <% end %>
