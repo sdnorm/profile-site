@@ -14,7 +14,7 @@ class AnalyticsTest < ActionDispatch::IntegrationTest
   end
 
   test "a blank token renders no PostHog on either site" do
-    [ "spencernorman.io", "normansimplified.com" ].each do |host|
+    [ "spencernorman.io", "www.normansimplified.com" ].each do |host|
       host! host
       get "/"
       assert_response :success
@@ -24,7 +24,7 @@ class AnalyticsTest < ActionDispatch::IntegrationTest
 
   test "both sites initialize cookieless analytics with their site property" do
     Rails.configuration.x.posthog.token = "phc_test"
-    { "spencernorman.io" => "personal", "normansimplified.com" => "studio" }.each do |host, site|
+    { "spencernorman.io" => "personal", "www.normansimplified.com" => "studio" }.each do |host, site|
       host! host
       get "/"
       assert_select "head script#site-analytics", count: 1 do |scripts|
@@ -53,7 +53,7 @@ class AnalyticsTest < ActionDispatch::IntegrationTest
       end
     end
 
-    host! "normansimplified.com"
+    host! "www.normansimplified.com"
     [ "/", "/ai-integration", "/how-we-work", "/contact" ].each do |path|
       get path
       assert_select "a[href^='/contact']", minimum: 1 do |links|
@@ -71,7 +71,7 @@ class AnalyticsTest < ActionDispatch::IntegrationTest
   end
 
   test "studio conversion contains only the validated raw interest after success" do
-    host! "normansimplified.com"
+    host! "www.normansimplified.com"
     post "/contact", params: { studio_inquiry: { name: "Private Name", email: "private@example.test", company: "Private Company", message: "Private message", interest: "build" } }, as: :turbo_stream
     assert_response :success
     assert_select "[data-analytics-on-connect-value=inquiry_submitted]", count: 1 do |panels|
@@ -85,7 +85,7 @@ class AnalyticsTest < ActionDispatch::IntegrationTest
   end
 
   test "studio HTML redirect success reports unknown interest" do
-    host! "normansimplified.com"
+    host! "www.normansimplified.com"
     post "/contact", params: { studio_inquiry: { email: "private@example.test", message: "Private message", interest: "automate" } }
     assert_response :see_other
     follow_redirect!

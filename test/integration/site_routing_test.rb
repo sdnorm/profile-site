@@ -16,7 +16,7 @@ class SiteRoutingTest < ActionDispatch::IntegrationTest
   end
 
   test "studio host root renders the studio layout" do
-    host! "normansimplified.com"
+    host! "www.normansimplified.com"
     get "/"
     assert_response :success
     assert_select "body[data-site=studio]"
