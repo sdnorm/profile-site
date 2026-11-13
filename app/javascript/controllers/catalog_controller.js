@@ -12,10 +12,4 @@ export default class extends Controller {
       window.posthog?.capture("catalog_group_opened", { group: params.group })
     }
   }
-
-  trackOpen({ currentTarget, params }) {
-    if (!currentTarget.closest("details").open) {
-      window.posthog?.capture("catalog_group_opened", { group: params.group })
-    }
-  }
 }
