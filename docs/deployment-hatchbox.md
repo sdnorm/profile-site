@@ -70,3 +70,10 @@ Ship the result off-box (S3/rsync), or use Litestream for continuous replication
 
 SQLite is a file, not a server — it works on one machine only. If this app ever needs
 horizontal scaling, migrate to Postgres (Hatchbox can provision it).
+
+## Analytics (PostHog)
+
+Set `POSTHOG_TOKEN` in the Hatchbox app environment to the PostHog project token (starts
+with `phc_`; PostHog > Settings > Project). Without it no analytics script is rendered.
+`POSTHOG_HOST` is optional and defaults to `https://us.i.posthog.com`; set it to
+`https://eu.i.posthog.com` for an EU project.
