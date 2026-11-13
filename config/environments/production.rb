@@ -105,8 +105,8 @@ Rails.application.configure do
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
-  # PostHog loads only when a project token is present. The token is public (it ships in
-  # the page source), so a plain environment variable is enough.
-  config.x.posthog.token = ENV["POSTHOG_TOKEN"].presence
-  config.x.posthog.host  = ENV["POSTHOG_HOST"].presence
+  # PostHog loads only when a project token is present. It lives in encrypted credentials
+  # (post_hog.project_token, optional post_hog.host); the environment variables are a fallback.
+  config.x.posthog.token = credentials.dig(:post_hog, :project_token).presence || ENV["POSTHOG_TOKEN"].presence
+  config.x.posthog.host  = credentials.dig(:post_hog, :host).presence || ENV["POSTHOG_HOST"].presence
 end

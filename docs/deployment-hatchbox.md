@@ -73,7 +73,14 @@ horizontal scaling, migrate to Postgres (Hatchbox can provision it).
 
 ## Analytics (PostHog)
 
-Set `POSTHOG_TOKEN` in the Hatchbox app environment to the PostHog project token (starts
-with `phc_`; PostHog > Settings > Project). Without it no analytics script is rendered.
-`POSTHOG_HOST` is optional and defaults to `https://us.i.posthog.com`; set it to
-`https://eu.i.posthog.com` for an EU project.
+Add the PostHog project token (starts with `phc_`; PostHog > Settings > Project) to the
+production credentials:
+
+```yaml
+post_hog:
+  project_token: phc_...
+  # host: https://eu.i.posthog.com   # only for an EU project; defaults to the US host
+```
+
+Without a token no analytics script is rendered. `POSTHOG_TOKEN` and `POSTHOG_HOST`
+environment variables work as a fallback.
