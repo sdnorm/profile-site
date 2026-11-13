@@ -1,5 +1,5 @@
 <% content_for :title, "Request a call | Norman Simplified" %>
-<% content_for :description, "Tell Spencer the workflow that is stuck. He replies by email within two business days. This form does not reserve a time." %>
+<% content_for :description, "Tell Spencer where paperwork or repeated data entry slows your team down. He replies by email within two business days to discuss a 25-minute call." %>
 <% content_for :head do %>
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
 <% end %>
@@ -8,24 +8,11 @@
   <header class="ns-section-heading ns-contact__hero">
     <p class="sn-eyebrow">Contact</p>
     <h1 class="t-display">Request a call</h1>
-    <p class="ns-lead">Describe the work that is still done by hand. I read it and reply by email within two business days. If a call makes sense, you and I set a time by email. This page does not book a slot.</p>
+    <p class="ns-lead">Tell me where paperwork or repeated data entry slows your team down. I reply by email within two business days. If it looks like a fit, we set up a 25-minute call.</p>
+    <p>You don't need to know the solution yet.</p>
   </header>
 
   <div class="ns-editorial-grid ns-contact__grid">
-    <aside class="ns-contact__next" aria-labelledby="contact-next-heading">
-      <h2 id="contact-next-heading" class="t-heading">After you send it</h2>
-      <ul>
-        <li>You see a confirmation on this page</li>
-        <li>I reply by email within two business days</li>
-        <li>If it is a fit and I have room, you and I pick a time in that email thread</li>
-        <li>If it is not a fit, I say so</li>
-      </ul>
-      <div class="ns-contact__note ns-prose">
-        <p>The first call is 25 minutes.</p>
-        <p>I do not take on work involving protected health information (PHI).</p>
-      </div>
-    </aside>
-
     <div id="inquiry_panel" class="ns-contact__panel">
       <% if @sent %>
         <%= render "studio/inquiries/success", interest: "unknown" %>
@@ -33,5 +20,10 @@
         <%= render "studio/inquiries/form", inquiry: @inquiry %>
       <% end %>
     </div>
+    <aside class="ns-contact__next" aria-labelledby="contact-next-heading">
+      <h2 id="contact-next-heading" class="t-heading">What we can discuss</h2>
+      <p>The work taking your team's time, the tools you use today, and whether a Workflow Review would help.</p>
+      <p>A Workflow Review is $4,500 fixed fee, over two weeks. You get one recommended first change in writing, with a budget range.</p>
+    </aside>
   </div>
 </main>

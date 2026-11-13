@@ -3,7 +3,7 @@ module Studio
     include TurnstileVerifiable
 
     def new
-      @inquiry = Inquiry.new(interest: requested_interest)
+      @inquiry = Inquiry.new(interest: requested_interest, message: example_message)
       @sent = flash[:inquiry_sent].present?
     end
 
@@ -23,13 +23,20 @@ module Studio
       Inquiry::INTERESTS.include?(params[:interest]) ? params[:interest] : "not_sure"
     end
 
+    def example_message
+      example = params[:example]
+      return unless example.is_a?(String) && example.match?(/\A[A-Za-z][A-Za-z0-9 &-]{0,79}\z/)
+
+      "I'd like to discuss: #{example}\n\n"
+    end
+
     def deliver_inquiry
       InquiryMailer.new_inquiry(@inquiry).deliver_now
       true
     rescue => e
       Rails.logger.error("Inquiry delivery failed: #{e.class}: #{e.message}")
       @inquiry.errors.add(:base, :delivery_failed,
-        message: "It did not send. Try again in a moment. If it fails twice, use the form on spencernorman.io and mention Norman Simplified.")
+        message: "It did not send. Your message is still in the form. Please try again in a moment.")
       false
     end
 

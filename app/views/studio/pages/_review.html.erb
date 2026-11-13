@@ -1,0 +1,42 @@
+<section id="review" class="ns-section ns-review" aria-labelledby="review-title">
+  <div class="ns-container ns-editorial-grid">
+    <header class="ns-section-heading">
+      <h2 id="review-title" class="t-heading">The Workflow Review</h2>
+      <p class="ns-lead">$4,500 fixed fee. Two weeks.</p>
+    </header>
+    <div class="ns-prose">
+      <p class="ns-review__label" id="review-outline-label">Outline of the report you receive. This is the deliverable, not a report from a client.</p>
+      <dl class="ns-review__outline" aria-labelledby="review-outline-label">
+        <div>
+          <dt>Conversations</dt>
+          <dd>Four conversations with the people who do the work</dd>
+        </div>
+        <div>
+          <dt>Three processes</dt>
+          <dd>Three recurring processes compared: where the time goes and what it costs</dd>
+        </div>
+        <div>
+          <dt>The first change</dt>
+          <dd>One recommended first change, in writing</dd>
+        </div>
+        <div>
+          <dt>Budget range</dt>
+          <dd>A budget range for making that change, with the assumptions shown</dd>
+        </div>
+        <div>
+          <dt>Go or no-go</dt>
+          <dd>A plain go or no-go recommendation</dd>
+        </div>
+        <div>
+          <dt>Walkthrough</dt>
+          <dd>A 45-minute walkthrough of the report</dd>
+        </div>
+      </dl>
+      <p>The report is yours whether or not you continue. $2,000 of the fee is credited toward any implementation project with Norman Simplified that starts within 60 days.</p>
+      <p>After the review you can stop, do the work in-house, or ask for a separately scoped, fixed-price implementation.</p>
+      <div class="ns-actions">
+        <%= link_to "Request a call", studio_contact_path(interest: "audit"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "audit", analytics_interest_param: "audit" }, class: "sn-btn sn-btn--primary sn-btn--lg" %>
+      </div>
+    </div>
+  </div>
+</section>

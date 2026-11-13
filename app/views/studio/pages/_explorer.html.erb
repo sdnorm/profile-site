@@ -2,10 +2,10 @@
   <div class="ns-container">
     <header class="ns-section-heading">
       <p class="sn-eyebrow">Sample only</p>
-      <h2 class="t-heading" id="explorer-title">A vendor invoice, walked through</h2>
-      <p class="ns-lead">Step through one recorded example, from a fictional invoice to the system it lands in. The numbers are part of the sample, not a promise about your documents.</p>
+      <h2 class="t-heading" id="explorer-title">Sample: a vendor invoice</h2>
+      <p class="ns-lead">Step through a sample, from a fictional invoice to the system it lands in. The numbers belong to the sample, not to a real project.</p>
     </header>
-    <p class="ns-explorer__banner">Fictional document. Recorded example. Not a live model. Not a client file. Do not upload real invoices here.</p>
+    <p class="ns-explorer__banner">Fictional invoice. This sample shows the steps; it does not run a live model.</p>
     <div class="ns-explorer__controls" data-explorer-target="buttons" hidden>
       <button type="button" class="sn-btn sn-btn--secondary sn-btn--md" data-action="explorer#previous" disabled>Previous</button>
       <p class="t-label" data-explorer-target="status" role="status" aria-live="polite" aria-atomic="true">Step 1 of 4 — Document</p>
@@ -35,17 +35,17 @@
     <section class="ns-explorer__step" data-explorer-target="steps" data-step-title="Extracted fields" aria-labelledby="fields-title">
       <p class="t-label">Step 2 — Extracted fields</p>
       <h3 class="t-heading" id="fields-title">Extracted fields</h3>
-      <p class="ns-explorer__caption">Sample confidence values</p>
+      <p class="ns-explorer__caption">Sample review decisions</p>
       <dl class="ns-explorer__fields">
-        <div><dt>Vendor name</dt><dd>Northline Supply Co. <span>98%</span></dd></div>
-        <div><dt>Invoice number</dt><dd>INV-10482 <span>99%</span></dd></div>
-        <div><dt>Invoice date</dt><dd>2026-03-12 <span>96%</span></dd></div>
-        <div><dt>PO number</dt><dd>PO-7781 <span>91%</span></dd></div>
-        <div><dt>Subtotal</dt><dd>$364.80 <span>97%</span></dd></div>
-        <div class="ns-explorer__flag"><dt>Tax</dt><dd>$29.18 <span>62%</span><small>under the sample review line of 85%</small></dd></div>
-        <div class="ns-explorer__flag"><dt>Total</dt><dd>$393.98 <span>97%</span><small>held because tax is unconfirmed</small></dd></div>
+        <div><dt>Vendor name</dt><dd>Northline Supply Co. <span>sample: above review line</span></dd></div>
+        <div><dt>Invoice number</dt><dd>INV-10482 <span>sample: above review line</span></dd></div>
+        <div><dt>Invoice date</dt><dd>2026-03-12 <span>sample: above review line</span></dd></div>
+        <div><dt>PO number</dt><dd>PO-7781 <span>sample: above review line</span></dd></div>
+        <div><dt>Subtotal</dt><dd>$364.80 <span>sample: above review line</span></dd></div>
+        <div class="ns-explorer__flag"><dt>Tax</dt><dd>$29.18 <span>sample: needs review</span><small>held for review in this sample</small></dd></div>
+        <div class="ns-explorer__flag"><dt>Total</dt><dd>$393.98 <span>sample: above review line</span><small>held because tax is unconfirmed</small></dd></div>
       </dl>
-      <p class="ns-explorer__caption">85% is the review line for this example. Your line is set from your documents, not copied from this page.</p>
+      <p class="ns-explorer__caption">We set review rules using your documents and the checks agreed before launch.</p>
     </section>
     <section class="ns-explorer__step" data-explorer-target="steps" data-step-title="Human review" aria-labelledby="review-title">
       <p class="t-label">Step 3 — Human review</p>
@@ -67,7 +67,7 @@
         <div><dt>Written back</dt><dd>invoice number, dates, PO, amounts, reviewer, timestamp</dd></div>
       </dl>
     </section>
-    <p class="ns-explorer__close">Your build uses your document types and your system. This sample only shows the path.</p>
+    <p class="ns-explorer__close">Your project uses your document types and your system. This sample shows the path.</p>
     <%= link_to "Request a call", studio_contact_path(interest: "build"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "explorer", analytics_interest_param: "build" }, class: "sn-btn sn-btn--primary sn-btn--lg" %>
   </div>
 </section>

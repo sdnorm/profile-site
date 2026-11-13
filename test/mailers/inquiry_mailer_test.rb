@@ -8,7 +8,7 @@ class InquiryMailerTest < ActionMailer::TestCase
 
     assert_equal [ "spencernorman@hey.com" ], mail.to
     assert_equal [ "jane@acme.com" ], mail.reply_to
-    assert_equal "New Norman Simplified inquiry (Build) from Jane Doe", mail.subject
+    assert_equal "New Norman Simplified inquiry (Custom software) from Jane Doe", mail.subject
     assert_match "Acme Supply", mail.body.encoded
     assert_match "Our order intake is all PDFs.", mail.body.encoded
   end

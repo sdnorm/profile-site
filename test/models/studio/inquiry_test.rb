@@ -23,8 +23,8 @@ class Studio::InquiryTest < ActiveSupport::TestCase
   end
 
   test "interest_label is human readable" do
-    assert_equal "Build", build(interest: "build").interest_label
-    assert_equal "Signal Audit", build(interest: "audit").interest_label
+    assert_equal "Custom software", build(interest: "build").interest_label
+    assert_equal "Workflow Review", build(interest: "audit").interest_label
     assert_equal "Not sure yet", build.interest_label
   end
 
