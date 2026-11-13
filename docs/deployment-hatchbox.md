@@ -6,8 +6,8 @@ No Node/bun is required — JS is served via importmap and CSS is compiled by
 
 ## Ruby version
 
-This app requires **Ruby 3.4.8** (Rails 8.1 does not parse on Ruby 3.3). Set the Ruby
-version for the app in Hatchbox to **3.4.8** before deploying the upgrade — it must match
+This app requires **Ruby 4.0.9**. Set the Ruby
+version for the app in Hatchbox to **4.0.9** before deploying the upgrade — it must match
 `.ruby-version`.
 
 ## Assets
