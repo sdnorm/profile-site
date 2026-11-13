@@ -13,10 +13,10 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
 
   test "every studio page has a title, meta description, and a Request a call link" do
     descriptions = {
-      "/" => "AI tools, automations, and custom software for operators buried in documents, spreadsheets, and aging tools. You work directly with Spencer Norman.",
-      "/ai-integration" => "Document intake, answers from your own files, and workflow automation inside the systems you already use. Human review, a measured sample, and a plain account of running cost.",
-      "/how-we-work" => "Fixed prices for Pick ($3,500) and Rollout ($8,500). Automate from $7,500. Build from $18,000. A Signal Audit is $4,500 if the workflow is still unclear.",
-      "/contact" => "Tell Spencer the workflow that is stuck. He replies by email within two business days. This form does not reserve a time."
+      "/" => "Reduce repetitive paperwork and data entry. Work directly with Spencer Norman, starting with a two-week Workflow Review for $4,500.",
+      "/ai-integration" => "Examples of document and workflow automation after a Workflow Review. See a sample, possible projects, and how we agree what to measure.",
+      "/how-we-work" => "Start with a two-week Workflow Review for $4,500. See what is included, implementation prices, and what happens next.",
+      "/contact" => "Tell Spencer where paperwork or repeated data entry slows your team down. He replies by email within two business days to discuss a 25-minute call."
     }
     descriptions.each do |path, description|
       get path
@@ -24,27 +24,44 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
       assert_select "meta[name=description]", count: 1 do |tags|
         assert_equal description, tags.first["content"], "description for #{path}"
       end
+      assert_select "h1", count: 1
       assert_select "a[href^='/contact']", minimum: 1
     end
   end
 
-  test "nav links to every v1 page" do
+  test "nav links to the review and every page" do
     get "/"
+    assert_select "nav a[href='/#review']", text: "Workflow Review"
     assert_select "nav a[href='/ai-integration']"
     assert_select "nav a[href='/how-we-work']"
     assert_select "nav a[href^='/contact']", text: /Request a call/
   end
 
-  test "home shows the brand line, three lanes with starting prices, and lane CTAs" do
+  test "home leads with the outcome, the Workflow Review price, and one call to action" do
     get "/"
-    assert_select "h1", /Technology, simplified/
+    assert_select "h1", "Less retyping. Less chasing paperwork."
+    assert_select ".ns-hero" do
+      assert_select "*", text: /Workflow Review for \$4,500/
+      assert_select "a[href='/contact?interest=audit']", text: "Request a call", count: 1
+    end
+    assert_select "#review", text: /\$4,500 fixed fee\. Two weeks\./
+    assert_select "#review", text: /\$2,000 of the fee is credited/
     assert_select "#services [data-lane]", 3
     [ "$3,500", "$7,500", "$18,000" ].each { |price| assert_match price, @response.body }
-    %w[adopt automate build].each { |lane| assert_select "a[href='/contact?interest=#{lane}']" }
-    assert_select "details", minimum: 6
+    %w[adopt automate build].each { |lane| assert_select "#services a[href='/how-we-work##{lane}']" }
   end
 
-  test "how we work shows exact Adopt prices and the Signal Audit" do
+  test "retired names, exclusions and unbacked claims are gone from every page" do
+    retired = /Signal Audit|Flow Care|Desk Hours|Managed AI Ops|Fractional|Legacy Rescue|Flexfit|PHI\b|BAA\b|healthcare|Technology, simplified/i
+    [ "/", "/ai-integration", "/how-we-work", "/contact" ].each do |path|
+      get path
+      text = Nokogiri::HTML(@response.body).at("body").text
+      assert_no_match retired, text, "retired wording on #{path}"
+      assert_no_match retired, Nokogiri::HTML(@response.body).at("title").text
+    end
+  end
+
+  test "how we work shows the fixed prices and the Workflow Review" do
     get "/how-we-work"
     [ "$3,500", "$8,500", "$4,500" ].each { |price| assert_match price, @response.body }
     assert_select "a[href='/contact?interest=audit']"
@@ -62,7 +79,10 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
       assert_match(/sample|fictional/i, explorer.text)
       assert_select "[data-explorer-target=status]", text: "Step 1 of 4 — Document"
     end
-    assert_select "details[open] summary h3", count: 5
+    assert_select "details summary h3", count: 5
+    assert_select "details[open]", count: 0
+    assert_no_match(/\$(12|28|38|42),000/, @response.body)
+    assert_select "[data-catalog-item] a[href^='/contact?']", count: 12
   end
 
   test "only the contact page loads Turnstile" do

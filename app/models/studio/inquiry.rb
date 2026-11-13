@@ -5,10 +5,10 @@ module Studio
     include ActiveModel::Attributes
 
     INTEREST_LABELS = {
-      "adopt" => "Adopt",
-      "automate" => "Automate",
-      "build" => "Build",
-      "audit" => "Signal Audit",
+      "adopt" => "Tools and training",
+      "automate" => "Workflow automation",
+      "build" => "Custom software",
+      "audit" => "Workflow Review",
       "not_sure" => "Not sure yet"
     }.freeze
     INTERESTS = INTEREST_LABELS.keys.freeze

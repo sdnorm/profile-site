@@ -82,6 +82,7 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .sn-pill--live .sn-pill__dot { animation: none; }
+  .sn-btn:active { transform: none; }
 }
 
 /* ---- IconButton ---- */

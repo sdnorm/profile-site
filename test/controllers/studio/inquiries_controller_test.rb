@@ -25,7 +25,7 @@ class Studio::InquiriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_match "inquiry_panel", @response.body
     assert_match "Request received", @response.body
-    assert_match "(Automate)", ActionMailer::Base.deliveries.last.subject
+    assert_match "(Workflow automation)", ActionMailer::Base.deliveries.last.subject
   end
 
   test "invalid turbo submission re-renders the form (422) and sends nothing" do
@@ -64,5 +64,15 @@ class Studio::InquiriesControllerTest < ActionDispatch::IntegrationTest
     assert_empty ActionMailer::Base.deliveries
   ensure
     ActionMailer::Base.unregister_interceptor(FailingDelivery)
+  end
+
+  test "an example link prefills the message, and an unsafe example is ignored" do
+    get studio_contact_path(interest: "build", example: "Document intake")
+    assert_select "textarea[name='studio_inquiry[message]']", text: /I'd like to discuss: Document intake/
+    assert_select "select[name='studio_inquiry[interest]'] option[selected][value=build]"
+
+    get studio_contact_path(example: "<script>alert(1)</script>")
+    assert_response :success
+    assert_select "textarea[name='studio_inquiry[message]']", text: ""
   end
 end

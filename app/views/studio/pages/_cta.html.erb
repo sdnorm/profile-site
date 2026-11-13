@@ -2,10 +2,10 @@
   <div class="ns-container">
     <div class="ns-cta__panel">
       <div>
-        <h2 id="cta-title" class="t-heading">What work is still done by hand?</h2>
-        <p class="ns-lead">Name the workflow. I will reply by email within two business days.</p>
+        <h2 id="cta-title" class="t-heading">Where does your team still retype or chase paperwork?</h2>
+        <p class="ns-lead">Tell me what is taking the time. I reply by email within two business days.</p>
       </div>
-      <%= link_to "Request a call", studio_contact_path, data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "cta" }, class: "sn-btn sn-btn--primary sn-btn--lg" %>
+      <%= link_to "Request a call", studio_contact_path(interest: "audit"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "cta", analytics_interest_param: "audit" }, class: "sn-btn sn-btn--primary sn-btn--lg" %>
     </div>
   </div>
 </section>

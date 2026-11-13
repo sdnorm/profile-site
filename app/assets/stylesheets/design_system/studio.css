@@ -117,8 +117,8 @@ body[data-site="studio"] .ns-content {
 }
 
 body[data-site="studio"] .ns-content:focus {
-  outline: none;
-  box-shadow: none;
+  outline: 2px solid var(--ring);
+  outline-offset: 4px;
 }
 
 body[data-site="studio"] .ns-skip-link {
@@ -435,16 +435,9 @@ body[data-site="studio"] .ns-prose > p + p {
   margin-top: 20px;
 }
 
-/* Home hero: a real workflow shape, explicitly labeled as an illustration. */
+/* Shared hero. The AI page still uses the large title. Home overrides sit below. */
 body[data-site="studio"] .ns-hero {
   padding-block: 88px 96px;
-}
-
-body[data-site="studio"] .ns-hero__grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-  gap: 64px;
-  align-items: center;
 }
 
 body[data-site="studio"] .ns-hero__copy > .sn-eyebrow {
@@ -466,202 +459,41 @@ body[data-site="studio"] .ns-hero__copy > .ns-lead {
   font-size: 22px;
 }
 
-body[data-site="studio"] .ns-hero__body {
-  margin: 20px 0 0;
-  max-width: 52ch;
-  color: var(--text-muted);
+/* Home hero stays short enough that the price and the button share the first screen. */
+body[data-site="studio"] .ns-home .ns-hero {
+  padding-block: clamp(28px, 4vw, 64px) clamp(36px, 5vw, 72px);
 }
 
-body[data-site="studio"] .ns-workflow {
-  min-width: 0;
-  margin: 0;
+body[data-site="studio"] .ns-home .ns-hero__title {
+  max-width: 16em;
+  font-size: clamp(34px, 4.4vw, 56px);
+  line-height: 1.08;
 }
 
-body[data-site="studio"] .ns-workflow__board {
-  padding: 28px;
-  border: 1px solid var(--brand-soft-border);
-  border-radius: var(--radius-xl);
-  background-color: var(--surface-accent);
-  background-image: radial-gradient(var(--brand-soft-border) 0.7px, transparent 0.7px);
-  background-size: 16px 16px;
+body[data-site="studio"] .ns-home .ns-hero__copy > .ns-lead {
+  max-width: 40em;
+  margin-top: 20px;
+  font-size: 18px;
 }
 
-body[data-site="studio"] .ns-workflow__heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 24px;
-  color: var(--text-link);
-}
-
-body[data-site="studio"] .ns-workflow__heading p {
-  margin: 0;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-}
-
-body[data-site="studio"] .ns-workflow__key {
-  display: flex;
-  gap: 4px;
-}
-
-body[data-site="studio"] .ns-workflow__key i {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--brand);
-}
-
-body[data-site="studio"] .ns-flow {
-  display: grid;
-  gap: 24px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-body[data-site="studio"] .ns-flow__step {
-  position: relative;
-  display: grid;
-  grid-template-columns: 24px minmax(0, 1fr);
-  align-items: center;
-  gap: 12px;
-}
-
-body[data-site="studio"] .ns-flow__step:not(:last-child)::after {
-  content: "↓";
-  position: absolute;
-  top: 100%;
-  left: calc(50% + 12px);
-  height: 24px;
-  color: var(--brand);
-  font-size: 20px;
-  line-height: 24px;
-}
-
-body[data-site="studio"] .ns-flow__number {
-  color: var(--text-muted);
-  font-size: 11px;
-  letter-spacing: 0;
-}
-
-body[data-site="studio"] .ns-flow__node {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px 14px;
-  min-height: 72px;
-  padding: 16px;
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  background: var(--surface-card);
-  box-shadow: var(--shadow-xs);
-}
-
-body[data-site="studio"] .ns-flow__label {
-  flex: 1;
-  min-width: 0;
+body[data-site="studio"] .ns-home .ns-lead strong {
   color: var(--text-strong);
-  font-size: 16px;
   font-weight: var(--fw-semibold);
-  line-height: 1.3;
 }
 
-body[data-site="studio"] .ns-flow__document {
-  display: grid;
-  align-content: center;
-  gap: 4px;
-  width: 27px;
-  height: 34px;
-  padding: 6px;
-  border: 1.5px solid var(--brand);
-  border-radius: 3px;
+body[data-site="studio"] .ns-home .ns-actions {
+  margin-top: 24px;
 }
 
-body[data-site="studio"] .ns-flow__document i {
-  height: 1.5px;
-  background: var(--brand);
-}
-
-body[data-site="studio"] .ns-flow__document i:last-child {
-  width: 65%;
-}
-
-body[data-site="studio"] .ns-flow__fields,
-body[data-site="studio"] .ns-flow__system {
-  display: grid;
-  gap: 4px;
-  width: 27px;
-}
-
-body[data-site="studio"] .ns-flow__fields i {
-  height: 6px;
-  border-left: 6px solid var(--brand);
-  background: var(--brand-soft-border);
-}
-
-body[data-site="studio"] .ns-flow__step--review .ns-flow__node {
-  border-color: var(--brand);
-  background: var(--brand);
-  box-shadow: var(--shadow-sm);
-}
-
-body[data-site="studio"] .ns-flow__step--review .ns-flow__label,
-body[data-site="studio"] .ns-flow__review,
-body[data-site="studio"] .ns-flow__annotation {
-  color: var(--text-on-accent);
-}
-
-body[data-site="studio"] .ns-flow__review {
-  display: grid;
-  place-items: center;
-  width: 27px;
-  height: 27px;
-  border: 1.5px solid currentColor;
-  border-radius: 50%;
-  font-size: 17px;
-}
-
-body[data-site="studio"] .ns-flow__annotation {
-  width: 100%;
-  margin-left: 41px;
-  font-size: 12px;
-}
-
-body[data-site="studio"] .ns-flow__system {
-  gap: 0;
-  border: 1.5px solid var(--brand);
-  border-radius: 3px;
-  overflow: hidden;
-}
-
-body[data-site="studio"] .ns-flow__system i {
-  height: 7px;
-  border-bottom: 1px solid var(--brand-soft-border);
-}
-
-body[data-site="studio"] .ns-flow__system i:first-child {
-  background: var(--brand-soft-border);
-}
-
-body[data-site="studio"] .ns-flow__system i:last-child {
-  border-bottom: 0;
-}
-
-body[data-site="studio"] .ns-workflow figcaption {
-  margin-top: 16px;
+body[data-site="studio"] .ns-hero__note {
+  margin: 12px 0 0;
+  max-width: 40em;
   color: var(--text-muted);
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.5;
 }
 
-body[data-site="studio"] .ns-workflow figcaption a {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-/* Three commercial lanes. The Audit stays a small note under Build. */
+/* Three commercial lanes. */
 body[data-site="studio"] .ns-services {
   border-block: 1px solid var(--border-subtle);
   background: var(--surface-raised);
@@ -673,30 +505,10 @@ body[data-site="studio"] .ns-lanes {
   gap: 16px 20px;
 }
 
-body[data-site="studio"] .ns-lane-with-note {
-  display: contents;
-}
-
 body[data-site="studio"] .ns-lane {
   display: flex;
   flex-direction: column;
   padding: 28px;
-}
-
-body[data-site="studio"] .ns-lane--build {
-  border-color: var(--brand-soft-border);
-  box-shadow: inset 0 3px var(--brand), var(--shadow-xs);
-}
-
-body[data-site="studio"] .ns-lane__heading {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-body[data-site="studio"] .ns-lane__number {
-  color: var(--text-accent);
-  letter-spacing: 0;
 }
 
 body[data-site="studio"] .ns-lane h3 {
@@ -717,14 +529,8 @@ body[data-site="studio"] .ns-lane__price strong {
   font-weight: var(--fw-semibold);
 }
 
-body[data-site="studio"] .ns-lane__problem {
-  margin: 0;
-  color: var(--text-strong);
-  font-weight: var(--fw-medium);
-}
-
 body[data-site="studio"] .ns-lane__deliverable {
-  margin: 20px 0 28px;
+  margin: 0 0 28px;
   color: var(--text-muted);
   font-size: 16px;
 }
@@ -741,105 +547,67 @@ body[data-site="studio"] .ns-lane__actions .ns-text-link {
   font-size: 15px;
 }
 
-body[data-site="studio"] .ns-lane__note {
-  grid-column: 3;
-  margin: 0;
-  padding-inline: 4px;
+body[data-site="studio"] .ns-services__note {
+  margin: 20px 0 0;
+  max-width: 62ch;
   color: var(--text-muted);
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.5;
 }
 
-body[data-site="studio"] .ns-lane__note a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  text-decoration: underline;
-  text-underline-offset: 3px;
+body[data-site="studio"] .ns-review__label {
+  margin: 0 0 8px;
+  color: var(--text-muted);
 }
 
-/* Labeled experience and two qualitative project accounts. */
-body[data-site="studio"] .ns-proof__list {
+body[data-site="studio"] .ns-review__outline {
+  margin: 0 0 28px;
+}
+
+body[data-site="studio"] .ns-review__outline > div {
+  padding-block: 16px;
   border-top: 1px solid var(--border-subtle);
 }
 
-body[data-site="studio"] .ns-proof__item {
-  padding-block: 28px;
+body[data-site="studio"] .ns-review__outline > div:last-child {
   border-bottom: 1px solid var(--border-subtle);
 }
 
-body[data-site="studio"] .ns-proof__item > .sn-eyebrow {
-  margin: 0 0 12px;
-  letter-spacing: 0.08em;
+body[data-site="studio"] .ns-review__outline dt {
+  color: var(--text-strong);
+  font-weight: var(--fw-semibold);
 }
 
-body[data-site="studio"] .ns-proof__item h3 {
-  margin: 0;
+body[data-site="studio"] .ns-review__outline dd {
+  margin: 4px 0 0;
+}
+
+body[data-site="studio"] .ns-example {
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+body[data-site="studio"] .ns-example h3 {
+  margin: 0 0 16px;
   color: var(--text-strong);
   font-size: 23px;
-  line-height: 1.3;
 }
 
-body[data-site="studio"] .ns-proof__item > p:last-child {
-  margin: 12px 0 0;
+body[data-site="studio"] .ns-example__steps {
+  display: grid;
+  gap: 16px;
+  margin: 0 0 16px;
 }
 
-body[data-site="studio"] .ns-proof__item strong {
+body[data-site="studio"] .ns-example__steps dt {
+  margin-bottom: 4px;
   color: var(--text-strong);
   font-weight: var(--fw-semibold);
 }
 
-body[data-site="studio"] .ns-selected-work {
-  margin-top: 96px;
-  scroll-margin-top: 32px;
-}
-
-body[data-site="studio"] .ns-work-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 48px;
-}
-
-body[data-site="studio"] .ns-work {
-  padding-top: 28px;
-  border-top: 2px solid var(--brand);
-}
-
-body[data-site="studio"] .ns-work__heading {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-body[data-site="studio"] .ns-work__heading h3 {
-  margin: 0;
-  color: var(--text-strong);
-  font-size: 30px;
-}
-
-body[data-site="studio"] .ns-work__label {
-  margin: 12px 0 28px;
-  min-height: 48px;
-  color: var(--text-muted);
-  font-size: 15px;
-}
-
-body[data-site="studio"] .ns-work__description {
-  display: grid;
-  gap: 24px;
-  margin: 0;
-}
-
-body[data-site="studio"] .ns-work__description dt {
-  margin-bottom: 6px;
-  color: var(--text-strong);
-  font-size: 15px;
-  font-weight: var(--fw-semibold);
-}
-
-body[data-site="studio"] .ns-work__description dd {
+body[data-site="studio"] .ns-example__steps dd,
+body[data-site="studio"] .ns-example > p {
   margin: 0;
 }
 
@@ -1028,26 +796,8 @@ body[data-site="studio"] .ns-cta__panel > .sn-btn {
 }
 
 @media (max-width: 63.999rem) {
-  body[data-site="studio"] .ns-hero__grid {
-    gap: 40px;
-  }
-
   body[data-site="studio"] .ns-hero__title {
     font-size: clamp(48px, 6.2vw, 64px);
-  }
-
-  body[data-site="studio"] .ns-workflow__board {
-    padding: 20px;
-  }
-
-  body[data-site="studio"] .ns-flow__step {
-    grid-template-columns: 20px minmax(0, 1fr);
-    gap: 8px;
-  }
-
-  body[data-site="studio"] .ns-flow__node {
-    gap: 8px 12px;
-    padding: 14px;
   }
 
   body[data-site="studio"] .ns-editorial-grid,
@@ -1083,10 +833,8 @@ body[data-site="studio"] .ns-cta__panel > .sn-btn {
     font-size: 20px;
   }
 
-  body[data-site="studio"] .ns-hero__grid,
   body[data-site="studio"] .ns-editorial-grid,
-  body[data-site="studio"] .ns-about__grid,
-  body[data-site="studio"] .ns-work-grid {
+  body[data-site="studio"] .ns-about__grid {
     grid-template-columns: minmax(0, 1fr);
     gap: 40px;
   }
@@ -1104,36 +852,9 @@ body[data-site="studio"] .ns-cta__panel > .sn-btn {
     margin-top: 28px;
   }
 
-  body[data-site="studio"] .ns-workflow {
-    max-width: 480px;
-  }
-
-  body[data-site="studio"] .ns-flow__annotation {
-    margin-left: 39px;
-  }
-
   body[data-site="studio"] .ns-lanes {
     grid-template-columns: minmax(0, 1fr);
     gap: 20px;
-  }
-
-  body[data-site="studio"] .ns-lane__heading {
-    flex-direction: row-reverse;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  body[data-site="studio"] .ns-lane__note {
-    grid-column: auto;
-    margin-top: -8px;
-  }
-
-  body[data-site="studio"] .ns-selected-work {
-    margin-top: 64px;
-  }
-
-  body[data-site="studio"] .ns-work__label {
-    min-height: 0;
   }
 
   body[data-site="studio"] .ns-process__steps li {

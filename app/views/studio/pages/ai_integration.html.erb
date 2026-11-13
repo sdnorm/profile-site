@@ -1,24 +1,24 @@
-<% content_for :title, "AI integration | Norman Simplified" %>
-<% content_for :description, "Document intake, answers from your own files, and workflow automation inside the systems you already use. Human review, a measured sample, and a plain account of running cost." %>
+<% content_for :title, "Document and workflow automation | Norman Simplified" %>
+<% content_for :description, "Examples of document and workflow automation after a Workflow Review. See a sample, possible projects, and how we agree what to measure." %>
 
 <main class="ns-ai">
   <section class="ns-hero ns-section" aria-labelledby="ai-title">
     <div class="ns-container ns-ai__hero">
-      <p class="sn-eyebrow">Build</p>
-      <h1 id="ai-title" class="t-display ns-hero__title">AI inside the software you already run</h1>
-      <p class="ns-lead">I extract fields from documents, draft answers from your files, and connect the result to the system your team already opens. A person still decides the exceptions. A pilot starts at $18,000.</p>
+      <p class="sn-eyebrow">Examples</p>
+      <h1 id="ai-title" class="t-display ns-hero__title">Less manual work between your tools</h1>
+      <p class="ns-lead">After a Workflow Review, we can connect the steps that slow your team down: retyping documents, chasing approvals, or keeping spreadsheets in sync. These are examples of possible work, not measured results.</p>
       <div class="ns-actions">
-        <%= link_to "Request a call", studio_contact_path(interest: "build"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "hero", analytics_interest_param: "build" }, class: "sn-btn sn-btn--primary sn-btn--lg" %>
-        <%= link_to "Start with a Signal Audit — $4,500", studio_contact_path(interest: "audit"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "audit", analytics_interest_param: "audit" }, class: "ns-text-link" %>
+        <%= link_to "Request a call", studio_contact_path(interest: "audit"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "hero", analytics_interest_param: "audit" }, class: "sn-btn sn-btn--primary sn-btn--lg" %>
       </div>
     </div>
   </section>
+  <%= render "studio/pages/explorer" %>
   <section class="ns-section ns-ai__explanation" aria-labelledby="build-shape">
     <div class="ns-container ns-editorial-grid">
-      <header class="ns-section-heading"><h2 class="t-heading" id="build-shape">One workflow, one system of record</h2></header>
+      <header class="ns-section-heading"><h2 class="t-heading" id="build-shape">One process, connected to your tools</h2></header>
       <div class="ns-prose">
-        <p>A pilot is three to four weeks and starts at $18,000. A fuller integration starts at $36,000 and usually takes six to eight weeks. You and I name the number this work should move before kickoff. Prices below are starting points for a single workflow with access in the first week. A second workflow is a second scope.</p>
-        <p>If you cannot name the workflow yet, the Signal Audit is $4,500 and takes two weeks.</p>
+        <p>A Pilot starts at $18,000 and takes 3–4 weeks. A Full integration starts at $36,000 and takes 6–8 weeks. Your written proposal sets the fixed fee before work begins. We agree what to measure before kickoff and scope one process at a time.</p>
+        <p>The usual first step is a Workflow Review: $4,500 fixed fee, two weeks. You get a recommended first change and a budget range, then decide whether to continue.</p>
       </div>
     </div>
   </section>
@@ -32,7 +32,7 @@
           <li>You and I set the confidence line and the sensitive actions before launch</li>
           <li>Items under the line go to a named role on your team</li>
           <li>The reviewer sees the source document next to the field</li>
-          <li>Nothing reaches the system of record until the rule for that field says it can</li>
+          <li>Nothing reaches the system your team uses until the rule for that field says it can</li>
           <li>Overrides are stored, so the next review is not from memory</li>
         </ul>
       </div>
@@ -46,7 +46,7 @@
         <ul>
           <li>The sample is documents you recognize</li>
           <li>The score is per field, not one flattering average</li>
-          <li>That set stays as a regression check when a prompt or model changes</li>
+          <li>That set stays as a check we repeat when a prompt or model changes</li>
           <li>If the sample is too small or too clean to trust, I say so before you rely on it</li>
         </ul>
       </div>
@@ -56,23 +56,14 @@
     <div class="ns-container ns-editorial-grid">
       <header class="ns-section-heading"><h2 class="t-heading" id="running-costs">The model bill is a line item, not a surprise</h2></header>
       <div class="ns-prose">
-        <p>Inference cost depends on document length, how many fields you extract, and monthly volume. I estimate it from your real volume before build, set a monthly ceiling, and alert when spend approaches it. There is no honest dollar figure for that bill until those inputs exist.</p>
+        <p>AI usage cost depends on document length, how many fields you extract, and monthly volume. I estimate it from your real volume before build, set a monthly ceiling, and alert when spend approaches it. There is no honest dollar figure for that bill until those inputs exist.</p>
         <ul>
           <li>You pay the model provider, or I pass the cost through with the ceiling written down</li>
           <li>Retries and long documents are part of the estimate</li>
-          <li>After launch, Managed AI Ops starts at $6,500 a month: monitoring, eval updates, the cost cap, and a one-page note on what changed</li>
+          <li>After launch, Ongoing operations support starts at $6,500 a month: monitoring, updates to the checks, the cost cap, and a one-page note on what changed. Your written proposal sets the fixed fee before work begins</li>
           <li>You can run it yourself with the handoff notes if you prefer</li>
         </ul>
       </div>
     </div>
   </section>
-  <section class="ns-section ns-ai__explanation" aria-labelledby="agent-eva">
-    <div class="ns-container ns-editorial-grid">
-      <header class="ns-section-heading"><h2 class="t-heading" id="agent-eva">The same pattern, already built once</h2></header>
-      <div class="ns-prose">
-        <p>Agent Eva is a Norman Simplified project. It read prescription-approval packets, wrote structured records, and held back fields that were not confident enough to store. I am not naming the client, and I am not offering this as healthcare work. The pattern — document, fields, review, your database — is the one in the catalog under Packet Intake.</p>
-      </div>
-    </div>
-  </section>
-  <%= render "studio/pages/explorer" %>
 </main>

@@ -1,0 +1,43 @@
+/* Page-specific v2 layout; shared studio styles remain in studio.css. */
+body[data-site="studio"] .ns-contact__grid {
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.65fr);
+}
+
+body[data-site="studio"] .ns-contact__hero {
+  margin-bottom: 32px;
+}
+
+body[data-site="studio"] .ns-contact__hero > p:last-child {
+  margin-top: 12px;
+}
+
+body[data-site="studio"] .ns-review-scope {
+  margin-block: 24px;
+}
+
+body[data-site="studio"] .ns-catalog__item > .ns-text-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 16px;
+}
+
+@media (max-width: 47.999rem) {
+  body[data-site="studio"] .ns-contact {
+    padding-block: 32px;
+  }
+
+  body[data-site="studio"] .ns-contact__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body[data-site="studio"] .ns-contact__hero h1 {
+    font-size: 40px;
+    line-height: 1.1;
+  }
+
+  body[data-site="studio"] .ns-contact__hero .ns-lead {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+}
