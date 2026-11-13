@@ -77,8 +77,8 @@ Add the PostHog project token (starts with `phc_`; PostHog > Settings > Project)
 production credentials:
 
 ```yaml
-posthog:
-  token: phc_...
+post_hog:
+  project_token: phc_...
   # host: https://eu.i.posthog.com   # only for an EU project; defaults to the US host
 ```
 
