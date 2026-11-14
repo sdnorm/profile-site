@@ -15,9 +15,9 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
     descriptions = {
       "/" => "Put AI agents to work on one recurring job, with limits you set and a person approving what goes out. Pilots are $9,500 fixed fee with Spencer Norman.",
       "/agent-readiness-review" => "A one-week Agent Readiness Review for $3,500. Find out which job an AI agent should take first, what it would be allowed to do, and what it costs.",
-      "/ai-integration" => "Examples of document and workflow automation after a Workflow Review. See a sample, possible projects, and how we agree what to measure.",
+      "/ai-integration" => "Examples of jobs an AI agent can take on, with a person approving the exceptions. See a sample, possible projects, and how we agree what to measure.",
       "/how-we-work" => "A pilot on one job is $9,500 fixed fee. Not sure where to start? The Agent Readiness Review is $3,500. See what each includes and what follows.",
-      "/contact" => "Tell Spencer where paperwork or repeated data entry slows your team down. He replies by email within two business days to discuss a 25-minute call."
+      "/contact" => "Tell Spencer which job you want off someone's desk. He replies by email within two business days to discuss a 25-minute call."
     }
     descriptions.each do |path, description|
       get path
@@ -117,6 +117,19 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
     assert_no_match(/Workflow Review|\$4,500|\$5,500|\$15,000/, Nokogiri::HTML(@response.body).at("main").text)
     assert_no_match(/Pilot<\/h3>\s*<p class="ns-how__price">Starts at \$18,000/, @response.body)
     assert_no_match(/per hour|\/hr/i, @response.body)
+  end
+
+  test "contact page talks about the job and the pilot" do
+    get "/contact"
+    assert_select "aside", text: /A pilot on one job is \$9,500 fixed fee/
+    assert_select "select option[value=pilot]", text: "Pilot"
+  end
+
+  test "examples page presents its examples as jobs for an agent" do
+    get "/ai-integration"
+    assert_select ".ns-hero a[href='/contact?interest=pilot']", text: "Request a call"
+    assert_match "A pilot on one job is $9,500 fixed fee", @response.body
+    assert_no_match(/Pilot starts at \$18,000/, @response.body)
   end
 
   test "AI integration groups twelve builds and labels its recorded explorer" do
