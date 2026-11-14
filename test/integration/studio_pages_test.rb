@@ -16,6 +16,7 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
       "/" => "Put AI agents to work on one recurring job, with limits you set and a person approving what goes out. Pilots are $9,500 fixed fee with Spencer Norman.",
       "/agent-readiness-review" => "A one-week Agent Readiness Review for $3,500. Find out which job an AI agent should take first, what it would be allowed to do, and what it costs.",
       "/where-agents-run" => "Your own server or the vendor's hosted service: what is stored where, what is sent to the AI model, and what it takes to keep running.",
+      "/engineering-teams" => "Agents for broken builds, alert triage and pull request review, with a clear answer on what the agent can reach and what leaves your network.",
       "/ai-integration" => "Examples of jobs an AI agent can take on, with a person approving the exceptions. See a sample, possible projects, and how we agree what to measure.",
       "/how-we-work" => "A pilot on one job is $9,500 fixed fee. Not sure where to start? The Agent Readiness Review is $3,500. See what each includes and what follows.",
       "/contact" => "Tell Spencer which job you want off someone's desk. He replies by email within two business days to discuss a 25-minute call."
@@ -196,6 +197,33 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
     assert_select "#down", text: /Nothing the business depends on stops/
     assert_select "#running", text: /updates, backups and monitoring/
     assert_select "#running a[href='/how-we-work#support']"
+  end
+
+  test "engineering page gives the hosting levels with checked vendor facts" do
+    get "/engineering-teams"
+    assert_response :success
+    assert_select "h1", "AI agents for engineering teams"
+    [ "broken builds", "alert triage", "pull request review" ].each { |job| assert_match(/#{job}/i, @response.body) }
+    assert_select "table tbody tr", 3
+    assert_select "table caption"
+    assert_select "table thead th", text: "Level"
+    assert_select "table thead th", text: "What you host"
+    assert_select "table thead th", text: "What reaches the vendor"
+    assert_select "table thead th", text: "Access"
+    assert_select ".ns-table-scroll table"
+    [ "cma-server", "PostgreSQL 16", "Amazon Bedrock", "Google Cloud", "Microsoft Foundry", "Anthropic account team" ].each { |fact| assert_match fact, @response.body }
+    assert_match "Checked against vendor documentation on 14 November 2026.", @response.body
+    assert_select "footer", text: /Norman Simplified is independent and is not affiliated with Anthropic\./
+    assert_select "#security-owner", text: /to the inference provider/
+    assert_select "#levels", text: /Session history is stored with you/
+    assert_select "#levels", text: /to the inference provider/
+    assert_select "#levels", text: /any agent stack/
+    assert_select "#take-on", text: /install each release/i
+    assert_no_match(/private beta|November 12|12 November/i, @response.body)
+    assert_select "a[href='/contact?interest=pilot']", minimum: 1
+    get "/"
+    assert_select "footer a[href='/engineering-teams']"
+    assert_select "footer", text: /not affiliated with Anthropic/, count: 0
   end
 
   test "only the contact page loads Turnstile" do

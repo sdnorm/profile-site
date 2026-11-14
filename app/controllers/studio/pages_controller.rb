@@ -5,5 +5,6 @@ module Studio
     def how_we_work; end
     def agent_readiness_review; end
     def where_agents_run; end
+    def engineering_teams; end
   end
 end

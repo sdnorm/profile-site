@@ -6,6 +6,7 @@ xml.urlset xmlns: "http://www.sitemaps.org/schemas/sitemap/0.9" do
     studio_root_url(**origin),
     studio_agent_readiness_review_url(**origin),
     studio_where_agents_run_url(**origin),
+    studio_engineering_teams_url(**origin),
     studio_how_we_work_url(**origin),
     studio_ai_integration_url(**origin),
     studio_contact_url(**origin)
