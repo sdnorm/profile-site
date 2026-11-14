@@ -3,6 +3,8 @@ require_relative "../config/environment"
 require "rails/test_help"
 require_relative "support/failing_delivery"
 
+STUDIO_PATHS = %w[/ /agent-readiness-review /how-we-work /ai-integration /contact].freeze
+
 module ActiveSupport
   class TestCase
     # Run tests in parallel with specified workers

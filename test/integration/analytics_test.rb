@@ -54,7 +54,7 @@ class AnalyticsTest < ActionDispatch::IntegrationTest
     end
 
     host! "www.normansimplified.com"
-    [ "/", "/ai-integration", "/how-we-work", "/contact" ].each do |path|
+    STUDIO_PATHS.each do |path|
       get path
       assert_select "a[href^='/contact']", minimum: 1 do |links|
         links.each do |link|

@@ -4,7 +4,7 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
   setup { host! "www.normansimplified.com" }
 
   test "studio pages render in the studio layout" do
-    [ "/", "/ai-integration", "/how-we-work" ].each do |path|
+    STUDIO_PATHS.each do |path|
       get path
       assert_response :success, "expected #{path} to render"
       assert_select "body[data-site=studio]"
@@ -51,12 +51,14 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
     assert_select "a[href='/contact?interest=audit']", text: "Request a call", minimum: 1
   end
 
-  test "nav links to the review and every page" do
+  test "nav and footer link to the offer and every page" do
     get "/"
-    assert_select "nav a[href='/#review']", text: "Workflow Review"
-    assert_select "nav a[href='/ai-integration']"
-    assert_select "nav a[href='/how-we-work']"
-    assert_select "nav a[href^='/contact']", text: /Request a call/
+    assert_select "nav[aria-label=Primary] a[href='/#review']", text: "How a pilot works"
+    assert_select "nav[aria-label=Primary] a[href='/ai-integration']", text: "Examples"
+    assert_select "nav[aria-label=Primary] a[href='/how-we-work']"
+    assert_select "nav[aria-label=Primary] a[href^='/contact']", text: /Request a call/
+    assert_select "nav[aria-label=Footer] a[href='/agent-readiness-review']"
+    assert_select ".ns-footer__tagline", "Put AI agents to work. Keep control of what they can do."
   end
 
   test "home leads with the pilot, states the limits, and offers the review second" do
@@ -83,7 +85,7 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
 
   test "retired names, exclusions and unbacked claims are gone from every page" do
     retired = /Signal Audit|Flow Care|Desk Hours|Managed AI Ops|Fractional|Legacy Rescue|Flexfit|PHI\b|BAA\b|healthcare|Technology, simplified|Workflow Review|\$4,500|\$5,500|\$15,000|never leaves|revolutionary|transformative|private beta/i
-    [ "/", "/ai-integration", "/how-we-work", "/contact" ].each do |path|
+    STUDIO_PATHS.each do |path|
       get path
       text = Nokogiri::HTML(@response.body).at("body").text
       assert_no_match retired, text, "retired wording on #{path}"
@@ -152,7 +154,7 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
   end
 
   test "only the contact page loads Turnstile" do
-    [ "/", "/ai-integration", "/how-we-work", "/contact" ].each do |path|
+    STUDIO_PATHS.each do |path|
       get path
       assert_select "head script[src*='challenges.cloudflare.com/turnstile']", count: (path == "/contact" ? 1 : 0)
     end
