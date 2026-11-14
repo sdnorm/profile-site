@@ -304,6 +304,12 @@ body[data-site="studio"] .ns-footer__bottom p {
   margin: 0;
 }
 
+body[data-site="studio"] .ns-footer__note {
+  margin-top: 12px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
 @media (max-width: 63.999rem) {
   body[data-site="studio"] .ns-nav {
     flex-wrap: wrap;
@@ -905,27 +911,6 @@ body[data-site="studio"] .ns-how__hero .ns-lead {
   margin: 28px 0 0;
 }
 
-body[data-site="studio"] .ns-how__overview {
-  border-block: 1px solid var(--border-subtle);
-  background: var(--surface-raised);
-}
-
-body[data-site="studio"] .ns-how__lanes {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 40px;
-  margin: 0;
-}
-
-body[data-site="studio"] .ns-how__lanes dt {
-  margin-bottom: 12px;
-  font-size: 24px;
-}
-
-body[data-site="studio"] .ns-how__lanes dd {
-  margin: 0;
-}
-
 body[data-site="studio"] .ns-how__lane {
   border-top: 1px solid var(--border-subtle);
 }
@@ -962,7 +947,6 @@ body[data-site="studio"] .ns-how__audit {
 }
 
 body[data-site="studio"] .ns-how__audit strong,
-body[data-site="studio"] .ns-how__lanes strong,
 body[data-site="studio"] .ns-how__offer strong {
   color: var(--text-strong);
   font-weight: var(--fw-semibold);
@@ -976,13 +960,6 @@ body[data-site="studio"] .ns-how__list {
 
 body[data-site="studio"] .ns-how__list li + li {
   margin-top: 16px;
-}
-
-@media (max-width: 47.999rem) {
-  body[data-site="studio"] .ns-how__lanes {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 24px;
-  }
 }
 
 /* Build catalog: grouped editorial rows with a visible price and scope. */
@@ -1003,13 +980,22 @@ body[data-site="studio"] .ns-ai__explanation .ns-section-heading {
   margin-bottom: 0;
 }
 
-body[data-site="studio"] .ns-ai__explanation .ns-prose ul {
+body[data-site="studio"] .ns-prose ul,
+body[data-site="studio"] .ns-prose ol {
   margin: 24px 0 0;
   padding-left: 24px;
+}
+
+body[data-site="studio"] .ns-prose ul {
   list-style: disc;
 }
 
-body[data-site="studio"] .ns-ai__explanation .ns-prose li + li {
+body[data-site="studio"] .ns-prose ol {
+  list-style: decimal;
+}
+
+body[data-site="studio"] .ns-prose ul li + li,
+body[data-site="studio"] .ns-prose ol li + li {
   margin-top: 12px;
 }
 
