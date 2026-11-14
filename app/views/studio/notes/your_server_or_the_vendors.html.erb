@@ -1,0 +1,84 @@
+<% content_for :title, "#{@note.title} | Norman Simplified" %>
+<% content_for :description, @note.description %>
+
+<main class="ns-how">
+  <section class="ns-section ns-how__hero" aria-labelledby="note-title">
+    <div class="ns-container">
+      <p class="sn-eyebrow">Note</p>
+      <h1 id="note-title" class="t-display ns-how__title"><%= @note.title %></h1>
+      <p class="ns-lead">There are two places an AI agent can run. Most businesses should start with the simpler one. Here is how to tell which suits you.</p>
+      <p>This is not offline. When the agent uses the AI model, the text it is working on is sent to the model provider.</p>
+    </div>
+  </section>
+
+  <section id="two-places" class="ns-section" aria-labelledby="two-places-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading">
+        <h2 id="two-places-title" class="t-heading">The two places</h2>
+      </header>
+      <div class="ns-prose">
+        <p>The vendor's hosted service is a service the AI company runs for you. The agent lives in a business account in your name, and the vendor looks after the machinery underneath. The second place is a rented computer in a hosting account in your name. The agent, its files and its credentials live there instead.</p>
+        <p>The page <%= link_to "Where your agent runs", studio_where_agents_run_path, class: "ns-text-link" %> sets the two side by side.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="hosted" class="ns-section" aria-labelledby="hosted-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading">
+        <h2 id="hosted-title" class="t-heading">When the hosted service is enough</h2>
+      </header>
+      <div class="ns-prose">
+        <p>For most first jobs, the hosted service is the right answer. There is nothing to patch and nothing to back up. If the work is drafting replies, sorting requests or preparing a weekly summary, and nobody has asked you where the data is kept, start here.</p>
+        <p>It is also the cheaper way to find out whether the job is worth automating at all. You pay for the pilot, the vendor bills the AI model usage to your account, and you can see what the agent costs to run before you commit to anything larger.</p>
+        <p>The hosted service is also where the agent is easiest to inspect. Every run is recorded, you can read the record, and a person approves anything that goes out to a customer. Those protections do not depend on which place the agent runs.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="reasons" class="ns-section" aria-labelledby="reasons-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading">
+        <h2 id="reasons-title" class="t-heading">Three reasons to want a server you own</h2>
+      </header>
+      <div class="ns-prose">
+        <ul>
+          <li>A contract or a customer asks you to say where the data is stored.</li>
+          <li>The agent holds credentials you want kept on a machine you control.</li>
+          <li>You want it to keep running whoever you work with, and the hosting account is yours to hand to anyone.</li>
+        </ul>
+        <p>None of these changes what is sent to the AI model.</p>
+        <p>This is not offline. When the agent uses the AI model, the text it is working on is sent to the model provider.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="upkeep" class="ns-section" aria-labelledby="upkeep-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading">
+        <h2 id="upkeep-title" class="t-heading">What a server costs you in upkeep</h2>
+      </header>
+      <div class="ns-prose">
+        <p>A server you own does not run itself. It needs updates, backups and someone watching it. It is also only as closed as its setup: who can reach it, who can sign in and how, and whether the backups are encrypted.</p>
+        <p>Someone has to do that work every month. It can be your own IT person, or it can be me under ongoing support. Either way, plan for it before you choose, and ask what happens if that person is away on the day something breaks.</p>
+        <p>This is not offline. When the agent uses the AI model, the text it is working on is sent to the model provider.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="decide" class="ns-section" aria-labelledby="decide-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading">
+        <h2 id="decide-title" class="t-heading">How to decide</h2>
+      </header>
+      <div class="ns-prose">
+        <p>Ask whether anyone requires the data to sit on a machine in your name. If yes, plan for a dedicated server. If not, start hosted.</p>
+        <p>You are not locked in. A pilot can start on the hosted service and move to a server later, once the job has proved itself and you know what the requirements really are.</p>
+        <p>If you are unsure, say so when you get in touch. Describe the job and who has asked about your data, and I will tell you plainly which place I would choose and why.</p>
+        <div class="ns-actions">
+          <%= link_to "Request a call", studio_contact_path(interest: "pilot"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "note_close", analytics_interest_param: "pilot" }, class: "sn-btn sn-btn--primary sn-btn--lg" %>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

@@ -3,7 +3,7 @@ require_relative "../config/environment"
 require "rails/test_help"
 require_relative "support/failing_delivery"
 
-STUDIO_PATHS = %w[/ /agent-readiness-review /where-agents-run /engineering-teams /how-we-work /ai-integration /contact].freeze
+STUDIO_PATHS = %w[/ /agent-readiness-review /where-agents-run /engineering-teams /how-we-work /ai-integration /notes /notes/what-leaves-your-business /notes/your-server-or-the-vendors /contact].freeze
 
 module ActiveSupport
   class TestCase

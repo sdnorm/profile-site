@@ -1,0 +1,26 @@
+<% content_for :title, "Notes | Norman Simplified" %>
+<% content_for :description, "Plain explanations of how AI agents handle your business data, from Spencer Norman." %>
+
+<main class="ns-how">
+  <section class="ns-section ns-how__hero" aria-labelledby="notes-title">
+    <div class="ns-container">
+      <p class="sn-eyebrow">Plain answers</p>
+      <h1 id="notes-title" class="t-display ns-how__title">Notes</h1>
+      <p class="ns-lead">Short explanations for business owners of where your data goes when you use AI.</p>
+    </div>
+  </section>
+
+  <section class="ns-section" aria-label="All notes">
+    <div class="ns-container ns-editorial-grid">
+      <div class="ns-prose">
+        <% @notes.each do |note| %>
+          <h2 class="t-heading"><%= link_to note.title, studio_note_path(note.slug), class: "ns-text-link" %></h2>
+          <p><%= note.description %></p>
+        <% end %>
+        <div class="ns-actions">
+          <%= link_to "Request a call", studio_contact_path(interest: "pilot"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "notes_index", analytics_interest_param: "pilot" }, class: "sn-btn sn-btn--primary sn-btn--lg" %>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

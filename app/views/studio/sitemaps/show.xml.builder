@@ -9,6 +9,8 @@ xml.urlset xmlns: "http://www.sitemaps.org/schemas/sitemap/0.9" do
     studio_engineering_teams_url(**origin),
     studio_how_we_work_url(**origin),
     studio_ai_integration_url(**origin),
+    studio_notes_url(**origin),
+    *Studio::Note.all.map { |note| studio_note_url(note.slug, **origin) },
     studio_contact_url(**origin)
   ].each { |loc| xml.url { xml.loc loc } }
 end
