@@ -1426,6 +1426,12 @@ body[data-site="studio"] .ns-run-diagram__model {
   text-align: center;
 }
 
+body[data-site="studio"] .ns-run-diagram__caption {
+  margin: 16px 0 0;
+  max-width: 62ch;
+  color: var(--text-body);
+}
+
 @media (max-width: 47.999rem) {
   body[data-site="studio"] .ns-run-diagram {
     grid-template-columns: minmax(0, 1fr);

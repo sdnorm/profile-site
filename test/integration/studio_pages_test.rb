@@ -177,7 +177,7 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "title", "Where your AI agent runs | Norman Simplified"
     sentence = "This is not offline. When the agent uses the AI model, the text it is working on is sent to the model provider."
-    claimed = css_select("main section").select { |section| section.text.match?(/your own server|a server you own|you own|you control/i) }
+    claimed = css_select("main section").select { |section| section.text.match?(/your own server|a server you own|you own|you control|your server/i) }
     assert claimed.any?
     claimed.each { |section| assert_includes section.text, sentence, section["id"].to_s }
 
