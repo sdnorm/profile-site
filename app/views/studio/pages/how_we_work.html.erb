@@ -18,7 +18,7 @@
       <header class="ns-section-heading">
         <h2 id="pilot-title" class="t-heading">Pilot</h2>
         <p class="ns-lead">One agent on one job, with a person approving what goes out.</p>
-        <div class="ns-actions"><%= link_to "Request a call", studio_contact_path(interest: "pilot"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "hero", analytics_interest_param: "pilot" }, class: "sn-btn sn-btn--primary sn-btn--md" %></div>
+        <div class="ns-actions"><%= link_to "Request a call", studio_contact_path(interest: "pilot"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "pilot", analytics_interest_param: "pilot" }, class: "sn-btn sn-btn--primary sn-btn--md" %></div>
       </header>
       <div class="ns-how__offers">
         <article class="ns-how__offer ns-prose">
@@ -120,7 +120,6 @@
     </div>
   </section>
 
-
   <section id="adopt" class="ns-section ns-how__lane" aria-labelledby="adopt-title">
     <div class="ns-container ns-editorial-grid">
       <header class="ns-section-heading">
@@ -170,10 +169,7 @@
           <p><strong>What it is not:</strong> A new application with its own database and logins. That is custom software.</p>
         </article>
         <article class="ns-how__offer ns-prose">
-          <h3 class="t-heading">Automation support</h3>
-          <p class="ns-how__price">$1,500 a month</p>
-          <p>About two hours of maintenance and small edits each month.</p>
-          <p>If the process needs a database or more complex recovery from failures, I will recommend a separately scoped custom software project.</p>
+          <p>Support for an automation uses the same monthly plans. See <%= link_to "Ongoing support", "#support", class: "ns-inline-link" %>. If the process needs a database or more complex recovery from failures, I will recommend a separately scoped custom software project.</p>
         </article>
       </div>
     </div>
@@ -205,7 +201,7 @@
         </article>
         <article class="ns-how__offer ns-prose">
           <h3 class="t-heading">After it is live</h3>
-          <p>Ongoing operations support starts at $6,500 a month. Your written proposal sets the fixed fee before work begins. You can also run the software with the handoff notes.</p>
+          <p>Running the software for you starts at $6,500 a month. Your written proposal sets the fixed fee before work begins. You can also run the software with the handoff notes.</p>
         </article>
       </div>
     </div>
@@ -215,7 +211,7 @@
     <div class="ns-container ns-editorial-grid">
       <header class="ns-section-heading"><h2 id="weeks-title" class="t-heading">What the weeks look like</h2></header>
       <ol class="ns-process__steps" role="list">
-        <li><span class="t-label ns-process__number" aria-hidden="true">01</span><p>You send the workflow through the form. I reply by email within two business days.</p></li>
+        <li><span class="t-label ns-process__number" aria-hidden="true">01</span><p>You send the job through the form. I reply by email within two business days.</p></li>
         <li><span class="t-label ns-process__number" aria-hidden="true">02</span><p>A 25-minute call to discuss the work and whether I can help.</p></li>
         <li><span class="t-label ns-process__number" aria-hidden="true">03</span><p>A written scope: price, duration, what is included, what is not, and how we will judge the result.</p></li>
         <li><span class="t-label ns-process__number" aria-hidden="true">04</span><p>Half to start. Work begins when access is available.</p></li>

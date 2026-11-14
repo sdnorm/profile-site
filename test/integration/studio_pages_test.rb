@@ -74,7 +74,7 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
     assert_select "#review", text: /\$3,500 fixed fee\. One week\./
     assert_select "#review a[href='/agent-readiness-review']"
     assert_select "#control", text: /This is not offline\. When the agent uses the AI model, the text it is working on is sent to the model provider\./
-    assert_select "#control li, #control dt", minimum: 7
+    assert_select "#control ul:first-of-type > li", 7
     assert_select "#services [data-lane]", 3
     assert_select "#services", text: /This is not offline\. When the agent uses the AI model, the text it is working on is sent to the model provider\./
     %w[agents setup support].each { |lane| assert_select "#services [data-lane=#{lane}] a[href='/how-we-work##{lane}']" }
@@ -114,6 +114,19 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
     assert_select "#support", text: /\$750 a month/
     assert_select "#support", text: /\$1,500 a month/
     assert_select "#support", text: /three-month minimum/i
+    assert_select "#support", text: /up to 2 hours/
+    assert_select "#support", text: /up to 6 hours/
+    assert_select "#support", text: /Business hours, not on-call/
+    assert_select "#automate", text: /\$1,500|a month/, count: 0
+    assert_select "#automate a[href='#support']"
+    assert_select "#build", text: /Running the software for you starts at \$6,500 a month/
+    assert_select "#pilot a[data-analytics-location-param='pilot']"
+    assert_select "#pilot a[data-analytics-location-param='hero']", count: 0
+    assert_no_match(/Ongoing operations support/, Nokogiri::HTML(@response.body).at("main").text)
+    get "/ai-integration"
+    assert_no_match(/Ongoing operations support/, Nokogiri::HTML(@response.body).at("main").text)
+    assert_match "running the software for you starts at $6,500 a month", @response.body
+    get "/how-we-work"
     { "pilot" => "pilot", "review-offer" => "audit", "agents" => "agents", "setup" => "setup", "support" => "support" }.each do |id, interest|
       assert_select "##{id} a[href='/contact?interest=#{interest}']"
     end
@@ -153,6 +166,10 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
     assert_select "details[open]", count: 0
     assert_no_match(/\$(12|28|38|42),000/, @response.body)
     assert_select "[data-catalog-item] a[href^='/contact?']", count: 12
+    assert_select "#catalog-title", "Work an agent could take on"
+    assert_select "#catalog-title + .ns-lead", text: /Each of these can start as a \$9,500 pilot on one job\. Taken to a full build, projects like these start at \$18,000\./
+    assert_select "[data-catalog-item] a[href*='interest=pilot']", count: 12
+    assert_select "[data-catalog-item] a[data-analytics-interest-param='pilot']", count: 12
   end
 
   test "explainer compares the two places an agent can run and says what is sent out" do
@@ -170,6 +187,18 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
     assert_select "a[href='/contact?interest=pilot']", minimum: 1
     get "/"
     assert_select "#control a[href='/where-agents-run']"
+  end
+
+  test "every page that says your server also says what is sent to the model" do
+    sentence = "This is not offline. When the agent uses the AI model, the text it is working on is sent to the model provider."
+    (STUDIO_PATHS - [ "/engineering-teams" ]).each do |path|
+      get path
+      main = Nokogiri::HTML(@response.body).at("main")
+      main.css("option").remove
+      text = main.text.squish
+      next unless text.match?(/your own server|a server you own|your server/i)
+      assert_includes text, sentence, path
+    end
   end
 
   test "explainer sections that mention a server you own repeat the model sentence" do
@@ -203,6 +232,7 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
     get "/engineering-teams"
     assert_response :success
     assert_select "h1", "AI agents for engineering teams"
+    assert_select "#check a[href='/contact?interest=pilot']", text: "Request a call"
     [ "broken builds", "alert triage", "pull request review" ].each { |job| assert_match(/#{job}/i, @response.body) }
     assert_select "table tbody tr", 3
     rows = css_select("table tbody tr")

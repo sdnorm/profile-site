@@ -108,8 +108,8 @@
   <div class="ns-container">
     <header class="ns-section-heading">
       <p class="sn-eyebrow">Examples</p>
-      <h2 class="t-heading" id="catalog-title">Work we could do after a review</h2>
-      <p class="ns-lead">Projects like these start at $18,000. Your proposal gives one fixed price, what it includes, and any running costs.</p>
+      <h2 class="t-heading" id="catalog-title">Work an agent could take on</h2>
+      <p class="ns-lead">Each of these can start as a $9,500 pilot on one job. Taken to a full build, projects like these start at $18,000. Your proposal gives one fixed price, what it includes, and any running costs.</p>
     </header>
     <% groups.each_with_index do |group, index| %>
       <details class="ns-catalog__group" data-catalog-target="groups">
@@ -129,7 +129,7 @@
                   <div><dt>What we could change</dt><dd><%= item[:what] %></dd></div>
                   <div><dt>How we judge the result</dt><dd><%= item[:outcome] %></dd></div>
                 </dl>
-                <%= link_to "Request a call about this", studio_contact_path(interest: "build", example: item[:name]), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "catalog", analytics_interest_param: "build" }, class: "ns-text-link" %>
+                <%= link_to "Request a call about this", studio_contact_path(interest: "pilot", example: item[:name]), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "catalog", analytics_interest_param: "pilot" }, class: "ns-text-link" %>
               </article>
             <% end %>
           </div>
