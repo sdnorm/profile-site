@@ -41,6 +41,13 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
     assert_select "h2", text: "Probably not a fit if"
     assert_match(/no passwords/i, @response.body)
     assert_match "This is not offline. When the agent uses the AI model, the text it is working on is sent to the model provider.", @response.body
+    assert_select "#report-outline", text: /This is not offline\. When the agent uses the AI model, the text it is working on is sent to the model provider\./
+    assert_select "section[aria-labelledby=notfit-title]" do
+      assert_select "li", text: /no outside connection at all/
+      assert_select "li", text: /chatbot for a public website/
+      assert_select "li", text: /procurement process/
+      assert_select "li", text: /few times a year/
+    end
     assert_select "a[href='/contact?interest=audit']", text: "Request a call", minimum: 1
   end
 
