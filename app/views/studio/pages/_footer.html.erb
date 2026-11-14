@@ -8,6 +8,7 @@
       <nav aria-label="Footer">
         <ul class="ns-footer__links">
           <li><%= link_to "Agent Readiness Review", studio_agent_readiness_review_path %></li>
+          <li><%= link_to "Where your agent runs", studio_where_agents_run_path %></li>
           <li><%= link_to "Examples", studio_ai_integration_path %></li>
           <li><%= link_to "How we work", studio_how_we_work_path %></li>
           <li><%= link_to "Request a call", studio_contact_path, data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "footer" } %></li>

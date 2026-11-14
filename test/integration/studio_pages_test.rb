@@ -15,6 +15,7 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
     descriptions = {
       "/" => "Put AI agents to work on one recurring job, with limits you set and a person approving what goes out. Pilots are $9,500 fixed fee with Spencer Norman.",
       "/agent-readiness-review" => "A one-week Agent Readiness Review for $3,500. Find out which job an AI agent should take first, what it would be allowed to do, and what it costs.",
+      "/where-agents-run" => "Your own server or the vendor's hosted service: what is stored where, what is sent to the AI model, and what it takes to keep running.",
       "/ai-integration" => "Examples of jobs an AI agent can take on, with a person approving the exceptions. See a sample, possible projects, and how we agree what to measure.",
       "/how-we-work" => "A pilot on one job is $9,500 fixed fee. Not sure where to start? The Agent Readiness Review is $3,500. See what each includes and what follows.",
       "/contact" => "Tell Spencer which job you want off someone's desk. He replies by email within two business days to discuss a 25-minute call."
@@ -151,6 +152,50 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
     assert_select "details[open]", count: 0
     assert_no_match(/\$(12|28|38|42),000/, @response.body)
     assert_select "[data-catalog-item] a[href^='/contact?']", count: 12
+  end
+
+  test "explainer compares the two places an agent can run and says what is sent out" do
+    get "/where-agents-run"
+    assert_response :success
+    assert_select "h1", "Where your agent runs"
+    assert_select "h2", text: "On the vendor's hosted service"
+    assert_select "h2", text: "On a server you own"
+    assert_select "h2", text: "What is sent to the AI model"
+    assert_select "h2", text: "What it takes to keep a server running"
+    assert_select "[data-diagram=where-agents-run]", 1
+    assert_select "img", 0
+    assert_match "This is not offline. When the agent uses the AI model, the text it is working on is sent to the model provider.", @response.body
+    assert_no_match(/sandbox|inference|control plane/i, Nokogiri::HTML(@response.body).at("main").text)
+    assert_select "a[href='/contact?interest=pilot']", minimum: 1
+    get "/"
+    assert_select "#control a[href='/where-agents-run']"
+  end
+
+  test "explainer sections that mention a server you own repeat the model sentence" do
+    get "/where-agents-run"
+    assert_response :success
+    assert_select "title", "Where your AI agent runs | Norman Simplified"
+    sentence = "This is not offline. When the agent uses the AI model, the text it is working on is sent to the model provider."
+    claimed = css_select("main section").select { |section| section.text.match?(/your own server|a server you own|you own|you control/i) }
+    assert claimed.any?
+    claimed.each { |section| assert_includes section.text, sentence, section["id"].to_s }
+
+    assert_select "#vendor", text: /the agent, its files, its credentials and the record of each run/
+    assert_select "#vendor", text: /your business account/
+    assert_select "#vendor", text: /I hold nothing you cannot revoke/
+    assert_select "#own-server", text: /the agent, its files, its credentials and the record of each run/
+    assert_select "#own-server", text: /your own hosting account/
+    assert_select "#own-server", text: /sometimes called a VPS/
+    assert_select "#sent", text: /true on the vendor's hosted service and on a server you own/
+    assert_select "#sign-in li", text: /firewall/i
+    assert_select "#sign-in li", text: /who can sign in/i
+    assert_select "#sign-in li", text: /encrypted backups/i
+    assert_select "#sign-in li", text: /credentials limited to what the job needs/i
+    assert_select "#down", text: /waits in a queue/
+    assert_select "#down", text: /the old way/
+    assert_select "#down", text: /Nothing the business depends on stops/
+    assert_select "#running", text: /updates, backups and monitoring/
+    assert_select "#running a[href='/how-we-work#support']"
   end
 
   test "only the contact page loads Turnstile" do

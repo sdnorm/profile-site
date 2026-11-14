@@ -1,0 +1,127 @@
+<% content_for :title, "Where your AI agent runs | Norman Simplified" %>
+<% content_for :description, "Your own server or the vendor's hosted service: what is stored where, what is sent to the AI model, and what it takes to keep running." %>
+
+<main class="ns-how">
+  <section id="intro" class="ns-section ns-how__hero" aria-labelledby="where-title">
+    <div class="ns-container">
+      <p class="sn-eyebrow">Two places</p>
+      <h1 id="where-title" class="t-display ns-how__title">Where your agent runs</h1>
+      <p class="ns-lead">You choose one of two places. The vendor's hosted service, under your business account. Or a server you own, rented in your own hosting account.</p>
+      <p>This is not offline. When the agent uses the AI model, the text it is working on is sent to the model provider.</p>
+      <div class="ns-actions">
+        <%= link_to "Request a call", studio_contact_path(interest: "pilot"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "hero", analytics_interest_param: "pilot" }, class: "sn-btn sn-btn--primary sn-btn--lg" %>
+      </div>
+    </div>
+  </section>
+
+  <section class="ns-section" aria-label="Diagram of where the agent runs">
+    <div class="ns-container">
+      <div class="ns-run-diagram" data-diagram="where-agents-run" role="img" aria-label="The vendor's hosted service and your server each send the text the agent is working on to the AI model provider.">
+        <div class="ns-run-diagram__place">
+          <p class="ns-run-diagram__title">Vendor's hosted service</p>
+          <ul class="ns-run-diagram__stack">
+            <li>The agent</li>
+            <li>Its files</li>
+            <li>Its credentials</li>
+            <li>The record of each run</li>
+          </ul>
+          <p class="ns-run-diagram__arrow">text the agent is working on</p>
+        </div>
+        <div class="ns-run-diagram__place">
+          <p class="ns-run-diagram__title">Your server</p>
+          <ul class="ns-run-diagram__stack">
+            <li>The agent</li>
+            <li>Its files</li>
+            <li>Its credentials</li>
+            <li>The record of each run</li>
+          </ul>
+          <p class="ns-run-diagram__arrow">text the agent is working on</p>
+        </div>
+        <p class="ns-run-diagram__model">AI model provider</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="vendor" class="ns-section" aria-labelledby="vendor-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading">
+        <h2 id="vendor-title" class="t-heading">On the vendor's hosted service</h2>
+      </header>
+      <div class="ns-prose">
+        <p>This place stores the agent, its files, its credentials and the record of each run.</p>
+        <p>The account is yours. The service is the vendor's hosted service under your business account.</p>
+        <p>The vendor runs the hosted service. I set up the agent in that account. I hold nothing you cannot revoke.</p>
+        <p>If we stop working together, you keep everything and it keeps running.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="own-server" class="ns-section" aria-labelledby="own-server-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading">
+        <h2 id="own-server-title" class="t-heading">On a server you own</h2>
+      </header>
+      <div class="ns-prose">
+        <p>This place stores the agent, its files, its credentials and the record of each run.</p>
+        <p>The account is yours. It is a server you rent in your own hosting account, sometimes called a VPS.</p>
+        <p>I set up the server. You hold the hosting account, and you decide who keeps it running.</p>
+        <p>This is not offline. When the agent uses the AI model, the text it is working on is sent to the model provider.</p>
+        <p>If we stop working together, you keep everything and it keeps running.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="sent" class="ns-section" aria-labelledby="sent-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading">
+        <h2 id="sent-title" class="t-heading">What is sent to the AI model</h2>
+      </header>
+      <div class="ns-prose">
+        <p>This is not offline. When the agent uses the AI model, the text it is working on is sent to the model provider.</p>
+        <p>This is true on the vendor's hosted service and on a server you own.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="sign-in" class="ns-section" aria-labelledby="sign-in-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading">
+        <h2 id="sign-in-title" class="t-heading">Who can sign in</h2>
+      </header>
+      <div class="ns-prose">
+        <p>A server you own is only as closed as its setup.</p>
+        <ul>
+          <li>The firewall, which limits who can reach the server.</li>
+          <li>Who can sign in, and how they sign in.</li>
+          <li>Encrypted backups.</li>
+          <li>Credentials limited to what the job needs.</li>
+        </ul>
+        <p>This is not offline. When the agent uses the AI model, the text it is working on is sent to the model provider.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="down" class="ns-section" aria-labelledby="down-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading">
+        <h2 id="down-title" class="t-heading">When the server is down</h2>
+      </header>
+      <div class="ns-prose">
+        <p>If the agent or its server is down, the work waits in a queue and people can do it the old way. Nothing the business depends on stops.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="running" class="ns-section" aria-labelledby="running-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading">
+        <h2 id="running-title" class="t-heading">What it takes to keep a server running</h2>
+      </header>
+      <div class="ns-prose">
+        <p>A server you own does not run itself. It needs updates, backups and monitoring.</p>
+        <p>That is what <%= link_to "Ongoing support", studio_how_we_work_path(anchor: "support"), class: "ns-text-link" %> is for.</p>
+        <p>This is not offline. When the agent uses the AI model, the text it is working on is sent to the model provider.</p>
+      </div>
+    </div>
+  </section>
+</main>
