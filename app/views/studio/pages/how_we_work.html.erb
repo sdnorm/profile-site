@@ -1,49 +1,125 @@
 <% content_for :title, "How it works and what it costs | Norman Simplified" %>
-<% content_for :description, "Start with a two-week Workflow Review for $4,500. See what is included, implementation prices, and what happens next." %>
+<% content_for :description, "A pilot on one job is $9,500 fixed fee. Not sure where to start? The Agent Readiness Review is $3,500. See what each includes and what follows." %>
 
 <main class="ns-how">
   <section class="ns-section ns-how__hero" aria-labelledby="how-title">
     <div class="ns-container">
       <p class="sn-eyebrow">Scope before work</p>
-      <h1 id="how-title" class="t-display ns-how__title">Start with a Workflow Review</h1>
-      <p class="ns-lead">Workflow Review. $4,500 fixed fee. Two weeks.</p>
-      <ul class="ns-how__list ns-review-scope">
-        <li>Four conversations with the people who do the work</li>
-        <li>Three recurring processes compared: where the time goes and what it costs</li>
-        <li>One recommended first change, in writing</li>
-        <li>A budget range for making that change, with the assumptions shown</li>
-        <li>A plain go or no-go recommendation</li>
-        <li>A 45-minute walkthrough of the report</li>
-      </ul>
-      <p class="ns-lead">The usual first step is a Workflow Review. The report is yours whether or not you continue. $2,000 of the fee is credited toward any implementation project with Norman Simplified that starts within 60 days.</p>
+      <h1 id="how-title" class="t-display ns-how__title">Start with one job</h1>
+      <p class="ns-lead">A pilot on one job. $9,500 fixed fee. Three to four weeks.</p>
       <div class="ns-actions">
-        <%= link_to "Request a call", studio_contact_path(interest: "audit"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "hero", analytics_interest_param: "audit" }, class: "sn-btn sn-btn--primary sn-btn--lg" %>
+        <%= link_to "Request a call", studio_contact_path(interest: "pilot"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "hero", analytics_interest_param: "pilot" }, class: "sn-btn sn-btn--primary sn-btn--lg" %>
       </div>
     </div>
   </section>
 
-  <section class="ns-section ns-how__overview" aria-labelledby="three-lanes">
-    <div class="ns-container">
+  <section id="pilot" class="ns-section ns-how__lane" aria-labelledby="pilot-title">
+    <div class="ns-container ns-editorial-grid">
       <header class="ns-section-heading">
-        <h2 id="three-lanes" class="t-heading">What happens after the review</h2>
-        <p class="ns-lead">You can stop, do the work in-house, or ask for a separately scoped, fixed-price implementation. If you already know what you need, we can discuss it on the call.</p>
+        <h2 id="pilot-title" class="t-heading">Pilot</h2>
+        <p class="ns-lead">One agent on one job, with a person approving what goes out.</p>
+        <div class="ns-actions"><%= link_to "Request a call", studio_contact_path(interest: "pilot"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "hero", analytics_interest_param: "pilot" }, class: "sn-btn sn-btn--primary sn-btn--md" %></div>
       </header>
-      <dl class="ns-how__lanes">
-        <div>
-          <dt><a class="ns-text-link" href="#adopt">Tools and training</a></dt>
-          <dd><strong>$3,500 fixed fee.</strong> A written tool recommendation. Staff rollout is a separate $8,500 fixed-fee project.</dd>
-        </div>
-        <div>
-          <dt><a class="ns-text-link" href="#automate">Workflow automation</a></dt>
-          <dd><strong>Starts at $7,500.</strong> One recurring process connected across your tools. Your written proposal sets the fixed fee before work begins.</dd>
-        </div>
-        <div>
-          <dt><a class="ns-text-link" href="#build">Custom software</a></dt>
-          <dd><strong>Starts at $18,000.</strong> Software for a process that has outgrown a spreadsheet or an old app. Your written proposal sets the fixed fee before work begins.</dd>
-        </div>
-      </dl>
+      <div class="ns-how__offers">
+        <article class="ns-how__offer ns-prose">
+          <h3 class="t-heading">One agent, one job</h3>
+          <p class="ns-how__price">$9,500 fixed fee. Three to four weeks.</p>
+          <p>We agree the limits, the approval step and the acceptance test in writing before work starts.</p>
+          <p>It runs on the vendor's hosted service under a business account in your name. The vendor bills AI model usage to your account, and the proposal gives an estimate.</p>
+        </article>
+      </div>
     </div>
   </section>
+
+  <section id="review-offer" class="ns-section ns-how__lane" aria-labelledby="review-offer-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading">
+        <h2 id="review-offer-title" class="t-heading">Agent Readiness Review</h2>
+        <p class="ns-lead">For when you do not yet know which job to start with.</p>
+        <div class="ns-actions"><%= link_to "Request a call", studio_contact_path(interest: "audit"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "lanes", analytics_interest_param: "audit" }, class: "sn-btn sn-btn--primary sn-btn--md" %></div>
+      </header>
+      <div class="ns-how__offers">
+        <article class="ns-how__offer ns-prose">
+          <h3 class="t-heading">One week, in writing</h3>
+          <p class="ns-how__price">$3,500 fixed fee. One week.</p>
+          <p>I compare your recurring jobs and tell you which one an agent should take first, and what it would be allowed to do.</p>
+          <p>The full $3,500 is credited toward a pilot that starts within 60 days.</p>
+          <p><%= link_to "See what the review includes", studio_agent_readiness_review_path, class: "ns-inline-link" %>.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="agents" class="ns-section ns-how__lane" aria-labelledby="agents-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading">
+        <h2 id="agents-title" class="t-heading">Full build</h2>
+        <p class="ns-lead">The job taken to production, or more jobs added.</p>
+        <div class="ns-actions"><%= link_to "Request a call", studio_contact_path(interest: "agents"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "lanes", analytics_interest_param: "agents" }, class: "sn-btn sn-btn--primary sn-btn--md" %></div>
+      </header>
+      <div class="ns-how__offers">
+        <article class="ns-how__offer ns-prose">
+          <h3 class="t-heading">Full build</h3>
+          <p class="ns-how__price">Starts at $18,000.</p>
+          <p>Your written proposal sets the fixed fee before work begins.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="setup" class="ns-section ns-how__lane" aria-labelledby="setup-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading">
+        <h2 id="setup-title" class="t-heading">Your own server</h2>
+        <p class="ns-lead">Optional. The agent runs on a server in your own hosting account.</p>
+        <div class="ns-actions"><%= link_to "Request a call", studio_contact_path(interest: "setup"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "lanes", analytics_interest_param: "setup" }, class: "sn-btn sn-btn--primary sn-btn--md" %></div>
+      </header>
+      <div class="ns-how__offers">
+        <article class="ns-how__offer ns-prose">
+          <h3 class="t-heading">A server in your hosting account</h3>
+          <p class="ns-how__price">Starts at $6,500.</p>
+          <p>Your written proposal sets the fixed fee before work begins.</p>
+          <p>A virtual private server (VPS), set up in a hosting account you own. I set up sign-in, a firewall, encrypted backups and monitoring, then write the documentation and finish with a handoff. The hosting company bills hosting to you.</p>
+          <p>This is not offline. When the agent uses the AI model, the text it is working on is sent to the model provider.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="support" class="ns-section ns-how__lane" aria-labelledby="support-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading">
+        <h2 id="support-title" class="t-heading">Ongoing support</h2>
+        <p class="ns-lead">Updates, backups and monitoring, so the agent keeps running.</p>
+        <div class="ns-actions"><%= link_to "Request a call", studio_contact_path(interest: "support"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "lanes", analytics_interest_param: "support" }, class: "sn-btn sn-btn--primary sn-btn--md" %></div>
+      </header>
+      <div class="ns-how__offers">
+        <article class="ns-how__offer ns-prose">
+          <h3 class="t-heading">Basic</h3>
+          <p class="ns-how__price">$750 a month</p>
+          <p>Updates, backups, monitoring, up to 2 hours of changes, and a reply by the next business day.</p>
+        </article>
+        <article class="ns-how__offer ns-prose">
+          <h3 class="t-heading">Standard</h3>
+          <p class="ns-how__price">$1,500 a month</p>
+          <p>The same, with up to 6 hours of changes and a same-day reply.</p>
+        </article>
+        <article class="ns-how__offer ns-prose">
+          <p>Business hours, not on-call. Three-month minimum.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="other" class="ns-section ns-how__lane" aria-labelledby="other-title">
+    <div class="ns-container">
+      <header class="ns-section-heading">
+        <h2 id="other-title" class="t-heading">Other work</h2>
+        <p class="ns-lead">Work that does not need an agent is still available.</p>
+      </header>
+    </div>
+  </section>
+
 
   <section id="adopt" class="ns-section ns-how__lane" aria-labelledby="adopt-title">
     <div class="ns-container ns-editorial-grid">
@@ -112,7 +188,7 @@
       </header>
       <div class="ns-how__offers">
         <article class="ns-how__offer ns-prose">
-          <h3 class="t-heading">Pilot</h3>
+          <h3 class="t-heading">First version</h3>
           <p class="ns-how__price">Starts at $18,000 · 3–4 weeks</p>
           <p>Your written proposal sets the fixed fee before work begins.</p>
           <p>One process connected to the system your team uses. We agree how to judge the result before kickoff.</p>

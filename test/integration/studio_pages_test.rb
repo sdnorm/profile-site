@@ -16,7 +16,7 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
       "/" => "Put AI agents to work on one recurring job, with limits you set and a person approving what goes out. Pilots are $9,500 fixed fee with Spencer Norman.",
       "/agent-readiness-review" => "A one-week Agent Readiness Review for $3,500. Find out which job an AI agent should take first, what it would be allowed to do, and what it costs.",
       "/ai-integration" => "Examples of document and workflow automation after a Workflow Review. See a sample, possible projects, and how we agree what to measure.",
-      "/how-we-work" => "Start with a two-week Workflow Review for $4,500. See what is included, implementation prices, and what happens next.",
+      "/how-we-work" => "A pilot on one job is $9,500 fixed fee. Not sure where to start? The Agent Readiness Review is $3,500. See what each includes and what follows.",
       "/contact" => "Tell Spencer where paperwork or repeated data entry slows your team down. He replies by email within two business days to discuss a 25-minute call."
     }
     descriptions.each do |path, description|
@@ -91,10 +91,31 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "how we work shows the fixed prices and the Workflow Review" do
+  test "how we work leads with the pilot and keeps the other work below" do
     get "/how-we-work"
-    [ "$3,500", "$8,500", "$4,500" ].each { |price| assert_match price, @response.body }
-    assert_select "a[href='/contact?interest=audit']"
+    assert_select "h1", "Start with one job"
+    %w[pilot review-offer agents setup support other adopt automate build].each { |id| assert_select "##{id}", 1 }
+    assert_select "#pilot", text: /\$9,500 fixed fee\. Three to four weeks\./
+    assert_select "#review-offer", text: /\$3,500 fixed fee\. One week\./
+    assert_select "#review-offer", text: /The full \$3,500 is credited toward a pilot that starts within 60 days\./
+    assert_select "#review-offer a[href='/agent-readiness-review']"
+    assert_select "#agents", text: /Starts at \$18,000/
+    assert_select "#setup", text: /Starts at \$6,500/
+    assert_select "#setup", text: /This is not offline\. When the agent uses the AI model, the text it is working on is sent to the model provider\./
+    assert_select "#setup", text: /sign-in/
+    assert_select "#setup", text: /firewall/
+    assert_select "#setup", text: /encrypted backups/
+    assert_select "#setup", text: /monitoring/
+    assert_select "#setup", text: /handoff/
+    assert_select "#support", text: /\$750 a month/
+    assert_select "#support", text: /\$1,500 a month/
+    assert_select "#support", text: /three-month minimum/i
+    { "pilot" => "pilot", "review-offer" => "audit", "agents" => "agents", "setup" => "setup", "support" => "support" }.each do |id, interest|
+      assert_select "##{id} a[href='/contact?interest=#{interest}']"
+    end
+    assert_select "#other ~ #adopt"
+    assert_no_match(/Workflow Review|\$4,500|\$5,500|\$15,000/, Nokogiri::HTML(@response.body).at("main").text)
+    assert_no_match(/Pilot<\/h3>\s*<p class="ns-how__price">Starts at \$18,000/, @response.body)
     assert_no_match(/per hour|\/hr/i, @response.body)
   end
 
