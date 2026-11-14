@@ -65,6 +65,7 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
     assert_select "#control", text: /This is not offline\. When the agent uses the AI model, the text it is working on is sent to the model provider\./
     assert_select "#control li, #control dt", minimum: 7
     assert_select "#services [data-lane]", 3
+    assert_select "#services", text: /This is not offline\. When the agent uses the AI model, the text it is working on is sent to the model provider\./
     %w[agents setup support].each { |lane| assert_select "#services [data-lane=#{lane}] a[href='/how-we-work##{lane}']" }
     [ "$18,000", "$6,500", "$750" ].each { |price| assert_match price, @response.body }
     assert_select "#about", text: /Implementation example/
