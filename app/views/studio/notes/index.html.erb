@@ -17,6 +17,7 @@
           <h2 class="t-heading"><%= link_to note.title, studio_note_path(note.slug), class: "ns-text-link" %></h2>
           <p><%= note.description %></p>
         <% end %>
+        <p>This is not offline. When the agent uses the AI model, the text it is working on is sent to the model provider.</p>
         <div class="ns-actions">
           <%= link_to "Request a call", studio_contact_path(interest: "pilot"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "notes_index", analytics_interest_param: "pilot" }, class: "sn-btn sn-btn--primary sn-btn--lg" %>
         </div>

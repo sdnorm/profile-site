@@ -32,13 +32,40 @@ class StudioNotesTest < ActionDispatch::IntegrationTest
   end
 
   test "every section that claims ownership repeats the model sentence" do
-    Studio::Note.all.each do |note|
-      get "/notes/#{note.slug}"
+    ([ "/notes" ] + Studio::Note.all.map { |note| "/notes/#{note.slug}" }).each do |note_path|
+      get note_path
       claimed = css_select("main section").select { |section| section.text.match?(/your own server|a server you own|you own|you control|your server/i) }
-      claimed.each { |section| assert_includes section.text, SENTENCE, "#{note.slug} #{section['id']}" }
+      claimed.each { |section| assert_includes section.text, SENTENCE, "#{note_path} #{section['id']}" }
     end
     get "/notes/your-server-or-the-vendors"
     assert css_select("main section").any? { |section| section.text.match?(/a server you own|you own/i) }
+  end
+
+  test "the first article covers accounts, the model, storage and four questions" do
+    get "/notes/what-leaves-your-business"
+    assert_select "#pasted", text: /personal account belongs to the person who signed up/
+    assert_select "#pasted", text: /business account is opened in the company's name/
+    assert_select "#agent-sends", text: /the text it is working on is sent to the model provider/
+    assert_select "#stays-put", text: /record of each run/
+    assert_select "#questions ol li", 4
+    [ /business account in my company's name/, /used to train the model/, /How long is the text kept/, /read the record of what was sent/ ].each_with_index do |phrase, i|
+      assert_select "#questions ol li:nth-child(#{i + 1})", text: phrase
+    end
+    assert_select "#questions", text: /I do not quote any vendor's terms/
+  end
+
+  test "the second article covers both places, three reasons, upkeep and the pilot path" do
+    get "/notes/your-server-or-the-vendors"
+    assert_select "#two-places", text: /hosted service/
+    assert_select "#hosted", text: /Ask what is backed up/
+    assert_no_match(/nothing to back up/, @response.body)
+    assert_select "#reasons ul li", 3
+    [ /asks you to say where the data is stored/, /credentials you want kept on a machine/, /keep running whoever you work with/ ].each_with_index do |phrase, i|
+      assert_select "#reasons ul li:nth-child(#{i + 1})", text: phrase
+    end
+    assert_select "#upkeep", text: /updates, backups and someone watching it/
+    assert_select "#upkeep", text: /ongoing support/
+    assert_select "#decide", text: /A pilot can start on the hosted service and move to a server later/
   end
 
   test "notes pages do not load the Turnstile script" do
