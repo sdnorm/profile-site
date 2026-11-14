@@ -13,7 +13,7 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
 
   test "every studio page has a title, meta description, and a Request a call link" do
     descriptions = {
-      "/" => "Reduce repetitive paperwork and data entry. Work directly with Spencer Norman, starting with a two-week Workflow Review for $4,500.",
+      "/" => "Put AI agents to work on one recurring job, with limits you set and a person approving what goes out. Pilots are $9,500 fixed fee with Spencer Norman.",
       "/ai-integration" => "Examples of document and workflow automation after a Workflow Review. See a sample, possible projects, and how we agree what to measure.",
       "/how-we-work" => "Start with a two-week Workflow Review for $4,500. See what is included, implementation prices, and what happens next.",
       "/contact" => "Tell Spencer where paperwork or repeated data entry slows your team down. He replies by email within two business days to discuss a 25-minute call."
@@ -37,22 +37,29 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
     assert_select "nav a[href^='/contact']", text: /Request a call/
   end
 
-  test "home leads with the outcome, the Workflow Review price, and one call to action" do
+  test "home leads with the pilot, states the limits, and offers the review second" do
     get "/"
-    assert_select "h1", "Less retyping. Less chasing paperwork."
+    assert_select "h1", "Put AI agents to work. Keep control of what they can do."
     assert_select ".ns-hero" do
-      assert_select "*", text: /Workflow Review for \$4,500/
-      assert_select "a[href='/contact?interest=audit']", text: "Request a call", count: 1
+      assert_select "*", text: /\$9,500/
+      assert_select "a[href='/contact?interest=pilot']", text: "Request a call", count: 1
     end
-    assert_select "#review", text: /\$4,500 fixed fee\. Two weeks\./
-    assert_select "#review", text: /\$2,000 of the fee is credited/
+    assert_select "#review", text: /\$9,500 fixed fee\. Three to four weeks\./
+    assert_select "#review", text: /\$3,500 fixed fee\. One week\./
+    assert_select "#review a[href='/agent-readiness-review']"
+    assert_select "#control", text: /This is not offline\. When the agent uses the AI model, the text it is working on is sent to the model provider\./
+    assert_select "#control li, #control dt", minimum: 7
     assert_select "#services [data-lane]", 3
-    [ "$3,500", "$7,500", "$18,000" ].each { |price| assert_match price, @response.body }
-    %w[adopt automate build].each { |lane| assert_select "#services a[href='/how-we-work##{lane}']" }
+    %w[agents setup support].each { |lane| assert_select "#services [data-lane=#{lane}] a[href='/how-we-work##{lane}']" }
+    [ "$18,000", "$6,500", "$750" ].each { |price| assert_match price, @response.body }
+    assert_select "#about", text: /Implementation example/
+    [ "Is our data sent anywhere?", "Do we need technical staff?", "What if the agent gets something wrong?", "What if we stop working with you?", "Who owns the work when it is done?" ].each do |question|
+      assert_select "#faq summary", text: question
+    end
   end
 
   test "retired names, exclusions and unbacked claims are gone from every page" do
-    retired = /Signal Audit|Flow Care|Desk Hours|Managed AI Ops|Fractional|Legacy Rescue|Flexfit|PHI\b|BAA\b|healthcare|Technology, simplified/i
+    retired = /Signal Audit|Flow Care|Desk Hours|Managed AI Ops|Fractional|Legacy Rescue|Flexfit|PHI\b|BAA\b|healthcare|Technology, simplified|Workflow Review|\$4,500|\$5,500|\$15,000|never leaves|revolutionary|transformative|private beta/i
     [ "/", "/ai-integration", "/how-we-work", "/contact" ].each do |path|
       get path
       text = Nokogiri::HTML(@response.body).at("body").text
