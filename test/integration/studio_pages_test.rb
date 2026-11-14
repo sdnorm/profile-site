@@ -114,6 +114,8 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
       assert_select "##{id} a[href='/contact?interest=#{interest}']"
     end
     assert_select "#other ~ #adopt"
+    assert_select "#build", text: /First version/
+    assert_select "#build", text: /Pilot/, count: 0
     assert_no_match(/Workflow Review|\$4,500|\$5,500|\$15,000/, Nokogiri::HTML(@response.body).at("main").text)
     assert_no_match(/Pilot<\/h3>\s*<p class="ns-how__price">Starts at \$18,000/, @response.body)
     assert_no_match(/per hour|\/hr/i, @response.body)
