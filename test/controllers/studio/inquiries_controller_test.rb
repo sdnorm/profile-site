@@ -75,4 +75,14 @@ class Studio::InquiriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "textarea[name='studio_inquiry[message]']", text: ""
   end
+
+  test "new preselects new and old interests, and lists them in order" do
+    { "pilot" => "Pilot", "audit" => "Agent Readiness Review", "build" => "Custom software" }.each do |key, label|
+      get studio_contact_path(interest: key)
+      assert_select "select[name='studio_inquiry[interest]'] option[selected][value=#{key}]", text: label
+    end
+    get studio_contact_path(interest: "crypto")
+    assert_select "select[name='studio_inquiry[interest]'] option[selected][value=not_sure]"
+    assert_equal Studio::Inquiry::INTEREST_LABELS.values, css_select("select[name='studio_inquiry[interest]'] option").map(&:text).reject(&:empty?)
+  end
 end

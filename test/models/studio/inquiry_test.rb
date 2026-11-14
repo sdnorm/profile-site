@@ -24,7 +24,12 @@ class Studio::InquiryTest < ActiveSupport::TestCase
 
   test "interest_label is human readable" do
     assert_equal "Custom software", build(interest: "build").interest_label
-    assert_equal "Workflow Review", build(interest: "audit").interest_label
+    assert_equal "Agent Readiness Review", build(interest: "audit").interest_label
+    assert_equal "Pilot", build(interest: "pilot").interest_label
+    assert_equal "Full build", build(interest: "agents").interest_label
+    assert_equal "Your own server", build(interest: "setup").interest_label
+    assert_equal "Ongoing support", build(interest: "support").interest_label
+    assert_equal %w[not_sure pilot audit agents setup support adopt automate build], Studio::Inquiry::INTERESTS
     assert_equal "Not sure yet", build.interest_label
   end
 
