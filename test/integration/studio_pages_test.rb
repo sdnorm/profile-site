@@ -205,6 +205,20 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
     assert_select "h1", "AI agents for engineering teams"
     [ "broken builds", "alert triage", "pull request review" ].each { |job| assert_match(/#{job}/i, @response.body) }
     assert_select "table tbody tr", 3
+    rows = css_select("table tbody tr")
+    expectations = [
+      [ "Vendor-hosted, scoped", "Nothing. You set network rules and credentials.", "the sandbox's files and state", "Beta" ],
+      [ "Your sandboxes", "The workers and sandboxes where tools run", "Files and processes stay on your worker. Web search and web fetch still run on the vendor's side.", "Beta" ],
+      [ "Your service and your sandboxes", "PostgreSQL 16 or later, workers and sandboxes. Session history is stored with you.", "to the inference provider: Anthropic by default", "By request through an Anthropic account team" ]
+    ]
+    expectations.each_with_index do |(level, host, reaches, access), i|
+      assert_equal level, rows[i].at_css("th").text.strip
+      cells = rows[i].css("td").map { |c| c.text.squish }
+      assert_includes cells[0], host
+      assert_includes cells[1], reaches
+      assert_includes cells[2], access
+    end
+    assert_select "#security-owner", text: /web search, web fetch and connections to MCP servers/
     assert_select "table caption"
     assert_select "table thead th", text: "Level"
     assert_select "table thead th", text: "What you host"
