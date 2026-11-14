@@ -14,6 +14,7 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
   test "every studio page has a title, meta description, and a Request a call link" do
     descriptions = {
       "/" => "Put AI agents to work on one recurring job, with limits you set and a person approving what goes out. Pilots are $9,500 fixed fee with Spencer Norman.",
+      "/agent-readiness-review" => "A one-week Agent Readiness Review for $3,500. Find out which job an AI agent should take first, what it would be allowed to do, and what it costs.",
       "/ai-integration" => "Examples of document and workflow automation after a Workflow Review. See a sample, possible projects, and how we agree what to measure.",
       "/how-we-work" => "Start with a two-week Workflow Review for $4,500. See what is included, implementation prices, and what happens next.",
       "/contact" => "Tell Spencer where paperwork or repeated data entry slows your team down. He replies by email within two business days to discuss a 25-minute call."
@@ -27,6 +28,20 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
       assert_select "h1", count: 1
       assert_select "a[href^='/contact']", minimum: 1
     end
+  end
+
+  test "review page states the offer, the fit, and how the week runs" do
+    get "/agent-readiness-review"
+    assert_response :success
+    assert_select "h1", "Agent Readiness Review"
+    assert_match "$3,500 fixed fee. One week.", @response.body
+    assert_match "The full $3,500 is credited toward a pilot that starts within 60 days.", @response.body
+    assert_select "dl.ns-review__outline > div", 7
+    assert_select "h2", text: "A good fit if"
+    assert_select "h2", text: "Probably not a fit if"
+    assert_match(/no passwords/i, @response.body)
+    assert_match "This is not offline. When the agent uses the AI model, the text it is working on is sent to the model provider.", @response.body
+    assert_select "a[href='/contact?interest=audit']", text: "Request a call", minimum: 1
   end
 
   test "nav links to the review and every page" do

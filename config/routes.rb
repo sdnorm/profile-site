@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       root "pages#home"
       get  "ai-integration", to: "pages#ai_integration", as: :ai_integration
       get  "how-we-work",    to: "pages#how_we_work",    as: :how_we_work
+      get  "agent-readiness-review", to: "pages#agent_readiness_review", as: :agent_readiness_review
       get  "contact",        to: "inquiries#new",        as: :contact
       post "contact",        to: "inquiries#create"
       get  "sitemap.xml",    to: "sitemaps#show", defaults: { format: :xml }
