@@ -76,7 +76,8 @@ class StudioNotesTest < ActionDispatch::IntegrationTest
   end
 
   test "unknown and hostile slugs are not found" do
-    [ "/notes/nope", "/notes/..%2F..%2Flayouts%2Fstudio", "/notes/index" ].each do |path|
+    [ "/notes/nope", "/notes/..%2F..%2Flayouts%2Fstudio", "/notes/index",
+                "/notes/what-leaves-your-business.json", "/notes/what-leaves-your-business.xml" ].each do |path|
       get path
       assert_response :not_found, path
     end

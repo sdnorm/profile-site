@@ -6,7 +6,7 @@ module Studio
 
     def show
       @note = Note.find(params[:slug])
-      return head :not_found unless @note
+      raise ActionController::RoutingError, "Not Found" unless @note
 
       render @note.template
     end

@@ -19,7 +19,7 @@ Rails.application.routes.draw do
       get  "where-agents-run", to: "pages#where_agents_run", as: :where_agents_run
       get  "engineering-teams", to: "pages#engineering_teams", as: :engineering_teams
       get  "notes",          to: "notes#index",          as: :notes
-      get  "notes/:slug",    to: "notes#show",           as: :note
+      get  "notes/:slug",    to: "notes#show",           as: :note, format: false
       get  "contact",        to: "inquiries#new",        as: :contact
       post "contact",        to: "inquiries#create"
       get  "sitemap.xml",    to: "sitemaps#show", defaults: { format: :xml }
