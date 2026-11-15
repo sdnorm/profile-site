@@ -304,6 +304,12 @@ body[data-site="studio"] .ns-footer__bottom p {
   margin: 0;
 }
 
+body[data-site="studio"] .ns-footer__note {
+  margin-top: 12px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
 @media (max-width: 63.999rem) {
   body[data-site="studio"] .ns-nav {
     flex-wrap: wrap;
@@ -905,27 +911,6 @@ body[data-site="studio"] .ns-how__hero .ns-lead {
   margin: 28px 0 0;
 }
 
-body[data-site="studio"] .ns-how__overview {
-  border-block: 1px solid var(--border-subtle);
-  background: var(--surface-raised);
-}
-
-body[data-site="studio"] .ns-how__lanes {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 40px;
-  margin: 0;
-}
-
-body[data-site="studio"] .ns-how__lanes dt {
-  margin-bottom: 12px;
-  font-size: 24px;
-}
-
-body[data-site="studio"] .ns-how__lanes dd {
-  margin: 0;
-}
-
 body[data-site="studio"] .ns-how__lane {
   border-top: 1px solid var(--border-subtle);
 }
@@ -962,7 +947,6 @@ body[data-site="studio"] .ns-how__audit {
 }
 
 body[data-site="studio"] .ns-how__audit strong,
-body[data-site="studio"] .ns-how__lanes strong,
 body[data-site="studio"] .ns-how__offer strong {
   color: var(--text-strong);
   font-weight: var(--fw-semibold);
@@ -976,13 +960,6 @@ body[data-site="studio"] .ns-how__list {
 
 body[data-site="studio"] .ns-how__list li + li {
   margin-top: 16px;
-}
-
-@media (max-width: 47.999rem) {
-  body[data-site="studio"] .ns-how__lanes {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 24px;
-  }
 }
 
 /* Build catalog: grouped editorial rows with a visible price and scope. */
@@ -1003,13 +980,22 @@ body[data-site="studio"] .ns-ai__explanation .ns-section-heading {
   margin-bottom: 0;
 }
 
-body[data-site="studio"] .ns-ai__explanation .ns-prose ul {
+body[data-site="studio"] .ns-prose ul,
+body[data-site="studio"] .ns-prose ol {
   margin: 24px 0 0;
   padding-left: 24px;
+}
+
+body[data-site="studio"] .ns-prose ul {
   list-style: disc;
 }
 
-body[data-site="studio"] .ns-ai__explanation .ns-prose li + li {
+body[data-site="studio"] .ns-prose ol {
+  list-style: decimal;
+}
+
+body[data-site="studio"] .ns-prose ul li + li,
+body[data-site="studio"] .ns-prose ol li + li {
   margin-top: 12px;
 }
 
@@ -1357,6 +1343,87 @@ body[data-site="studio"] .ns-contact__success > p {
   }
 }
 
+body[data-site="studio"] .ns-run-diagram {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 24px;
+  max-width: 100%;
+}
+
+body[data-site="studio"] .ns-run-diagram__place {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+body[data-site="studio"] .ns-run-diagram__title,
+body[data-site="studio"] .ns-run-diagram__model {
+  margin: 0;
+  padding: 12px 16px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  background: var(--surface-inverse);
+  color: var(--text-on-inverse);
+  font-weight: var(--fw-semibold);
+}
+
+body[data-site="studio"] .ns-run-diagram__stack {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body[data-site="studio"] .ns-run-diagram__stack li {
+  margin: 0;
+  padding: 12px 16px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background: var(--surface-card);
+  color: var(--text-strong);
+  overflow-wrap: anywhere;
+}
+
+body[data-site="studio"] .ns-run-diagram__arrow {
+  margin: 0;
+  color: var(--text-muted);
+  font-family: var(--type-label-family);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--track-label);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+body[data-site="studio"] .ns-run-diagram__arrow::before {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 28px;
+  margin: 0 auto 8px;
+  background: var(--border-default);
+}
+
+body[data-site="studio"] .ns-run-diagram__model {
+  grid-column: 1 / -1;
+  background: var(--surface-accent);
+  color: var(--text-strong);
+  text-align: center;
+}
+
+body[data-site="studio"] .ns-run-diagram__caption {
+  margin: 16px 0 0;
+  max-width: 62ch;
+  color: var(--text-body);
+}
+
+@media (max-width: 47.999rem) {
+  body[data-site="studio"] .ns-run-diagram {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 @media (max-width: 47.999rem) {
   body[data-site="studio"] .ns-contact__hero {
     margin-bottom: 40px;
@@ -1370,4 +1437,37 @@ body[data-site="studio"] .ns-contact__success > p {
     padding-inline: 10px;
     font-size: 16px;
   }
+}
+
+/* Hosting-level table on /engineering-teams. Scrolls on its own so the page never does. */
+body[data-site="studio"] .ns-table-scroll {
+  max-width: 100%;
+  margin-block: 24px;
+  overflow-x: auto;
+}
+
+body[data-site="studio"] .ns-table {
+  width: 100%;
+  min-width: 44rem;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+body[data-site="studio"] .ns-table caption {
+  padding-bottom: 12px;
+  color: var(--text-muted);
+  text-align: left;
+}
+
+body[data-site="studio"] .ns-table th,
+body[data-site="studio"] .ns-table td {
+  padding: 12px 16px;
+  border: 1px solid var(--border-subtle);
+  vertical-align: top;
+}
+
+body[data-site="studio"] .ns-table thead th {
+  background: var(--surface-inverse);
+  color: var(--text-on-inverse);
+  font-weight: var(--fw-semibold);
 }

@@ -15,6 +15,11 @@ Rails.application.routes.draw do
       root "pages#home"
       get  "ai-integration", to: "pages#ai_integration", as: :ai_integration
       get  "how-we-work",    to: "pages#how_we_work",    as: :how_we_work
+      get  "agent-readiness-review", to: "pages#agent_readiness_review", as: :agent_readiness_review
+      get  "where-agents-run", to: "pages#where_agents_run", as: :where_agents_run
+      get  "engineering-teams", to: "pages#engineering_teams", as: :engineering_teams
+      get  "notes",          to: "notes#index",          as: :notes
+      get  "notes/:slug",    to: "notes#show",           as: :note, format: false
       get  "contact",        to: "inquiries#new",        as: :contact
       post "contact",        to: "inquiries#create"
       get  "sitemap.xml",    to: "sitemaps#show", defaults: { format: :xml }

@@ -1,44 +1,45 @@
 <section id="services" class="ns-section ns-services" aria-labelledby="services-title">
   <div class="ns-container">
     <header class="ns-section-heading">
-      <h2 id="services-title" class="t-heading">Three ways the work gets done</h2>
-      <p class="ns-lead">For a team that already knows the process to change.</p>
+      <h2 id="services-title" class="t-heading">After a pilot</h2>
+      <p class="ns-lead">What can follow once one job is working.</p>
     </header>
 
     <div class="ns-lanes">
-      <article class="sn-card ns-lane" data-lane="adopt" aria-labelledby="adopt-title">
-        <h3 id="adopt-title" class="t-heading">Tools and training</h3>
-        <p class="ns-lane__price">from <strong>$3,500</strong></p>
-        <p class="ns-lane__deliverable">A written recommendation of which tools to buy, who gets a seat, and what is off limits.</p>
-        <div class="ns-lane__actions">
-          <%= link_to studio_how_we_work_path(anchor: "adopt"), class: "ns-text-link" do %>
-            What's included <span aria-hidden="true">→</span>
-          <% end %>
-        </div>
-      </article>
-
-      <article class="sn-card ns-lane" data-lane="automate" aria-labelledby="automate-title">
-        <h3 id="automate-title" class="t-heading">Workflow automation</h3>
-        <p class="ns-lane__price">from <strong>$7,500</strong></p>
-        <p class="ns-lane__deliverable">One recurring process connected across the tools you already use, with a named owner on your team.</p>
-        <div class="ns-lane__actions">
-          <%= link_to studio_how_we_work_path(anchor: "automate"), class: "ns-text-link" do %>
-            What's included <span aria-hidden="true">→</span>
-          <% end %>
-        </div>
-      </article>
-
-      <article class="sn-card ns-lane" data-lane="build" aria-labelledby="build-title">
-        <h3 id="build-title" class="t-heading">Custom software</h3>
+      <article class="sn-card ns-lane" data-lane="agents" aria-labelledby="agents-title">
+        <h3 id="agents-title" class="t-heading">Full build</h3>
         <p class="ns-lane__price">from <strong>$18,000</strong></p>
-        <p class="ns-lane__deliverable">Software for one process that has outgrown a spreadsheet or an old app.</p>
+        <p class="ns-lane__deliverable">The job taken to production, or further jobs added.</p>
         <div class="ns-lane__actions">
-          <%= link_to studio_how_we_work_path(anchor: "build"), class: "ns-text-link" do %>
+          <%= link_to studio_how_we_work_path(anchor: "agents"), class: "ns-text-link" do %>
+            What's included <span aria-hidden="true">→</span>
+          <% end %>
+        </div>
+      </article>
+
+      <article class="sn-card ns-lane" data-lane="setup" aria-labelledby="setup-title">
+        <h3 id="setup-title" class="t-heading">Your own server</h3>
+        <p class="ns-lane__price">from <strong>$6,500</strong></p>
+        <p class="ns-lane__deliverable">The agent moved to a server in your own hosting account.</p>
+        <div class="ns-lane__actions">
+          <%= link_to studio_how_we_work_path(anchor: "setup"), class: "ns-text-link" do %>
+            What's included <span aria-hidden="true">→</span>
+          <% end %>
+        </div>
+      </article>
+
+      <article class="sn-card ns-lane" data-lane="support" aria-labelledby="support-title">
+        <h3 id="support-title" class="t-heading">Ongoing support</h3>
+        <p class="ns-lane__price">from <strong>$750 a month</strong></p>
+        <p class="ns-lane__deliverable">Updates, backups, monitoring and changes in business hours.</p>
+        <div class="ns-lane__actions">
+          <%= link_to studio_how_we_work_path(anchor: "support"), class: "ns-text-link" do %>
             What's included <span aria-hidden="true">→</span>
           <% end %>
         </div>
       </article>
     </div>
-    <p class="ns-services__note">Workflow automation and custom software are starting prices. Your written proposal sets the fixed fee before work begins.</p>
+    <p class="ns-services__note">This is not offline. When the agent uses the AI model, the text it is working on is sent to the model provider.</p>
+    <p class="ns-services__note">Full build and your own server are starting prices. Your written proposal sets the fixed fee before work begins.</p>
   </div>
 </section>

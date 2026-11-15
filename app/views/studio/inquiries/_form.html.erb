@@ -19,14 +19,8 @@ end %>
 end %>
 <% field_errors = { name: name_error, email: email_error, company: company_error, interest: interest_error, message: message_error }.compact %>
 <% first_invalid_field = [ :email, :message, :name, :company, :interest ].find { |field| field_errors.key?(field) } %>
-<% interest_options = [
-  [ "Not sure yet", "not_sure" ],
-  [ "Workflow Review", "audit" ],
-  [ "Tools and training", "adopt" ],
-  [ "Workflow automation", "automate" ],
-  [ "Custom software", "build" ]
-] %>
-<h2 class="t-heading ns-contact__form-heading">The workflow</h2>
+<% interest_options = Studio::Inquiry::INTEREST_LABELS.map { |key, label| [ label, key ] } %>
+<h2 class="t-heading ns-contact__form-heading">The job</h2>
 <%= form_with model: inquiry, scope: :studio_inquiry, url: studio_contact_path, class: "sn-contact-form ns-contact__form" do |f| %>
   <% if inquiry.errors.any? %>
     <div class="sn-form-alert ns-contact__alert" role="alert">
@@ -77,7 +71,7 @@ end %>
 
   <div class="sn-field <%= "sn-field--error" if message_error %>">
     <%= f.label :message, class: "sn-field__label" do %>What is taking the time?<span class="sn-field__req" aria-hidden="true"> *</span><% end %>
-    <%= f.text_area :message, class: "sn-textarea", rows: 6, required: true, maxlength: 5000, autofocus: first_invalid_field == :message, placeholder: "The documents, the spreadsheet, or the tool. What happens today, and who does it?", aria: { invalid: message_error.present?, describedby: [ "studio_inquiry_message_hint", ("studio_inquiry_message_error" if message_error) ].compact.join(" ") } %>
+    <%= f.text_area :message, class: "sn-textarea", rows: 6, required: true, maxlength: 5000, autofocus: first_invalid_field == :message, placeholder: "The job, who does it today, and the tools it touches.", aria: { invalid: message_error.present?, describedby: [ "studio_inquiry_message_hint", ("studio_inquiry_message_error" if message_error) ].compact.join(" ") } %>
     <span id="studio_inquiry_message_hint" class="sn-field__hint ns-contact__helper">Please leave out confidential or personal data.</span>
     <% if message_error %>
       <span id="studio_inquiry_message_error" class="sn-field__hint"><%= message_error %></span>

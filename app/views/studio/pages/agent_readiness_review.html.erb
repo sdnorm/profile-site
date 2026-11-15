@@ -1,0 +1,122 @@
+<% content_for :title, "Agent Readiness Review | Norman Simplified" %>
+<% content_for :description, "A one-week Agent Readiness Review for $3,500. Find out which job an AI agent should take first, what it would be allowed to do, and what it costs." %>
+
+<main class="ns-how">
+  <section class="ns-section ns-how__hero" aria-labelledby="review-page-title">
+    <div class="ns-container">
+      <p class="sn-eyebrow">One week. Fixed fee.</p>
+      <h1 id="review-page-title" class="t-display ns-how__title">Agent Readiness Review</h1>
+      <p class="ns-lead">$3,500 fixed fee. One week.</p>
+      <p class="ns-lead">Not sure which job an AI agent should take first? I compare up to three and give you the answer in writing.</p>
+      <div class="ns-actions">
+        <%= link_to "Request a call", studio_contact_path(interest: "audit"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "hero", analytics_interest_param: "audit" }, class: "sn-btn sn-btn--primary sn-btn--lg" %>
+      </div>
+    </div>
+  </section>
+
+  <section id="report-outline" class="ns-section ns-review" aria-labelledby="outline-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading">
+        <h2 id="outline-title" class="t-heading">Outline of the report you receive</h2>
+        <p class="ns-lead">This is the outline of what you get. It is not a report written for a client.</p>
+      </header>
+      <div class="ns-prose">
+        <p class="ns-review__label" id="report-outline-label">What the review includes.</p>
+        <dl class="ns-review__outline" aria-labelledby="report-outline-label">
+          <div>
+            <dt>Up to three conversations</dt>
+            <dd>With the people who do the work.</dd>
+          </div>
+          <div>
+            <dt>Up to three jobs compared</dt>
+            <dd>Where the time goes, and which job an agent should take first.</dd>
+          </div>
+          <div>
+            <dt>What the agent would see</dt>
+            <dd>The inboxes, files and systems it could read.</dd>
+          </div>
+          <div>
+            <dt>What it would be allowed to do</dt>
+            <dd>And where a person approves before anything is sent or changed.</dd>
+          </div>
+          <div>
+            <dt>Where it should run</dt>
+            <dd>On the vendor's hosted service or on your own server, with the reasoning.</dd>
+          </div>
+          <div>
+            <dt>A budget range</dt>
+            <dd>To build it, and a monthly figure to run it.</dd>
+          </div>
+          <div>
+            <dt>A go or no-go recommendation, and a walkthrough</dt>
+            <dd>A plain answer, then a 45-minute walkthrough of the report.</dd>
+          </div>
+        </dl>
+        <p>This is not offline. When the agent uses the AI model, the text it is working on is sent to the model provider.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ns-section" aria-labelledby="week-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading"><h2 id="week-title" class="t-heading">How the week runs</h2></header>
+      <ul class="ns-how__list">
+        <li>Conversations and a list of the systems the jobs touch come first. Then the report and the walkthrough.</li>
+        <li>It runs on conversations, documents and screen shares only.</li>
+        <li>I need no passwords and no access to your systems.</li>
+        <li>If you ask, we sign a mutual NDA (a confidentiality agreement) first.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="ns-section" aria-labelledby="need-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading"><h2 id="need-title" class="t-heading">What I need from you</h2></header>
+      <ul class="ns-how__list">
+        <li>The people for up to three conversations</li>
+        <li>A description of the tools the jobs touch</li>
+        <li>Any contract or policy terms about where your data can go</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="ns-section" aria-labelledby="fit-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading"><h2 id="fit-title" class="t-heading">A good fit if</h2></header>
+      <ul class="ns-how__list">
+        <li>You run a business of roughly 20 to 200 people with few or no engineers on staff</li>
+        <li>Several people handle the same recurring requests, documents or updates</li>
+        <li>That work passes between email and two or more business systems</li>
+        <li>You are the owner or operations manager who answers for the delays and mistakes</li>
+        <li>One job takes about 15 hours a week of someone's time, or a faster answer wins you orders</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="ns-section" aria-labelledby="notfit-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading"><h2 id="notfit-title" class="t-heading">Probably not a fit if</h2></header>
+      <ul class="ns-how__list">
+        <li>You need a system with no outside connection at all</li>
+        <li>You want a chatbot for a public website</li>
+        <li>Your company has a procurement process or a vendor security review to get through</li>
+        <li>The job happens only a few times a year</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="ns-section" aria-labelledby="after-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading"><h2 id="after-title" class="t-heading">Afterwards</h2></header>
+      <div class="ns-prose">
+        <p>You can stop, do the work in-house, or start a pilot. The report is yours either way.</p>
+        <p>The full $3,500 is credited toward a pilot that starts within 60 days.</p>
+        <p>If the report recommends your own server, the same rule applies as everywhere else on this site. This is not offline. When the agent uses the AI model, the text it is working on is sent to the model provider.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="ns-container ns-section">
+    <%= link_to "Request a call", studio_contact_path(interest: "audit"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "cta", analytics_interest_param: "audit" }, class: "sn-btn sn-btn--primary sn-btn--lg" %>
+  </div>
+</main>

@@ -1,0 +1,97 @@
+<% content_for :title, "AI agents for engineering teams | Norman Simplified" %>
+<% content_for :description, "Agents for broken builds, alert triage and pull request review, with a clear answer on what the agent can reach and what leaves your network." %>
+<% content_for :footer_note, "Norman Simplified is independent and is not affiliated with Anthropic." %>
+
+<main class="ns-how">
+  <section id="intro" class="ns-section ns-how__hero" aria-labelledby="eng-title">
+    <div class="ns-container">
+      <p class="sn-eyebrow">For software teams</p>
+      <h1 id="eng-title" class="t-display ns-how__title">AI agents for engineering teams</h1>
+      <p class="ns-lead">I build agents for three jobs: broken builds, alert triage and pull request review. Each one starts with a clear answer on what the agent can reach and what leaves your network.</p>
+      <div class="ns-actions">
+        <%= link_to "Request a call", studio_contact_path(interest: "pilot"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "hero", analytics_interest_param: "pilot" }, class: "sn-btn sn-btn--primary sn-btn--lg" %>
+      </div>
+    </div>
+  </section>
+
+  <section id="security-owner" class="ns-section" aria-labelledby="security-owner-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading">
+        <h2 id="security-owner-title" class="t-heading">What the security owner will ask</h2>
+      </header>
+      <div class="ns-prose">
+        <p><strong>What can it reach?</strong> The shell and file tools reach only what the sandbox and its network rules allow. The agent's shell is a real shell with the worker's permissions, so isolation comes from what the worker runs in. Tools the vendor runs on its side, such as web search, web fetch and connections to MCP servers, have their own reach and their own controls. I cover those in the review or setup.</p>
+        <p><strong>Which credentials does it hold?</strong> Scoped to the job. A self-hosted service uses three: a server API key, an inference credential held by the server, and an environment key held by the workers.</p>
+        <p><strong>Where is its history stored?</strong> With the vendor at the first two levels. With you at the third. Either way, the model still sees it.</p>
+        <p><strong>What is sent to the model?</strong> Each model call sends the conversation so far, including tool inputs and results, to the inference provider. This is not offline.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="levels" class="ns-section" aria-labelledby="levels-title">
+    <div class="ns-container">
+      <header class="ns-section-heading">
+        <h2 id="levels-title" class="t-heading">Three ways to host it</h2>
+      </header>
+      <div class="ns-table-scroll" tabindex="0" role="region" aria-labelledby="levels-title">
+        <table class="ns-table">
+          <caption>Hosting levels for Claude Managed Agents, from least to most hosted by you</caption>
+          <thead>
+            <tr>
+              <th scope="col">Level</th>
+              <th scope="col">What you host</th>
+              <th scope="col">What reaches the vendor</th>
+              <th scope="col">Access</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Vendor-hosted, scoped</th>
+              <td>Nothing. You set network rules and credentials.</td>
+              <td>Conversation, tool results, the sandbox's files and state, skills, memory stores</td>
+              <td>Beta</td>
+            </tr>
+            <tr>
+              <th scope="row">Your sandboxes</th>
+              <td>The workers and sandboxes where tools run</td>
+              <td>Conversation, tool results, skills, memory stores. Files and processes stay on your worker. Web search and web fetch still run on the vendor's side.</td>
+              <td>Beta</td>
+            </tr>
+            <tr>
+              <th scope="row">Your service and your sandboxes</th>
+              <td>The server (<code>cma-server</code>), PostgreSQL 16 or later, workers and sandboxes. Session history is stored with you.</td>
+              <td>Each model call sends the conversation so far, including tool inputs and results, to the inference provider: Anthropic by default, or Amazon Bedrock, Google Cloud, Microsoft Foundry, or your own gateway</td>
+              <td>By request through an Anthropic account team</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ns-prose">
+        <p>These levels apply to any agent stack. Claude Managed Agents is the worked example.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="take-on" class="ns-section" aria-labelledby="take-on-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading">
+        <h2 id="take-on-title" class="t-heading">What you take on</h2>
+      </header>
+      <div class="ns-prose">
+        <p>At the third level you run and secure the server, the database and the sandboxes, and you install each release.</p>
+        <p>Session history is stored with you, but this is not offline. Each model call still sends the conversation so far, including tool inputs and results, to the inference provider.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="check" class="ns-section" aria-label="Vendor check">
+    <div class="ns-container ns-editorial-grid">
+      <div class="ns-prose">
+        <p>Checked against vendor documentation on 14 November 2026.</p>
+        <div class="ns-actions">
+          <%= link_to "Request a call", studio_contact_path(interest: "pilot"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "engineering_teams_pilot", analytics_interest_param: "pilot" }, class: "sn-btn sn-btn--primary sn-btn--lg" %>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

@@ -6,7 +6,7 @@ class SearchIndexingTest < ActionDispatch::IntegrationTest
 
   test "studio pages declare a canonical URL on the www host" do
     host! "www.normansimplified.com"
-    { "/" => "/", "/ai-integration" => "/ai-integration", "/how-we-work" => "/how-we-work", "/contact?lane=ai" => "/contact" }.each do |path, canonical|
+    STUDIO_PATHS.to_h { |p| [ p, p ] }.merge("/contact?lane=ai" => "/contact").each do |path, canonical|
       get path
       assert_select "link[rel=canonical]", count: 1 do |tags|
         assert_equal "#{STUDIO}#{canonical}", tags.first["href"], "canonical for #{path}"
@@ -29,7 +29,7 @@ class SearchIndexingTest < ActionDispatch::IntegrationTest
     get "/sitemap.xml"
     assert_response :success
     assert_equal "application/xml", response.media_type
-    assert_equal [ "/", "/ai-integration", "/how-we-work", "/contact" ].map { |p| "#{STUDIO}#{p}" }, sitemap_locs
+    assert_equal STUDIO_PATHS.map { |p| "#{STUDIO}#{p}" }, sitemap_locs
   end
 
   test "personal sitemap lists the personal home page" do

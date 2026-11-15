@@ -1,0 +1,72 @@
+<% content_for :title, "#{@note.title} | Norman Simplified" %>
+<% content_for :description, @note.description %>
+
+<main class="ns-how">
+  <section class="ns-section ns-how__hero" aria-labelledby="note-title">
+    <div class="ns-container">
+      <p class="sn-eyebrow">Note</p>
+      <h1 id="note-title" class="t-display ns-how__title"><%= @note.title %></h1>
+      <p class="ns-lead">Many people are not sure what happens to the text once it goes into an AI tool. Here is the short version, and the questions worth asking.</p>
+    </div>
+  </section>
+
+  <section id="pasted" class="ns-section" aria-labelledby="pasted-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading">
+        <h2 id="pasted-title" class="t-heading">When a staff member pastes it in</h2>
+      </header>
+      <div class="ns-prose">
+        <p>Say someone on your team pastes a customer email into an AI tool to get a reply drafted. That text is sent to the company that runs the tool. What happens to it next depends on the account, and on the terms that come with it. Ask, and read where the answer is written down.</p>
+        <p>The first thing to find out is whose account it is. A personal account belongs to the person who signed up. The terms are the ones a consumer accepts, and when that person leaves, the history leaves with them. You may not even know it exists.</p>
+        <p>A business account is opened in the company's name. You choose who has access, and you can end it. The terms the business has agreed to are written down, and you can ask the vendor questions as a customer.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="agent-sends" class="ns-section" aria-labelledby="agent-sends-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading">
+        <h2 id="agent-sends-title" class="t-heading">What an agent sends each time</h2>
+      </header>
+      <div class="ns-prose">
+        <p>An AI agent is a program that does a defined job for you, such as reading incoming requests and preparing a draft reply. To read and write, it uses an AI model. That model is run by another company, the model provider.</p>
+        <p>This is not offline. When the agent uses the AI model, the text it is working on is sent to the model provider.</p>
+        <p>That is true however the agent is set up. It is worth knowing before you decide which jobs to hand it. The page <%= link_to "Where your agent runs", studio_where_agents_run_path, class: "ns-text-link" %> shows the two places an agent can live and what is sent in each.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="stays-put" class="ns-section" aria-labelledby="stays-put-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading">
+        <h2 id="stays-put-title" class="t-heading">What stays where it is stored</h2>
+      </header>
+      <div class="ns-prose">
+        <p>Sending text to the model is different from storing it. The agent's files, its saved settings and the record of each run are kept in the place the agent runs. Your customer list, your accounts and your documents stay in the systems they are already in.</p>
+        <p>The agent should reach only the folders and systems the job needs. A narrow job means less text is sent, and less can go wrong.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="questions" class="ns-section" aria-labelledby="questions-title">
+    <div class="ns-container ns-editorial-grid">
+      <header class="ns-section-heading">
+        <h2 id="questions-title" class="t-heading">Four questions to ask before customer data goes in</h2>
+      </header>
+      <div class="ns-prose">
+        <p>Put these to any AI vendor, and to any consultant, me included.</p>
+        <ol>
+          <li>Is this a business account in my company's name, and who can sign in to it?</li>
+          <li>Is the text we send used to train the model? Where is that written down in the vendor's terms?</li>
+          <li>How long is the text kept, and can we have it deleted? Where is that written down?</li>
+          <li>Who in your business can read the record of what was sent, and can I revoke their access?</li>
+        </ol>
+        <p>I do not quote any vendor's terms here, because they change. Read the current terms yourself, or ask the vendor to point you to the exact page. If the answer is vague, treat it as a no.</p>
+        <p>If you want help working out which job suits an agent and what it would be allowed to touch, that is what a pilot is for.</p>
+        <div class="ns-actions">
+          <%= link_to "Request a call", studio_contact_path(interest: "pilot"), data: { controller: "analytics", action: "click->analytics#track", analytics_event_param: "cta_clicked", analytics_cta_param: "request_a_call", analytics_location_param: "note_close", analytics_interest_param: "pilot" }, class: "sn-btn sn-btn--primary sn-btn--lg" %>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
