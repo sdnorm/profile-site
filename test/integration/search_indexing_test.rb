@@ -67,6 +67,34 @@ class SearchIndexingTest < ActionDispatch::IntegrationTest
     assert_equal "#{PERSONAL}/", response.location
   end
 
+  test "legacy demo and sign-in pages ask search engines not to index them" do
+    [ "spencernorman.io", "www.normansimplified.com" ].each do |host|
+      host! host
+      [ "/session/new", "/registration/new", "/date_parser/index" ].each do |path|
+        get path
+        assert_response :success
+        assert_equal "noindex", response.headers["X-Robots-Tag"], "#{host}#{path}"
+      end
+    end
+  end
+
+  test "site pages stay indexable" do
+    { "spencernorman.io" => "/", "www.normansimplified.com" => "/" }.each do |host, path|
+      host! host
+      get path
+      assert_nil response.headers["X-Robots-Tag"], "#{host}#{path}"
+    end
+  end
+
+  test "a QR sign-in link with a missing or bad token redirects instead of erroring" do
+    host! "spencernorman.io"
+    [ "/qr_sessions", "/qr_sessions?token=nope" ].each do |path|
+      get path
+      assert_response :redirect, path
+      assert_equal "noindex", response.headers["X-Robots-Tag"], path
+    end
+  end
+
   private
 
   def sitemap_locs

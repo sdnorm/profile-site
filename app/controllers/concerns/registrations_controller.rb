@@ -1,4 +1,6 @@
 class RegistrationsController < ApplicationController
+  include Unindexed
+
   def new
     @user = User.new
   end

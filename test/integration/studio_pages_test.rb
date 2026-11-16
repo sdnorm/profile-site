@@ -68,6 +68,8 @@ class StudioPagesTest < ActionDispatch::IntegrationTest
     assert_select "h1", "Put AI agents to work. Keep control of what they can do."
     assert_select ".ns-hero" do
       assert_select "*", text: /\$9,500/
+      assert_select ".ns-lead", text: /A customer emails asking for a quote\./
+      assert_select ".ns-lead", text: /Someone on your team looks it over and sends it\./
       assert_select "a[href='/contact?interest=pilot']", text: "Request a call", count: 1
     end
     assert_select "#review", text: /\$9,500 fixed fee\. Three to four weeks\./

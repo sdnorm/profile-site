@@ -1,4 +1,6 @@
 class QrSessionsController < ApplicationController
+  include Unindexed
+
   before_action :authenticate_user!, only: :new
   before_action :authenticate_user_by_qr_code!, only: :qr_sign_in
 
@@ -27,6 +29,6 @@ class QrSessionsController < ApplicationController
 
   def authenticate_user_by_qr_code!
     @user = User.find_by_token_for(:qr_sign_in, params[:token])
-    sign_in @user
+    sign_in @user if @user
   end
 end
