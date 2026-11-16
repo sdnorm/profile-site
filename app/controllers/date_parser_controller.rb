@@ -1,4 +1,6 @@
 class DateParserController < ApplicationController
+  include Unindexed
+
   def index
   end
 
